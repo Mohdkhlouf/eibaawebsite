@@ -27,6 +27,7 @@ export const Header2 = () => {
           <Nav className="me-auto">
             <Nav.Link className=".navba-link" href="/">الصفحة الرئيسية</Nav.Link>
             <Nav.Link className=".navba-link" href="/#myServices">الخدمات</Nav.Link>
+            <Nav.Link className=".navba-link" href="/Articles">المقالات</Nav.Link>
             <Nav.Link className=".navba-link" href="/#podcastsection">بودكاست</Nav.Link>
             <Nav.Link className=".navba-link" href="/#instagramPosts">Stories</Nav.Link>
             <Nav.Link className=".navba-link" href="/#footer">تواصل معنا</Nav.Link>

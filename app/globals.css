@@ -10,13 +10,16 @@ body {
   overflow-x: hidden;
   height: 100%;
   scroll-padding-top: 95px;
+  scroll-behavior: smooth;
+  font-size: 16px;
   
 }
 
-html{
-  scroll-behavior: smooth;
-  font-size: 16px;
+a{
+  color: unset;
+  text-decoration: none;
 }
+
 
 :root{
   --mainColor:#60768e;
@@ -120,6 +123,7 @@ padding:0.3rem 1.8rem;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    padding: 2rem 0 2rem 0;
     
 
 }
@@ -435,15 +439,237 @@ height:100%;
   box-shadow: 10px 10px 5px var(--mainColor);
 }
 
+/* homePage articles*/
+.homePageArticle{
+  display:flex;
+  flex-direction: column;
+  padding:1rem;
+}
+
+.homePageArticleimg img{
+width:100%;
+}
+
+
+
+
+
+
+.homePageArticleTitle{
+  text-align: center;
+  margin-top:1rem;
+  
+}
+.homePageArticleTitle h2{
+  font-size:1.2rem;
+  font-weight: bold;
+  
+}
+
+
+.homePageArticleText{
+  text-align: justify;
+}
+
+.homePageArticle:hover{
+  background-color:#60768e20;
+}
+/*homePage articles end*/
+
+
+/*Article page*/
+.articlePageDetails{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.articlePageDetails .articlePageTitle{
+  color: #60768e;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.articlePageDetails span{
+  color:black;
+}
+
+
+.articlePageimg{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  
+
+  }
+
+  .articlePageimg img{
+    width:100%;
+    
+  
+    }
+
+
+  .articlePageDetails .articlePageText{
+    margin-top: 1.2rem;
+    font-size: 1.3rem;
+    text-align: justify;
+    line-height: 2;
+    
+  }
+
+  /*FeaturedArticles in articles page*/
+  .FeaturedArticles{
+      display:flex;
+      flex-direction: row;
+  }
+
+
+  .featuredArticle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:1rem;
+    width: 100%;
+  }
+
+  .FeaturedArticleThumbnail{
+    margin-bottom: 2rem;
+    width:28.1258rem;
+    height:16.625rem;
+    
+  }
+  .FeaturedArticleThumbnail img{
+    width:100%;
+    
+  }
+
+  .featuredArticleDetails{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+  }
+
+
+
+  .FeaturedArticleTitle{
+  color: #60768e;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align:center;
+  height:5rem;
+  display:inline-block;
+  
+  }
+
+  .FeaturedArticleText{
+    font-size:1.3rem;
+    text-align: justify;
+
+  }
+
+  .featuredArticle:hover{
+    background-color:#60768e20;
+  }
+
+  /*FeaturedArticles in articles page End*/
+
+
+  /* Not Featured articles in the articles page*/
+  #article{
+      padding:10px;
+      
+    }
+
+  .articles{
+    display:flex;
+    flex-direction: column;
+   
+  }
+
+  .articlesPagearticle{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .articlesPageThumbnail{
+    width:18rem;
+    height:12rem;
+  }
+  .articlesPageThumbnail img{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+    
+  }
+
+
+  .articleDetails{
+    width:70%;
+    display:flex;
+    flex-direction: column;
+    margin-right:1rem;
+    padding:1rem 1rem 1rem 0rem;
+  }
+
+
+  .articleTitle{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .articlesubtext{
+    font-size: 1.2rem;
+    text-align: justify;
+  }
+
+  .articlesPagearticle:hover{
+    background-color:#60768e20;
+  }
+ /* Not Featured articles in the articles page End*/
+
+
+  
+
+
+
 
 @media only screen and (max-width: 1000px) {
  
     .container{
       width:100%;
     }
-  
 
+    .FeaturedArticles{
+            flex-direction: column;
+  }
+  
+.articlesPagearticle{
+  flex-direction: column;
+}
   html {
     font-size: calc(15px + 0.390625vw);
+}
+
+
+.articlesPageThumbnail{
+  width:100%;
+  height:100%;
+  
+}
+
+.articleDetails{
+  width:100%;
+}
+.headerContent{
+  align-items: center;
+}
+.content{
+  width:95%;
 }
 }

@@ -5,6 +5,7 @@ import { Services } from './components/Services'
 import { PodcastSection } from './components/PodcastSection'
 import { InstagramPosts } from './components/InstagramPosts'
 import { HeaderContent } from './components/HeaderContent'
+import { Blog } from './components/Blog'
 
 
 
@@ -15,7 +16,9 @@ const homePage = () => {
 <HeaderContent />
 
 <Services />
-                
+
+<Blog />
+
 <PodcastSection />
 
 <InstagramPosts />

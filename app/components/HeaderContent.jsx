@@ -30,12 +30,12 @@ export const HeaderContent = () => {
     transition={{duration:0.75}}>
   <div className="container">
 
-          <div className="headerContent p-5 text-end"  ref={scrollRef}>
+          <div className="headerContent text-end"  ref={scrollRef}>
             <div className="content">
           
         <motion.h2
             initial={{
-              x:400,
+              x:'50%',
               opacity: 0
             }}
 
@@ -55,7 +55,7 @@ export const HeaderContent = () => {
               <FadeInWhenVisible>
               <motion.h2 
             initial={{
-              x:-400,
+              x:'-50%',
               opacity: 0
             }}
             
