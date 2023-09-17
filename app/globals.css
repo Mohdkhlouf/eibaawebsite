@@ -185,12 +185,7 @@ padding:0.3rem 1.8rem;
 
 
 .serviceImage{
-  background-position:center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image:url('../public/img/services2.jpg');
-  max-height:75%;
-  border-radius: 25px;
+ 
   width:225px;
   height:225px;
   border-radius: 100%;
@@ -296,8 +291,14 @@ padding:0.3rem 1.8rem;
   footer{
       background-color: var(--secondColor);
       color:var(--mainColor);
+      text-align: center;
+      
   
       
+  }
+  .footer-content{
+    display: flex;
+    justify-content: center;
   }
   
   .pattern{

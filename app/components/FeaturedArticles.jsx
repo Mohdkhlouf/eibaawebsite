@@ -24,10 +24,6 @@ export const FeaturedArticles = (props) => {
                           <h2 className="FeaturedArticleTitle">{data.attributes.TitleName}
                           </h2>
                          
-
-                         
-
-                          
                           <p className="FeaturedArticleText">{data.attributes.ArticleText.substring(0,200)}
                           
                           </p>

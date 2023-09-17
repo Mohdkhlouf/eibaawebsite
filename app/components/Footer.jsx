@@ -6,7 +6,9 @@ export const Footer = () => {
 /*Footer Start*/
 <footer className="box mt-5 py-5" id="footer">
   <div className="container">
-    <div className="row pt-5 text-center">
+    
+    <div className="row pt-5">
+    <div className="footer-content">
       <div className="col-md-4">
         <img
         src="./personal.png"
@@ -21,13 +23,6 @@ export const Footer = () => {
         <span>eiba.abutaha@gmail.com</span>
       
       </div>
-      <div className="col-md-4 text-center">
-        <h6>الموقع من تصميم وتنفيذ</h6>
-        <span>Mohammad Khlouf</span><br />
-        <span>mohammad.khlouf@gmail.com</span>
-      </div>
-      <div className="col-md-4">
-     
       </div>
     </div>
   </div>

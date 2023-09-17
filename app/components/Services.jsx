@@ -6,12 +6,14 @@ export const Services = () => {
     {
       'title':"اختيار شريك الحياة",
       'slug':"أساعدك على حسن الاختيار",
+      'img':"/shareek.jpg",
       'details':`
       يمكنك معرفة المعايير التي ستعتمد عليها عند اختيارك لشريك الحياة، وإذا ما كانت متوافقة معك ومناسبة لك، فمن حقك الحصول على علاقة آمنة وسعيدة. من الآن يمكنك رسم علاقتك المستقبلية.      `
     },
     {
       'title':"الخطوبة",
       'slug':"أساعدك على تأسيس زواج صحّي ",
+      'img':"/khottbah.jpg",
       'details':`
       يمكنك استثمار هذه المرحلة لاكتشاف الشريك، وتأسيس قوانين العلاقة الصحيحة، وتعميق التواصل الحقيقي، فأنت على بُعد مسافات قصيرة من الزواج، من الآن يمكنك السعي لتخفيف وطأة المفاجآت المحتملة فيه. 
       `
@@ -19,6 +21,7 @@ export const Services = () => {
     {
       'title':"الحياة الزوجية",
       'slug':"أساعدك على التواصل الصحيح",
+      'img':"/Marrage.jpg",
       'details':`
       يمكنك خوض تجربة اتصالية جديدة وسليمة في داخل العلاقة الزوجية، بعدما أصبح التواصل بينكما شائكاً ومُعقداً وتراجع معه الشعور بالثقة والأمان، لذا يمثل وجودك هنا العتبة الصحيحة لتنمية العلاقة وحمايتها من الانحدار أكثر.
       `
@@ -61,6 +64,7 @@ className="col-md-4 dflex-centerd{">
   
           <div className='dflex-centerd'>
               <div className="serviceImage">
+              <img className="serviceImage" src={element.img} alt={element.slug}/>
               </div>
               <h3 className='serviceTitle sectionChildTitle'> {element.title} </h3>
               <h3 className='serviceTitle sectionChildTitle'> {element.slug} </h3>
