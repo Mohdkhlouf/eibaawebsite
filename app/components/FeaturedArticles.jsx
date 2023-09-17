@@ -5,16 +5,19 @@ export const FeaturedArticles = (props) => {
     console.log(data);
 
   return (
+    
     <section className="FeaturedArticles">
       
       
       {data.map((data) => 
                 
-                <Link href={`/Articles/${data.id}`}> 
+                
                     
                     <div className="featuredArticle" key={data.id}>
+                      <Link href={`/Articles/${data.id}`}> 
                     
-                    <div className="FeaturedArticleThumbnail">                  
+                    <div className="FeaturedArticleThumbnail">
+                         <img  src={data.attributes.ArticleThumbnail.data?.attributes.url} alt={data.attributes.ArticleThumbnail.data?.attributes.url}/>       
                     </div>      
                         <div className="featuredArticleDetails">
                           
@@ -22,7 +25,7 @@ export const FeaturedArticles = (props) => {
                           </h2>
                          
 
-                          <img  src={data.attributes.ArticleThumbnail.data?.attributes.url} alt={data.attributes.ArticleThumbnail.data?.attributes.url}/>
+                         
 
                           
                           <p className="FeaturedArticleText">{data.attributes.ArticleText.substring(0,200)}
@@ -30,9 +33,9 @@ export const FeaturedArticles = (props) => {
                           </p>
                           </div>
 
-                          
+                          </Link>   
                   </div>
-                  </Link>
+                  
 
                 
 
@@ -47,5 +50,6 @@ export const FeaturedArticles = (props) => {
         
         
         </section>
+       
   )
 }
