@@ -1,10 +1,4 @@
 import React from 'react'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 import Image from 'next/image';
 
 const imageStyle = {
@@ -63,28 +57,17 @@ export const InstagramPosts = () => {
           {stories.map((ele) => (
             <div className="col-md-4" key={ele.slideId}>
               <div className="album">
-                <Swiper
-                  modules={[Navigation, Pagination, Scrollbar, A11y]}
-                  spaceBetween={20}
-                  slidesPerView={1}
-                  navigation
-                  pagination={{ clickable: true }}
-                  scrollbar={{ draggable: true }}
-                >
-                  {ele.slideImages.map((image, idx) => (
-                    <SwiperSlide key={`${ele.slideId}-${idx}`}>
-                      <div className="posts">
-                        <Image
-                          src={image.src}
-                          width={300}
-                          height={300}
-                          style={imageStyle}
-                          alt={`story-${ele.slideId}-img-${idx}`}
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {ele.slideImages.map((image, idx) => (
+                  <div className="posts" key={idx}>
+                    <Image
+                      src={image.src}
+                      width={300}
+                      height={300}
+                      style={imageStyle}
+                      alt={`story-${ele.slideId}-img-${idx}`}
+                    />
+                  </div>
+                ))}
               </div>
               <div className="albumoverlay" />
             </div>
