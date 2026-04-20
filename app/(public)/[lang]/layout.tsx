@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation'
+
 const languages = ['ar', 'fi', 'en'];
 const direction = { ar: 'rtl', fi: 'ltr', en: 'ltr' };
 
