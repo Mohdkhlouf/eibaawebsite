@@ -18,7 +18,7 @@ enum Role {
 }
 
 model User {
-  id        String   @id
+  id        String   @id @default(cuid())
   email     String   @unique
   name      String?
   avatarUrl String?
@@ -26,4 +26,22 @@ model User {
   createdAt DateTime @default(now())
 
   @@map("profiles") // actual table name in DB will be "profiles"
+}
+
+model Category {
+  id    String @id @default(cuid())
+  name  String @unique
+  blogs Blog[]
+}
+
+model Blog {
+  id         String   @id @default(cuid())
+  title      String
+  shortTitle String
+  slug       String   @unique
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
