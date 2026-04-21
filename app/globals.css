@@ -1,25 +1,21 @@
+@import "tailwindcss";
+
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
-
 html,
 body {
+    height: 100%;
     max-width: 100vw;
     overflow-x: hidden;
-    height: 100%;
-    scroll-padding-top: 95px;
-    scroll-behavior: smooth;
-    font-size: 16px;
-
 }
 
 a {
     color: unset;
     text-decoration: none;
 }
-
 
 :root {
     --mainColor: #60768e;
@@ -31,7 +27,6 @@ a {
     margin: 0px auto;
 }
 
-
 /*Navbar Start*/
 
 .navbarBox {
@@ -39,9 +34,6 @@ a {
     position: sticky;
     top: 0;
     z-index: 500;
-
-
-
 }
 
 .logo {
@@ -50,11 +42,9 @@ a {
 }
 
 .navbar {
-
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     font-weight: 600;
     font-size: 1.125rem;
-
 }
 
 .navba-link {
@@ -65,18 +55,13 @@ a {
 
 .headerSection {
     align-items: center;
-    background-image: linear-gradient(to bottom, rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('../public/background.png');
+    background-image:
+        linear-gradient(to bottom, rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)),
+        url("../public/background.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-
 }
-
-
-
-
-
-
 
 .consultationBtn {
     text-decoration: none;
@@ -89,18 +74,14 @@ a {
     padding: 0.3rem 1.8rem;
 }
 
-
-
 .uppertext {
     /*spans upper the title*/
     font-weight: 200;
     font-size: 1rem;
-    ;
-
 }
 
 .headingh2 {
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     font-size: 2.5rem;
     font-weight: 800;
     line-height: 50pt;
@@ -112,12 +93,9 @@ a {
     line-height: 50pt;
 }
 
-
 .underLinedText {
     border-bottom: solid 2px var(--secondColor);
 }
-
-
 
 /*Header Content Start*/
 .headerContent {
@@ -127,8 +105,6 @@ a {
     justify-content: center;
     align-items: flex-end;
     padding: 2rem 0 2rem 0;
-
-
 }
 
 .content {
@@ -137,9 +113,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
-
 
 .headerContent h2 {
     font-size: 1.5rem;
@@ -154,7 +128,6 @@ a {
     font-size: 1.3rem;
     text-align: justify;
     text-shadow: 2px 2px 4px #000000;
-
 }
 
 .socialLinks i {
@@ -164,50 +137,37 @@ a {
     height: 30px;
     font-size: 0.938rem;
     line-height: 30px;
-
 }
 
 .socialLinks i:hover {
     background-color: var(--mainColor);
     color: white;
-
-
 }
 
 /*Header Content End*/
 
-
 /*Myservice section start*/
-.myServices {}
-
-
-
+.myServices {
+}
 
 .serviceImage {
-
     width: 225px;
     height: 225px;
     border-radius: 100%;
     margin-bottom: 10px;
 }
 
-
-
 .consutationTypes {
     background-color: var(--secondColor);
     background-position: center;
     background-size: cover;
-
 }
 
 .consutationTypes .col-md-6:hover i {
     font-size: 3rem;
     color: var(--mainColor);
     background-color: var(--secondColor);
-
 }
-
-
 
 .consutationTypes i {
     font-size: 1.875rem;
@@ -218,15 +178,12 @@ a {
     height: 100px;
     line-height: 50px;
     color: var(--mainColor);
-
 }
-
 
 .consutationTypes h3 {
     color: var(--mainColor);
     font-weight: 800;
     line-height: 3rem;
-
 }
 
 .consutationTypes p {
@@ -234,20 +191,14 @@ a {
     margin-top: 1.2rem;
     font-size: 1.6rem;
     text-align: justify;
-
-
 }
 
-
-
 /*Myservice section End*/
-
 
 /*blog section start*/
 .blog img:hover {
     border-radius: 20px;
 }
-
 
 /*blog section end*/
 /*Media start*/
@@ -259,7 +210,6 @@ a {
     top: 0;
     bottom: 0;
     margin: auto;
-
 }
 
 .circle-lt {
@@ -270,13 +220,11 @@ a {
     top: 0;
     bottom: 0;
     margin: auto;
-
 }
-
 
 .mediaTitle {
     font-size: 2.5rem;
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     color: #e6a678;
 }
 
@@ -286,16 +234,11 @@ a {
 
 /*Media Ends*/
 
-
-
 /* Footer Section Start*/
 footer {
     background-color: var(--secondColor);
     color: var(--mainColor);
     text-align: center;
-
-
-
 }
 
 .footer-content {
@@ -305,25 +248,21 @@ footer {
 
 .pattern {
     background-color: #e7d0c3;
-    background-image: linear-gradient(0deg, #e7d0c3 0%, #FFDEE9 100%);
-
+    background-image: linear-gradient(0deg, #e7d0c3 0%, #ffdee9 100%);
 }
 
 /* Footer Section End*/
-
 
 .blogthumbnail {
     width: 200px;
     height: 150px;
 }
 
-
 .add-course label {
     padding-top: 0.6rem;
     padding-bottom: 0.3rem;
     color: #60768e;
 }
-
 
 .textJustify {
     text-align: justify;
@@ -334,21 +273,18 @@ footer {
     padding-bottom: 0.6rem;
 }
 
-
 .tab-content h3 {
     color: #60768e;
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     font-size: 1.25rem;
     font-weight: 600;
-
 }
 
 .nav-link {
     color: #60768e !important;
-    font-family: 'Tajawal', sans-serif !important;
+    font-family: "Tajawal", sans-serif !important;
     font-weight: 600 !important;
 }
-
 
 /*Section Header Start*/
 .sectionHeader {
@@ -360,16 +296,14 @@ footer {
 
 .sectionHeaderTitle {
     color: var(--mainColor);
-
 }
 
 .sectionHeaderDetails {
     font-size: 1.2rem;
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     line-height: 1.8rem;
     font-weight: 500;
     padding: 0.6rem;
-
 }
 
 /*Section Header End*/
@@ -379,7 +313,6 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 /*Courses Section*/
@@ -388,20 +321,19 @@ footer {
     height: 200px;
     background-image: url(../public/img/courses1.jpg);
     background-size: contain;
-
 }
 
 /* General classes*/
 .sectionChildTitle {
     color: #60768e;
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     font-size: 1.25rem;
     font-weight: 600;
 }
 
 .sectionChilddetails {
     font-size: 1.2rem;
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     line-height: 1.8rem;
     font-weight: 400;
     padding: 0.6rem;
@@ -412,18 +344,14 @@ footer {
     margin-top: 40px;
 }
 
-
-
 .podcastimage {
     width: 100%;
     height: 100%;
-
 }
 
 .album {
     position: relative;
 }
-
 
 .motionbox {
     background-color: #60768e;
@@ -437,7 +365,6 @@ footer {
     width: 200px;
     height: 200px;
 }
-
 
 .footerPersonal {
     width: 100%;
@@ -456,23 +383,15 @@ footer {
     width: 100%;
 }
 
-
-
-
-
-
 .homePageArticleTitle {
     text-align: center;
     margin-top: 1rem;
-
 }
 
 .homePageArticleTitle h2 {
     font-size: 1.2rem;
     font-weight: bold;
-
 }
-
 
 .homePageArticleText {
     text-align: justify;
@@ -484,7 +403,6 @@ footer {
 
 /*homePage articles end*/
 
-
 /*Article page*/
 .articlePageDetails {
     display: flex;
@@ -492,10 +410,9 @@ footer {
     align-items: center;
 }
 
-
 .articlePageDetails .articlePageTitle {
     color: #60768e;
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     font-size: 2rem;
     font-weight: 600;
     margin-top: 2rem;
@@ -505,28 +422,21 @@ footer {
     color: black;
 }
 
-
 .articlePageimg {
     margin-top: 2rem;
     margin-bottom: 2rem;
     width: 100%;
-
-
 }
 
 .articlePageimg img {
     width: 100%;
-
-
 }
-
 
 .articlePageDetails .articlePageText {
     margin-top: 1.2rem;
     font-size: 1.3rem;
     text-align: justify;
     line-height: 2;
-
 }
 
 /*FeaturedArticles in articles page*/
@@ -534,7 +444,6 @@ footer {
     display: flex;
     flex-direction: row;
 }
-
 
 .featuredArticle {
     display: flex;
@@ -548,12 +457,10 @@ footer {
     margin-bottom: 2rem;
     width: 28.1258rem;
     height: 19.625rem;
-
 }
 
 .FeaturedArticleThumbnail img {
     width: 100%;
-
 }
 
 .featuredArticleDetails {
@@ -562,23 +469,19 @@ footer {
     align-items: center;
 }
 
-
-
 .FeaturedArticleTitle {
     color: #60768e;
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
     font-size: 1.8rem;
     font-weight: 600;
     text-align: center;
     height: 5rem;
     display: inline-block;
-
 }
 
 .FeaturedArticleText {
     font-size: 1.3rem;
     text-align: justify;
-
 }
 
 .featuredArticle:hover {
@@ -587,17 +490,14 @@ footer {
 
 /*FeaturedArticles in articles page End*/
 
-
 /* Not Featured articles in the articles page*/
 #article {
     padding: 10px;
-
 }
 
 .articles {
     display: flex;
     flex-direction: column;
-
 }
 
 .articlesPagearticle {
@@ -615,9 +515,7 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 }
-
 
 .articleDetails {
     width: 70%;
@@ -626,7 +524,6 @@ footer {
     margin-right: 1rem;
     padding: 1rem 1rem 1rem 0rem;
 }
-
 
 .articleTitle {
     font-size: 1.5rem;
@@ -644,14 +541,7 @@ footer {
 
 /* Not Featured articles in the articles page End*/
 
-
-
-
-
-
-
 @media only screen and (max-width: 1000px) {
-
     .container {
         width: 100%;
     }
@@ -668,11 +558,9 @@ footer {
         font-size: calc(15px + 0.390625vw);
     }
 
-
     .articlesPageThumbnail {
         width: 100%;
         height: 100%;
-
     }
 
     .articleDetails {
