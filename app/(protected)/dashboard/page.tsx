@@ -47,7 +47,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full w-full">
       <DashboardSidebar />
       <main className="flex-1 overflow-y-auto p-6 bg-gray-50">
         {renderContent()}

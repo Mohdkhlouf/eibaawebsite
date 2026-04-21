@@ -72,10 +72,10 @@ export function DashboardSidebar() {
         </Link>
 
         {menuSections.map(section => (
-          <div key={section.key} className="space-y-1">
+          <div key={section.key} className="space-y-3">
             <button
               onClick={() => toggleSection(section.key)}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+              className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-2xl font-medium text-gray-700 hover:bg-gray-100 transition-colors"
             >
               <span>{section.title}</span>
               <span className={`text-gray-400 transition-transform duration-200 inline-block ${expandedSections[section.key] ? 'rotate-180' : ''}`}>
@@ -89,7 +89,7 @@ export function DashboardSidebar() {
                   <Link
                     key={item.action}
                     href={`/dashboard?section=${section.key}&action=${item.action}`}
-                    className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
+                    className={`block px-3 py-2 rounded-lg text-lg transition-colors ${
                       currentSection === section.key && currentAction === item.action
                         ? 'bg-blue-50 text-blue-600 font-medium'
                         : 'text-gray-600 hover:bg-gray-100'
