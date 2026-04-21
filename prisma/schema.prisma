@@ -18,17 +18,17 @@ enum Role {
 }
 
 model User {
-  id           String        @id @default(cuid())
+  id           String        @id @db.Uuid
   email        String        @unique
   name         String?
   avatarUrl    String?
   role         Role          @default(USER)
   createdAt    DateTime      @default(now())
-  courses      courses[]
+  courses      Course[]
   blogs        Blog[]
   enrollements Enrollement[]
 
-  @@map("profiles")
+  @@map("users")
 }
 
 model Category {
@@ -43,7 +43,7 @@ model Blog {
   id          String    @id @default(cuid())
   title       String
   author      User      @relation(fields: [authorId], references: [id])
-  authorId    String
+  authorId    String    @db.Uuid
   shortTitle  String
   slug        String    @unique
   category    Category  @relation(fields: [categoryId], references: [id])
@@ -58,7 +58,7 @@ model Blog {
   @@map("blogs")
 }
 
-model courses {
+model Course {
   id              String        @id @default(cuid())
   title           String        @unique
   slug            String        @unique
@@ -69,13 +69,15 @@ model courses {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
   enrollements    Enrollement[]
+
+  @@map("courses")
 }
 
 model Enrollement {
   id         String   @id @default(cuid())
   user       User     @relation(fields: [userId], references: [id])
-  userId     String
-  course     courses  @relation(fields: [courseId], references: [id])
+  userId     String   @db.Uuid
+  course     Course   @relation(fields: [courseId], references: [id])
   courseId   String
   enrolledAt DateTime @default(now())
 

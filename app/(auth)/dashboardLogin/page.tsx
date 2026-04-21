@@ -1,4 +1,5 @@
 'use client'
+
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -12,6 +13,8 @@ export default function AdminLoginPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
+    setError(null)
+
     const form = new FormData(e.currentTarget)
 
     const { error } = await supabase.auth.signInWithPassword({
@@ -25,17 +28,21 @@ export default function AdminLoginPage() {
       return
     }
 
-    const res = await fetch('/api/me')
-    const user = await res.json()
+    const res = await fetch('/api/me', {
+      credentials: 'include',
+    })
 
-    if (user.role !== 'SUPER_ADMIN') {
+    const data = await res.json()
+console.log("data:",data)
+    if (!res.ok || data.role !== 'SUPER_ADMIN') {
       await supabase.auth.signOut()
       setError('Access denied.')
       setLoading(false)
       return
     }
 
-    router.push('/dashboard')
+    router.replace('/dashboard')
+    router.refresh()
   }
 
   return (

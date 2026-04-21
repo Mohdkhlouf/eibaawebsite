@@ -9,6 +9,8 @@ body {
     height: 100%;
     max-width: 100vw;
     overflow-x: hidden;
+    background: var(--bg);
+    color: var(--text);
 }
 
 a {
@@ -19,6 +21,10 @@ a {
 :root {
     --mainColor: #60768e;
     --secondColor: #e7d0c3;
+    --bg: #404060;
+    --surface: #a0c0e0;
+    --accent: #8080a0;
+    --text: #e0e0e0;
 }
 
 .container {

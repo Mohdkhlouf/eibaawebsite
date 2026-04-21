@@ -2,6 +2,12 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function proxy(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+
+  const isDashboardRoute = pathname.startsWith('/dashboard')
+  const isDashboardLogin = pathname === '/dashboardLogin'
+  const isNormalLogin = pathname === '/login'
+
   const response = NextResponse.next()
 
   const supabase = createServerClient(
@@ -9,39 +15,29 @@ export async function proxy(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        getAll: () => request.cookies.getAll(),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) =>
+        getAll() {
+          return request.cookies.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
             response.cookies.set(name, value, options)
-          )
-        }
-      }
+          })
+        },
+      },
     }
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
-  const pathname = request.nextUrl.pathname
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  // unauthenticated → redirect to admin login
-  if (!user && pathname.startsWith('/dashboard') && pathname !== '/dashboard/login') {
-    return NextResponse.redirect(new URL('/dashboard/login', request.url))
-  }
-
-  // authenticated → check role via API
-  if (user && pathname.startsWith('/dashboard') && pathname !== '/dashboard/login') {
-    const res = await fetch(new URL('/api/me', request.url), {
-      headers: { cookie: request.headers.get('cookie') ?? '' }
-    })
-    const data = await res.json()
-
-    if (data.role !== 'SUPER_ADMIN') {
-      return NextResponse.redirect(new URL('/dashboard/login', request.url))
-    }
+  if (isDashboardRoute && !isDashboardLogin && !user) {
+    return NextResponse.redirect(new URL('/dashboardLogin', request.url))
   }
 
   return response
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*']
+  matcher: ['/dashboard/:path*'],
 }

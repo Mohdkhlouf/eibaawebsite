@@ -1,4 +1,6 @@
 import {userType} from '@/lib/types/general'
+import { LogOut } from '@/components/dashboard/LogOut'
+
 import Image from 'next/image'
 
 export function DashboardHeader({dashboardUser}: {dashboardUser: userType}) {
@@ -13,7 +15,10 @@ export function DashboardHeader({dashboardUser}: {dashboardUser: userType}) {
           height={40}
         />
         <span className="dashboard-header__name">{dashboardUser?.email}</span>
-      </div>
+        </div>
+        <div>
+          <LogOut />
+        </div>
       </nav>
     </header>
   )
