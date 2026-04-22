@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-
+import { LogOut } from './dashboard/LogOut'
 export const Header2 = () => {
   const [open, setOpen] = useState(false)
 
@@ -50,6 +50,7 @@ export const Header2 = () => {
                 )}
               </svg>
             </button>
+            <LogOut />
           </div>
         </div>
 
@@ -63,6 +64,7 @@ export const Header2 = () => {
               <Link href="/#instagramPosts" className="block px-3 py-2 text-[var(--mainColor)] font-medium">Stories</Link>
               <Link href="/#footer" className="block px-3 py-2 text-[var(--mainColor)] font-medium">تواصل معنا</Link>
               <Link href="/Consultation" className="mt-2 inline-block px-4 py-2 bg-[var(--secondColor)] rounded-full text-black font-semibold text-center">احجز استشارتك</Link>
+              <LogOut />
             </nav>
           </div>
         )}

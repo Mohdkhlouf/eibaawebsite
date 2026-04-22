@@ -18,7 +18,10 @@ export default async function ProtectedLayout({
     where: { id: user.id }
   })
 
-  if (!profile) redirect('/login')
+  if (!profile) {
+    console.log("login note:", "you are not loggin in so login first please")
+    redirect('/login')
+  }
 
   return (
     <div className="flex flex-col h-screen">

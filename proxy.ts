@@ -3,12 +3,11 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
-
   const isDashboardRoute = pathname.startsWith('/dashboard')
-  const isDashboardLogin = pathname === '/dashboardLogin'
-  const isNormalLogin = pathname === '/login'
 
-  const response = NextResponse.next()
+  let response = NextResponse.next({
+    request: { headers: request.headers },
+  })
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -19,6 +18,12 @@ export async function proxy(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) => {
+            request.cookies.set(name, value)
+          })
+          response = NextResponse.next({
+            request: { headers: request.headers },
+          })
           cookiesToSet.forEach(({ name, value, options }) => {
             response.cookies.set(name, value, options)
           })
@@ -31,8 +36,17 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (isDashboardRoute && !isDashboardLogin && !user) {
-    return NextResponse.redirect(new URL('/dashboardLogin', request.url))
+  if (isDashboardRoute) {
+    // Not logged in → redirect to login
+    if (!user) {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
+
+    // Logged in but not SUPER_ADMIN → redirect to home
+    const isSuperAdmin = user.app_metadata?.role === 'SUPER_ADMIN'
+    if (!isSuperAdmin) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
   }
 
   return response

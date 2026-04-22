@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
+import { LogOut } from './dashboard/LogOut'
 
 
 export const Header = () => {
@@ -47,9 +48,14 @@ export const Header = () => {
                 <Link className="nav-link" href="#footer">تواصل معنا</Link>
               </li>
               <li className="nav-item m-1">
+
                 <div className="reserveConsultation border-2 rounded-pill p-2">
-                  <a className="consultationBtn rounded-pill " href="/Consultation">احجز استشارتك</a>
+                  <Link className="consultationBtn rounded-pill " href="/Consultation">احجز استشارتك</Link>
+
                 </div>                  </li>
+              <li>
+                <LogOut />
+              </li>
             </ul>
           </div>
         </nav>
