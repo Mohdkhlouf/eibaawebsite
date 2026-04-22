@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import { DashboardFooter } from '@/components/dashboard/DashboardFooter'
 import { redirect } from 'next/navigation'
-
+import './dashboard.css'
 export default async function ProtectedLayout({
   children,
 }: {

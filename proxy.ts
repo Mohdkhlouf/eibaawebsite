@@ -32,19 +32,20 @@ export async function proxy(request: NextRequest) {
     }
   )
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const { data: { user } } = await supabase.auth.getUser()
 
   if (isDashboardRoute) {
-    // Not logged in → redirect to login
     if (!user) {
       return NextResponse.redirect(new URL('/login', request.url))
     }
 
-    // Logged in but not SUPER_ADMIN → redirect to home
-    const isSuperAdmin = user.app_metadata?.role === 'SUPER_ADMIN'
-    if (!isSuperAdmin) {
+    // Check role from DB via /api/me
+    const meRes = await fetch(new URL('/api/me', request.url), {
+      headers: { cookie: request.headers.get('cookie') ?? '' },
+    })
+    const me = await meRes.json()
+
+    if (!meRes.ok || me.role !== 'SUPER_ADMIN') {
       return NextResponse.redirect(new URL('/', request.url))
     }
   }
