@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { LogOut } from './dashboard/LogOut'
-export const Header2 = () => {
+export  const Header = () => {
   const [open, setOpen] = useState(false)
 
   return (
