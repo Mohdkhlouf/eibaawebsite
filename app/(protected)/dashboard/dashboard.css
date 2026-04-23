@@ -44,3 +44,12 @@ a {
     height: 0;
     pointer-events: none;
 }
+
+.ProseMirror img {
+    transition: outline 0.1s;
+}
+
+.ProseMirror img.ProseMirror-selectednode {
+    outline: 3px solid #3b82f6;
+    border-radius: 2px;
+}
