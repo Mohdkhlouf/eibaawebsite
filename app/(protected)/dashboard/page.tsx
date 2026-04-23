@@ -23,7 +23,9 @@ export default function DashboardPage() {
   const renderContent = () => {
     switch (section) {
       case 'blogs':
-        return action === 'add' ? <BlogsForm /> : <BlogsList />
+        if (action === 'add') return <BlogsForm />
+        if (action === 'edit') return <BlogsForm />
+        return <BlogsList />
 
       case 'categories':
         return action === 'add' ? <CategoriesForm /> : <CategoriesList />

@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
+import { blogSchema } from '@/lib/types/blog'
 import { NextRequest, NextResponse } from 'next/server'
 
 // GET all blogs
@@ -7,32 +8,15 @@ export async function GET(request: NextRequest) {
   try {
     const blogs = await prisma.blog.findMany({
       include: {
-        author: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-          }
-        },
-        category: {
-          select: {
-            id: true,
-            name: true,
-          }
-        }
+        author: { select: { id: true, name: true, email: true } },
+        category: { select: { id: true, name: true } },
       },
-      orderBy: {
-        createdAt: 'desc'
-      }
+      orderBy: { createdAt: 'desc' },
     })
-
     return NextResponse.json(blogs)
   } catch (error) {
     console.error('[BLOGS_GET]', error)
-    return NextResponse.json(
-      { message: 'Failed to fetch blogs' },
-      { status: 500 }
-    )
+    return NextResponse.json({ message: 'Failed to fetch blogs' }, { status: 500 })
   }
 }
 
@@ -44,57 +28,37 @@ export async function POST(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
 
     if (!user) {
-      return NextResponse.json(
-        { message: 'Unauthorized' },
-        { status: 401 }
-      )
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
     }
 
     // Check if user is admin
-    const adminUser = await prisma.user.findUnique({
-      where: { id: user.id }
-    })
-
+    const adminUser = await prisma.user.findUnique({ where: { id: user.id } })
     if (adminUser?.role !== 'SUPER_ADMIN') {
-      return NextResponse.json(
-        { message: 'Forbidden: Only admins can create blogs' },
-        { status: 403 }
-      )
+      return NextResponse.json({ message: 'Forbidden: Only admins can create blogs' }, { status: 403 })
     }
 
+    // Validate body with Zod
     const body = await request.json()
-    const { title, shortTitle, slug, content, categoryId, thumbnail, published } = body
-
-    // Validate required fields
-    if (!title || !shortTitle || !slug || !content || !categoryId || !thumbnail) {
+    const parsed = blogSchema.safeParse(body)
+    if (!parsed.success) {
       return NextResponse.json(
-        { message: 'Missing required fields' },
+        { message: 'Validation failed', errors: parsed.error.flatten().fieldErrors },
         { status: 400 }
       )
     }
 
-    // Check if category exists
-    const category = await prisma.category.findUnique({
-      where: { id: categoryId }
-    })
+    const { title, shortTitle, slug, content, categoryId, thumbnail, published } = parsed.data
 
+    // Check if category exists
+    const category = await prisma.category.findUnique({ where: { id: categoryId } })
     if (!category) {
-      return NextResponse.json(
-        { message: 'Category not found' },
-        { status: 404 }
-      )
+      return NextResponse.json({ message: 'Category not found' }, { status: 404 })
     }
 
     // Check if slug already exists
-    const existingBlog = await prisma.blog.findUnique({
-      where: { slug }
-    })
-
+    const existingBlog = await prisma.blog.findUnique({ where: { slug } })
     if (existingBlog) {
-      return NextResponse.json(
-        { message: 'Blog with this slug already exists' },
-        { status: 409 }
-      )
+      return NextResponse.json({ message: 'Blog with this slug already exists' }, { status: 409 })
     }
 
     const blog = await prisma.blog.create({
@@ -105,32 +69,18 @@ export async function POST(request: NextRequest) {
         content,
         categoryId,
         thumbnail,
-        published: published || false,
+        published,
         authorId: user.id,
       },
       include: {
-        author: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-          }
-        },
-        category: {
-          select: {
-            id: true,
-            name: true,
-          }
-        }
-      }
+        author: { select: { id: true, name: true, email: true } },
+        category: { select: { id: true, name: true } },
+      },
     })
 
     return NextResponse.json(blog, { status: 201 })
   } catch (error) {
     console.error('[BLOGS_POST]', error)
-    return NextResponse.json(
-      { message: 'Failed to create blog' },
-      { status: 500 }
-    )
+    return NextResponse.json({ message: 'Failed to create blog' }, { status: 500 })
   }
 }
