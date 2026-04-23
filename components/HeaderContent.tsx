@@ -5,10 +5,10 @@ export const HeaderContent = () => {
   const scrollRef = useRef(null);
 
   return (
-    <section className="flex items-center bg-cover bg-center bg-no-repeat" style={{backgroundImage: 'linear-gradient(to bottom, rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url("../public/background.png")'}}>
-      <div className="max-w-[1000px] mx-auto w-full">
-        <div className="flex flex-col justify-center text-right text-white py-8" ref={scrollRef}>
-          <div className="w-3/5 flex flex-col justify-center items-center">
+    <section className="flex items-center bg-[linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(/background.png)] bg-cover bg-center bg-no-repeat" >
+      <div className="flex flex-col max-w-250 min-h-125 mx-auto w-full justify-center align-middle " >
+        <div className="flex flex-col items-end text-white py-8" ref={scrollRef}>
+          <div className="w-3/5  flex flex-col items-center justify-center">
             <h2 className="text-2xl font-bold leading-12 drop-shadow-lg text-center">
               هناك أوقات نتعثر فيها ونحتاج أن نجلب الشمس للعلاقة
             </h2>
