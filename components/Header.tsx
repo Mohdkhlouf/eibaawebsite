@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Logo from '@/components/ui/logo'
+import MainMenu from '@/components/ui/MainMenu'
 import { LogOut } from './dashboard/LogOut'
 export  const Header = () => {
   const [open, setOpen] = useState(false)
@@ -12,28 +14,15 @@ export  const Header = () => {
         <div className="flex items-center justify-between py-3">
           <div className="flex items-center">
             <Link href="/" className="block">
-              <img
-                src="/logo.png"
-                width={150}
-                height={85}
-                alt="Site logo"
-                className="h-14 w-auto"
-              />
+              <Logo />
             </Link>
           </div>
 
-          <nav className="hidden md:flex space-x-6 items-center" aria-label="Main navigation">
-            <Link href="/" className="text-[var(--mainColor)] font-semibold">الصفحة الرئيسية</Link>
-            <Link href="/#myServices" className="text-[var(--mainColor)] font-semibold">الخدمات</Link>
-            <Link href="/Articles" className="text-[var(--mainColor)] font-semibold">المقالات</Link>
-            <Link href="/#podcastsection" className="text-[var(--mainColor)] font-semibold">بودكاست</Link>
-            <Link href="/#instagramPosts" className="text-[var(--mainColor)] font-semibold">Stories</Link>
-            <Link href="/#footer" className="text-[var(--mainColor)] font-semibold">تواصل معنا</Link>
-          </nav>
+<MainMenu />
 
           <div className="flex items-center space-x-4">
             <div className="hidden md:block">
-              <Link href="/Consultation" className="bg-[var(--secondColor)] text-black px-4 py-2 rounded-full font-semibold">احجز استشارتك</Link>
+              <Link href="/Consultation" className="bg-[var(--secondColor)] text-[#60768e] px-4 py-2 rounded-full font-semibold">احجز استشارتك</Link>
             </div>
 
             <button
