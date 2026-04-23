@@ -3,16 +3,16 @@ import { SocialMediaLinks } from './SocialMediaLinks'
 
 export const Footer: React.FC = () => {
   return (
-    /*Footer Start*/
-    <footer className="box mt-5 py-5" id="footer">
-      <div className="container">
+    <footer className="bg-[var(--secondColor)] text-[var(--mainColor)] text-center mt-5 py-5" id="footer">
+      <div className="max-w-[1000px] mx-auto w-full">
 
-        <div className="row pt-5">
-          <div className="footer-content">
-            <div className="col-md-4">
+        <div className="pt-5">
+          <div className="flex justify-center">
+            <div className="flex-1">
               <img
                 src="./personal.png"
-                className='footerPersonal'
+                className='w-full rounded-3xl shadow-lg'
+                style={{boxShadow: '10px 10px 5px var(--mainColor)'}}
                 alt="personal"
               />
 
@@ -28,6 +28,5 @@ export const Footer: React.FC = () => {
         </div>
       </div>
     </footer>
-    /*Footer End*/
   )
 }

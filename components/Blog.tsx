@@ -39,16 +39,16 @@ export const Blog: React.FC = () => {
   if (error) return <p>Error :</p>
 
   return (
-    <div className='Posts'>
-      <div className="container">
-        <div className="row">
-          <div className='sectionHeader'>
-            <h2 className="sectionHeaderTitle ">المقالات</h2>
-            <p className="sectionHeaderDetails ">مداد القلم وخلاصة الأفكار</p>
+    <div className=''>
+      <div className="max-w-[1000px] mx-auto w-full">
+        <div className="">
+          <div className='flex flex-col items-center justify-center'>
+            <h2 className="text-[var(--mainColor)]">المقالات</h2>
+            <p className="">مداد القلم وخلاصة الأفكار</p>
           </div>
         </div>
 
-        <div className="row">
+        <div className="flex">
           {data && data.slice(0, 3).map((post) => {
             const thumb =
               post.attributes?.ArticleThumbnail?.data?.attributes?.formats?.thumbnail?.url ??
@@ -60,16 +60,16 @@ export const Blog: React.FC = () => {
               'article thumbnail'
 
             return (
-              <div className="col-md-4" key={post.id}>
-                <div className="homePageArticle">
+              <div className="flex-1" key={post.id}>
+                <div className="flex flex-col p-4">
                   <Link href={`/Articles/${post.id}`}>
-                    <div className="homePageArticleimg">
+                    <div className="">
                       <img src={thumb} alt={alt} />
                     </div>
-                    <div className="homePageArticleTitle">
-                      <h2>{post.attributes?.TitleName}</h2>
+                    <div className="text-center mt-4">
+                      <h2 className="text-sm font-bold">{post.attributes?.TitleName}</h2>
                     </div>
-                    <p className="homePageArticleText">{post.attributes?.ArticleText ? post.attributes.ArticleText.substring(0, 200) : ''}</p>
+                    <p className="text-justify">{post.attributes?.ArticleText ? post.attributes.ArticleText.substring(0, 200) : ''}</p>
                   </Link>
                 </div>
               </div>

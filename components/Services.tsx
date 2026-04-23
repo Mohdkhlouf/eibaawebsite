@@ -32,20 +32,18 @@ const services: ServiceItem[] = [
 
 export const Services: React.FC = () => {
   return (
-    <section id="myServices" className="myServices py-5">
-      <div className="container">
-        <div className="row">
-          <div className="sectionHeader">
-            <h2 className="sectionHeaderTitle">الخدمات الإستشارية</h2>
-            <p className="sectionHeaderDetails">أقدمها للأشخاص في مرحلة</p>
-          </div>
+    <section id="myServices" className="py-5">
+      <div className="max-w-[1000px] mx-auto w-full flex flex-col">
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-[var(--mainColor)]">الخدمات الإستشارية</h2>
+          <p className="text-lg font-family-tajawal leading-7 font-medium p-1.5">أقدمها للأشخاص في مرحلة</p>
         </div>
 
-        <div className="row p-4">
+        <div className="flex p-4">
           {services.map((element) => (
-            <div key={element.slug} className="col-md-4 dflex-centerd">
-              <div id={element.slug} className="dflex-centerd">
-                <div className="serviceImage">
+            <div key={element.slug} className="flex-1 flex flex-col justify-center items-center">
+              <div id={element.slug} className="flex flex-col justify-center items-center">
+                <div className="w-56 h-56 rounded-full mb-2.5">
                   <Image
                     src={element.img}
                     alt={element.slug}
@@ -55,26 +53,26 @@ export const Services: React.FC = () => {
                     priority={false}
                   />
                 </div>
-                <h3 className="serviceTitle sectionChildTitle">{element.title}</h3>
-                <h3 className="serviceTitle sectionChildTitle">{element.slug}</h3>
-                <p className="serviceDetails sectionChilddetails">{element.details}</p>
+                <h3 className="text-[#60768e] font-family-tajawal text-xl font-semibold">{element.title}</h3>
+                <h3 className="text-[#60768e] font-family-tajawal text-xl font-semibold">{element.slug}</h3>
+                <p className="text-lg font-family-tajawal leading-7 font-normal p-1.5 text-center">{element.details}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="consutationTypes">
-        <div className="container">
-          <div className="row p-4">
-            <div className="col-md-12 text-center bg-color1 py-5">
+      <div className="bg-[var(--secondColor)] bg-center bg-cover">
+        <div className="max-w-[1000px] mx-auto w-full">
+          <div className="flex p-4">
+            <div className="w-full text-center bg-color1 py-5">
               <i className="fa-solid fa-handshake-angle" />
-              <h3 className="headingh3 text-center">جلسات دعم جماعية للنساء</h3>
-              <p className="womenSupprot text-justify">
+              <h3 className="text-2xl font-semibold leading-12 text-center">جلسات دعم جماعية للنساء</h3>
+              <p className="text-justify">
                 تُقدم هذه الجلسات الدعم الجمعي للنساء في مجالات الحياة المختلفة (العاطفية، النفسية، الجسدية، المهنية، الزوجية، الوالدية) عبر حوار شفاف وعميق، يساعدهنّ على الوصول لأعمق نقطة في داخلهنّ، لتوسيع مساحات النموّ الحقيقي، وتعزيز قدرتهنّ على اتخاذ خيارات أكثر سعة وحكمة بشأن حياتهنّ الخاصة، في فضاء أنثوي يخبرهنّ أنهنّ
               </p>
-              <div className="reserveConsultation border-2 rounded-pill p-2">
-                <Link className="consultationBtn" href="/Consultation">اقرأ المزيد</Link>
+              <div className="border-2 rounded-full p-2">
+                <Link className="no-underline text-black bg-[var(--secondColor)] text-base font-semibold px-7 py-1.2" href="/Consultation">اقرأ المزيد</Link>
               </div>
             </div>
           </div>

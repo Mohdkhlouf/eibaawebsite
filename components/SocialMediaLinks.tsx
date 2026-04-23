@@ -17,10 +17,10 @@ const links: SocialLink[] = [
 
 export const SocialMediaLinks: React.FC = () => {
   return (
-    <div className="socialLinks">
+    <div className="flex items-center justify-center gap-2">
       {links.map(({ href, icon }) => (
         <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${href}`}>
-          <i className={`${icon} rounded-circle m-2 text-center`} aria-hidden="true" />
+          <i className={`${icon} rounded-full w-8 h-8 flex items-center justify-center bg-white text-[var(--mainColor)] text-sm leading-8 m-2 text-center`} aria-hidden="true" />
         </a>
       ))}
     </div>

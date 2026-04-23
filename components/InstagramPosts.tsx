@@ -45,20 +45,20 @@ const stories = [
 
 export const InstagramPosts = () => {
   return (
-    <section className="instagramPosts p-5" id="instagramPosts">
-      <div className="container">
-        <div className="row">
-          <div className="sectionHeader">
-            <h2 className="sectionHeaderTitle">Stories</h2>
-            <p className="sectionHeaderDetails">من وحي قلمي في انستاجرام</p>
+    <section className="p-5" id="instagramPosts">
+      <div className="max-w-[1000px] mx-auto w-full">
+        <div className="">
+          <div className="flex flex-col items-center justify-center">
+            <h2 className="text-[var(--mainColor)]">Stories</h2>
+            <p className="text-lg font-family-tajawal leading-7 font-medium p-1.5">من وحي قلمي في انستاجرام</p>
           </div>
         </div>
-        <div className="row">
+        <div className="flex">
           {stories.map((ele) => (
-            <div className="col-md-4" key={ele.slideId}>
-              <div className="album">
+            <div className="flex-1" key={ele.slideId}>
+              <div className="relative">
                 {ele.slideImages.map((image, idx) => (
-                  <div className="posts" key={idx}>
+                  <div className="" key={idx}>
                     <Image
                       src={image.src}
                       width={300}
@@ -69,7 +69,7 @@ export const InstagramPosts = () => {
                   </div>
                 ))}
               </div>
-              <div className="albumoverlay" />
+              <div className="" />
             </div>
           ))}
         </div>

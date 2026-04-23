@@ -12,13 +12,13 @@ type ArticlesProps = {
  */
 export const Articles = ({ data }: ArticlesProps) => {
   return (
-    <section className="notFeaturedArticles">
-      <div className="row">
+    <section className="">
+      <div className="">
         {data.map((item) => (
-          <div className="articles" key={item.id}>
-            <Link className="articleLink" href={`/Articles/${item.id}`}>
-              <div className="articlesPagearticle" id="article">
-                <div className="articlesPageThumbnail">
+          <div className="flex flex-col" key={item.id}>
+            <Link className="" href={`/Articles/${item.id}`}>
+              <div className="flex flex-row items-center p-2.5" id="article">
+                <div className="w-72 h-48">
                   <img
                     src={
                       item.attributes.ArticleThumbnail?.data?.attributes.formats?.thumbnail?.url ??
@@ -30,13 +30,14 @@ export const Articles = ({ data }: ArticlesProps) => {
                       item.attributes.ArticleThumbnail?.data?.attributes.url ??
                       'article thumbnail'
                     }
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
-                <div className="articleDetails">
-                  <h2 className="articleTitle">{item.attributes.TitleName}</h2>
+                <div className="w-70 flex flex-col mr-4 pl-4">
+                  <h2 className="text-2xl font-bold">{item.attributes.TitleName}</h2>
 
-                  <p className="articlesubtext">
+                  <p className="text-xl text-justify">
                     {item.attributes.ArticleText ? item.attributes.ArticleText.substring(0, 200) : ''}
                   </p>
                 </div>
