@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { CldUploadWidget } from 'next-cloudinary'
 import Image from 'next/image'
+import { cloudinaryConfig } from '@/lib/cloudinary/cloudinary'
 
 interface CloudinaryUploadProps {
   onUpload: (url: string) => void
@@ -24,7 +25,9 @@ export default function CloudinaryUpload({ onUpload }: CloudinaryUploadProps) {
   return (
     <div className="space-y-2">
       {!previewUrl ? (
-        <CldUploadWidget uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!} onSuccess={handleUpload}>
+        <CldUploadWidget uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!}
+          options={cloudinaryConfig.options}
+          onSuccess={handleUpload}>
           {({ open }) => (
             <button
               type="button"

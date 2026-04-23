@@ -1,8 +1,8 @@
+import { deleteCloudinaryImage } from '@/lib/cloudinary/cloudinary-admin'
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { blogSchema } from '@/lib/types/blog'
 import { NextRequest, NextResponse } from 'next/server'
-
 
 
 // GET single blog
@@ -116,6 +116,7 @@ export async function PUT(
 }
 
 // DELETE blog
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -123,7 +124,6 @@ export async function DELETE(
   try {
     const { id } = await params
 
-    // Check authentication
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
@@ -131,7 +131,6 @@ export async function DELETE(
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
     }
 
-    // Check if blog exists
     const blog = await prisma.blog.findUnique({
       where: { id },
       include: { author: true },
@@ -141,10 +140,14 @@ export async function DELETE(
       return NextResponse.json({ message: 'Blog not found' }, { status: 404 })
     }
 
-    // Check authorization
     const currentUser = await prisma.user.findUnique({ where: { id: user.id } })
     if (blog.authorId !== user.id && currentUser?.role !== 'SUPER_ADMIN') {
       return NextResponse.json({ message: 'Forbidden: You can only delete your own blogs' }, { status: 403 })
+    }
+
+    // Delete image from Cloudinary before deleting blog
+    if (blog.thumbnail) {
+      await deleteCloudinaryImage(blog.thumbnail)
     }
 
     await prisma.blog.delete({ where: { id } })

@@ -8,7 +8,7 @@ import { CldUploadWidget } from 'next-cloudinary'
 import { blogSchema, BlogFormData } from '@/lib/types/blog'
 import CloudinaryUpload from '@/components/cloudinary/CloudinaryUpload'
 import RichTextEditor from '@/components/editor/EditorWrapper'
-
+import { cloudinaryConfig } from '@/lib/cloudinary/cloudinary'
 // ─── Types ────────────────────────────────────────────────
 interface Category {
   id: string
@@ -147,6 +147,7 @@ export default function BlogsForm() {
       {/* Hidden Cloudinary widget for editor image uploads */}
       <CldUploadWidget
         uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!}
+        options={cloudinaryConfig.options}
         onSuccess={(result: any) => {
           const url = result.info.secure_url
           imageCallbackRef.current?.(url)
