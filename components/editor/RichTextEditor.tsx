@@ -1,6 +1,7 @@
 'use client'
 
 import { useEditor, EditorContent } from '@tiptap/react'
+import { useEffect, useState } from 'react'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
@@ -10,14 +11,37 @@ import {
   List, ListOrdered, Quote, Minus, Undo, Redo, Link as LinkIcon, Image as ImageIcon
 } from 'lucide-react'
 
+const ToolbarButton = ({
+  onClick, active, children,
+}: {
+  onClick: () => void
+  active?: boolean
+  children: React.ReactNode
+}) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={`p-2 rounded hover:bg-gray-200 transition-colors ${active ? 'bg-gray-200 text-blue-600' : 'text-gray-700'}`}
+  >
+    {children}
+  </button>
+)
+
 interface RichTextEditorProps {
   value: string
   onChange: (value: string) => void
   placeholder?: string
+  onImageUpload?: (callback: (url: string) => void) => void
 }
 
-export default function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
+export default function RichTextEditor({ value, onChange, placeholder, onImageUpload }: RichTextEditorProps) {  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit,
       Image,
@@ -25,10 +49,26 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
       Placeholder.configure({ placeholder: placeholder || 'Write your content here...' }),
     ],
     content: value,
+    editorProps: {
+      attributes: {
+        class: 'prose max-w-none p-4 min-h-[300px] focus:outline-none',
+      },
+    },
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML())
     },
   })
+
+  // Sync value when editing existing blog
+  useEffect(() => {
+    if (editor && value && editor.getHTML() !== value) {
+      editor.commands.setContent(value)
+    }
+  }, [value, editor])
+
+  if (!mounted) return (
+    <div className="border border-gray-300 rounded-lg min-h-[300px] animate-pulse bg-gray-50" />
+  )
 
   if (!editor) return null
 
@@ -38,31 +78,18 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
   }
 
   const addImage = () => {
-    const url = prompt('Enter image URL')
-    if (url) editor.chain().focus().setImage({ src: url }).run()
-  }
-
-  const ToolbarButton = ({
-    onClick,
-    active,
-    children,
-  }: {
-    onClick: () => void
-    active?: boolean
-    children: React.ReactNode
-  }) => (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`p-2 rounded hover:bg-gray-200 transition-colors ${active ? 'bg-gray-200 text-blue-600' : 'text-gray-700'}`}
-    >
-      {children}
-    </button>
-  )
+     if (onImageUpload) {
+       onImageUpload((url: string) => {
+         editor.chain().focus().setImage({ src: url }).run()
+       })
+     } else {
+       const url = prompt('Enter image URL')
+       if (url) editor.chain().focus().setImage({ src: url }).run()
+     }
+   }
 
   return (
     <div className="border border-gray-300 rounded-lg overflow-hidden">
-      {/* Toolbar */}
       <div className="flex flex-wrap gap-1 p-2 bg-gray-50 border-b border-gray-300">
         <ToolbarButton onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')}>
           <Bold size={16} />
@@ -123,11 +150,7 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
         </ToolbarButton>
       </div>
 
-      {/* Editor */}
-      <EditorContent
-        editor={editor}
-        className="prose max-w-none p-4 min-h-[300px] focus:outline-none"
-      />
+      <EditorContent editor={editor} />
     </div>
   )
 }

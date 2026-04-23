@@ -1,24 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { CldUploadWidget } from 'next-cloudinary'
+import { blogSchema, BlogFormData } from '@/lib/types/blog'
 import CloudinaryUpload from '@/components/cloudinary/CloudinaryUpload'
-
-// ─── Schema ───────────────────────────────────────────────
-const blogSchema = z.object({
-  title: z.string().min(3, 'Title must be at least 3 characters'),
-  shortTitle: z.string().min(3, 'Short title must be at least 3 characters'),
-  slug: z.string().min(3, 'Slug must be at least 3 characters'),
-  content: z.string().min(10, 'Content is too short'),
-  categoryId: z.string().min(1, 'Please select a category'),
-  thumbnail: z.string().min(1, 'Thumbnail is required'),
-  published: z.boolean().default(false),
-})
-
-type BlogFormData = z.infer<typeof blogSchema>
+import RichTextEditor from '@/components/editor/EditorWrapper'
 
 // ─── Types ────────────────────────────────────────────────
 interface Category {
@@ -50,6 +39,15 @@ export default function BlogsForm() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(isEdit)
   const [serverError, setServerError] = useState<string | null>(null)
+
+  // ─── Refs for editor image upload ─────────────────────
+  const imageCallbackRef = useRef<((url: string) => void) | null>(null)
+  const openEditorUploadRef = useRef<(() => void) | null>(null)
+
+  const handleEditorImageUpload = (callback: (url: string) => void) => {
+    imageCallbackRef.current = callback
+    openEditorUploadRef.current?.()
+  }
 
   const {
     register,
@@ -146,6 +144,21 @@ export default function BlogsForm() {
     <div className="space-y-4">
       <h2 className="text-2xl font-bold text-gray-900">{isEdit ? 'Edit Blog' : 'Add New Blog'}</h2>
 
+      {/* Hidden Cloudinary widget for editor image uploads */}
+      <CldUploadWidget
+        uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!}
+        onSuccess={(result: any) => {
+          const url = result.info.secure_url
+          imageCallbackRef.current?.(url)
+          imageCallbackRef.current = null
+        }}
+      >
+        {({ open }) => {
+          openEditorUploadRef.current = open
+          return <span className="hidden" />
+        }}
+      </CldUploadWidget>
+
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-lg shadow p-6 max-w-3xl space-y-6">
 
         {serverError && (
@@ -214,7 +227,6 @@ export default function BlogsForm() {
             <CloudinaryUpload
               onUpload={(url: string) => setValue('thumbnail', url, { shouldValidate: true })}
             />
-            {/* Preview */}
             {watch('thumbnail') && (
               <img src={watch('thumbnail')} alt="Thumbnail preview" className="mt-2 h-20 rounded-lg object-cover" />
             )}
@@ -225,11 +237,11 @@ export default function BlogsForm() {
         {/* Content */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Content *</label>
-          <textarea
-            {...register('content')}
-            rows={8}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          <RichTextEditor
+            value={watch('content')}
+            onChange={(val) => setValue('content', val, { shouldValidate: true })}
             placeholder="Write your blog content here..."
+            onImageUpload={handleEditorImageUpload}
           />
           {errors.content && <p className="text-red-500 text-sm mt-1">{errors.content.message}</p>}
         </div>

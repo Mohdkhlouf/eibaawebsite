@@ -24,7 +24,7 @@ export default function CloudinaryUpload({ onUpload }: CloudinaryUploadProps) {
   return (
     <div className="space-y-2">
       {!previewUrl ? (
-        <CldUploadWidget uploadPreset="eibaapreset" onSuccess={handleUpload}>
+        <CldUploadWidget uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!} onSuccess={handleUpload}>
           {({ open }) => (
             <button
               type="button"
