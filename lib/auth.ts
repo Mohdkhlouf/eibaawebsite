@@ -14,9 +14,14 @@ export async function getUser(): Promise<import('@supabase/supabase-js').User | 
           return cookieStore.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            cookieStore.set(name, value, options)
-          })
+          try {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              cookieStore.set(name, value, options)
+            })
+          } catch (error) {
+            // Cookies can only be set in Server Actions or Route Handlers
+            // This error is safe to ignore during server-side rendering
+          }
         },
       },
     }
