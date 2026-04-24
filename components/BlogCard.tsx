@@ -1,8 +1,9 @@
 import Image from "next/image"
-
+import Link from "next/link"
 
 export default function BlogCard({ blog }: { blog: any }) {
   return (
+    <Link href={`/blogs/${blog.id}`}>
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
     <article key={blog.id} className='flex flex-col justify-center items-center text-center border rounded-lg shadow-md overflow-hidden'>
       <div className='relative w-full h-48'>
@@ -23,6 +24,7 @@ export default function BlogCard({ blog }: { blog: any }) {
         </button>
       </div>
       </article>
-    </div>
+      </div>
+    </Link>
   )
 }
