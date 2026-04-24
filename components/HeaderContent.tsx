@@ -1,3 +1,4 @@
+'use client'
 import React, { useRef } from 'react'
 import { SocialMediaLinks } from './SocialMediaLinks'
 
