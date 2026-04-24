@@ -1,5 +1,6 @@
 import React from 'react'
 import { SocialMediaLinks } from './SocialMediaLinks'
+import Image from 'next/image'
 
 export const Footer: React.FC = () => {
   return (
@@ -8,12 +9,14 @@ export const Footer: React.FC = () => {
 
         <div className="pt-5">
           <div className="flex justify-center">
-            <div className="flex-1">
-              <img
-                src="./personal.png"
+            <div className="flex flex-col items-center">
+              <Image
+                src="/personal.png"
                 className='w-full rounded-3xl shadow-lg'
                 style={{boxShadow: '10px 10px 5px var(--mainColor)'}}
                 alt="personal"
+                width={200}
+                height={200}
               />
 
               <h6 className='mt-3'>للتواصل معي من خلال</h6>

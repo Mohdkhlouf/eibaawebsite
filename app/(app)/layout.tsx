@@ -22,11 +22,11 @@ export default function RootLayout({ children }: { children: ReactNode }){
   return (
     <html lang="ar">
 
-      <body dir="rtl" className={tajawal.className}>
+      <body dir="rtl" className={`${tajawal.className} flex flex-col min-h-screen`}>
         <Header />
-
-        {children}
-
+        <main className="flex-1 mx-auto w-full py-8">
+          {children}
+        </main>
         <Footer />
       </body>
 
