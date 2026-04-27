@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 // GET all courses
 export async function GET(request: NextRequest) {
   try {
-    const courses = await prisma.courses.findMany({
+    const courses = await prisma.course.findMany({
       include: {
         enrollements: {
           select: {
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if title already exists
-    const existingTitle = await prisma.courses.findUnique({
+    const existingTitle = await prisma.course.findUnique({
       where: { title }
     })
 
@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if slug already exists
-    const existingSlug = await prisma.courses.findUnique({
+    const existingSlug = await prisma.course.findUnique({
       where: { slug }
     })
 
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const course = await prisma.courses.create({
+    const course = await prisma.course.create({
       data: {
         title,
         slug,

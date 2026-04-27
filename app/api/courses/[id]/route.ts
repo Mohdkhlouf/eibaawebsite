@@ -10,7 +10,7 @@ export async function GET(
   try {
     const { id } = await params
 
-    const course = await prisma.courses.findUnique({
+    const course = await prisma.course.findUnique({
       where: { id },
       include: {
         enrollements: {
@@ -72,7 +72,7 @@ export async function PUT(
     }
 
     // Check if course exists
-    const existingCourse = await prisma.courses.findUnique({
+    const existingCourse = await prisma.course.findUnique({
       where: { id }
     })
 
@@ -104,7 +104,7 @@ export async function PUT(
 
     // Check if new title already exists (but allow if it's the same course)
     if (title !== existingCourse.title) {
-      const duplicateTitle = await prisma.courses.findUnique({
+      const duplicateTitle = await prisma.course.findUnique({
         where: { title }
       })
 
@@ -118,7 +118,7 @@ export async function PUT(
 
     // Check if new slug already exists (but allow if it's the same course)
     if (slug !== existingCourse.slug) {
-      const duplicateSlug = await prisma.courses.findUnique({
+      const duplicateSlug = await prisma.course.findUnique({
         where: { slug }
       })
 
@@ -130,7 +130,7 @@ export async function PUT(
       }
     }
 
-    const updatedCourse = await prisma.courses.update({
+    const updatedCourse = await prisma.course.update({
       where: { id },
       data: {
         title,
@@ -193,7 +193,7 @@ export async function DELETE(
     }
 
     // Check if course exists
-    const course = await prisma.courses.findUnique({
+    const course = await prisma.course.findUnique({
       where: { id }
     })
 
@@ -204,7 +204,7 @@ export async function DELETE(
       )
     }
 
-    await prisma.courses.delete({
+    await prisma.course.delete({
       where: { id }
     })
 

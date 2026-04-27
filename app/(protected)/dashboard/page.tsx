@@ -5,12 +5,14 @@ import { useSearchParams } from 'next/navigation'
 
 // Import list components
 import BlogsList from '@/components/dashboard/lists/BlogsList'
+import ServicesList from '@/components/dashboard/lists/ServicesList'
 import CategoriesList from '@/components/dashboard/lists/CategoriesList'
 import CoursesList from '@/components/dashboard/lists/CoursesList'
 import UsersList from '@/components/dashboard/lists/UsersList'
 
 // Import form components
 import BlogsForm from '@/components/dashboard/forms/BlogsForm'
+import ServicesForm from '@/components/dashboard/forms/ServicesForm'
 import CategoriesForm from '@/components/dashboard/forms/CategoriesForm'
 import CoursesForm from '@/components/dashboard/forms/CoursesForm'
 import UsersForm from '@/components/dashboard/forms/UsersForm'
@@ -26,6 +28,9 @@ export default function DashboardPage() {
         if (action === 'add') return <BlogsForm />
         if (action === 'edit') return <BlogsForm />
         return <BlogsList />
+
+      case 'services':
+        return action === 'add' ? <ServicesForm /> : <ServicesList />
 
       case 'categories':
         return action === 'add' ? <CategoriesForm /> : <CategoriesList />

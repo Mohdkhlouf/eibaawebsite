@@ -41,7 +41,7 @@ const CustomImage = Image.extend({
 
       img.addEventListener('click', () => {
         const pos = typeof getPos === 'function' ? getPos() : null
-        if (pos === null) return
+        if (pos == null || typeof pos !== 'number') return
         editor.view.dispatch(
           editor.view.state.tr.setSelection(
             NodeSelection.create(editor.view.state.doc, pos)

@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { randomUUID } from 'crypto'
 
 // GET all users
 export async function GET(request: NextRequest) {
@@ -88,6 +89,7 @@ export async function POST(request: NextRequest) {
 
     const newUser = await prisma.user.create({
       data: {
+        id: randomUUID(),
         email: email.trim(),
         name: name || null,
         avatarUrl: avatarUrl || null,

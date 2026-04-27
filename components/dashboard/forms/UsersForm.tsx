@@ -20,10 +20,10 @@ export default function UsersForm() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{ email: string; name: string; role: 'USER' | 'SUPER_ADMIN' }>({
     email: '',
     name: '',
-    role: 'USER' as const,
+    role: 'USER',
   })
 
   useEffect(() => {

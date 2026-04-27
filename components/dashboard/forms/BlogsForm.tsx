@@ -57,7 +57,7 @@ export default function BlogsForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<BlogFormData>({
-    resolver: zodResolver(blogSchema),
+    resolver: zodResolver(blogSchema) as any,
     defaultValues: {
       title: '',
       shortTitle: '',

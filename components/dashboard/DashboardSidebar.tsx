@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 
 const menuItems = [
   { label: 'Blogs', section: 'blogs' },
+  { label: 'Services', section: 'services' },
   { label: 'Categories', section: 'categories' },
   { label: 'Courses', section: 'courses' },
   { label: 'Users', section: 'users' },
