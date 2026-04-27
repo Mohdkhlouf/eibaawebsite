@@ -1,4 +1,4 @@
-import { Services } from '@/components/Services'
+import FeaturedServices from "@/components/FeaturedServices"
 import { PodcastSection } from '@/components/PodcastSection'
 import { InstagramPosts } from '@/components/InstagramPosts'
 import { HeaderContent } from '@/components/HeaderContent'
@@ -9,7 +9,7 @@ export default function HomePage() {
     <>
       <HeaderContent />
 
-      <Services />
+      <FeaturedServices />
 
       <FeaturedBlogs />
 
