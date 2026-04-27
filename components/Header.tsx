@@ -9,7 +9,7 @@ export default async function Header() {
   const loggedIn = await getUser()
 
   return (
-    <header className="flex bg-white sticky top-0 z-50 shadow-sm">
+    <header className="flex bg-white sticky top-0 z-50 shadow-sm ">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between gap-5 py-3">
           <div className="flex items-center">

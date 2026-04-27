@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[var(--secondColor)] text-[var(--mainColor)] text-center mt-5 py-5" id="footer">
+    <footer className="bg-[#3D3350] text-[#FAF7F5] py-12">
       <div className="max-w-[1000px] mx-auto w-full">
 
         <div className="pt-5">
