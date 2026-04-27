@@ -12,6 +12,7 @@ export default function BlogCard({ blog }: { blog: any }) {
             src={blog.thumbnail}
             alt={blog.title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
           />
         )}

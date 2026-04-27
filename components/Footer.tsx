@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
               <SocialMediaLinks />
 
               <h6 className='mt-2'>راسلني عبر</h6>
-              <span>eiba.abutaha@gmail.com</span>
+              <a href="mailto:eiba.abutaha@gmail.com">eiba.abutaha@gmail.com</a>
 
             </div>
           </div>

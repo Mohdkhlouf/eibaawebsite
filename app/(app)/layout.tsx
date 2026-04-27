@@ -20,16 +20,13 @@ export const metadata:Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }){
 
   return (
-    <html lang="ar">
-
-      <body dir="rtl" className={`${tajawal.className} flex flex-col min-h-screen`}>
+    <div lang="ar" dir="rtl" className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-1 mx-auto w-full py-8">
           {children}
         </main>
-        <Footer />
-      </body>
+      <Footer />
+    </div>
 
-    </html>
   )
 }

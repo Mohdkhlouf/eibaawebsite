@@ -24,7 +24,7 @@ export default async function Header() {
             <button className="hidden md:block bg-[#60768e] text-amber-50 rounded-full px-4 py-2 font-semibold">
               <Link href="/Consultation">احجز استشارتك</Link>
             </button>
-            {loggedIn? <LogOut /> : <Link href='\login'>Login</Link>}
+            {loggedIn? <LogOut /> : <Link href='/login'>Login</Link>}
           </div>
         </div>
       </div>
