@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-
+import ServiceCard from "@/components/ServiceCard"
 
 export default async function servicesPage() {
   const services = await prisma.service.findMany({
@@ -17,14 +17,9 @@ export default async function servicesPage() {
 
 
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
       {services.map(service => (
-        <div>
-
-          <h2>{service.title}</h2>
-          <p>{service.shortDesc}</p>
-          <p>{service.content }</p>
-        </div>
+        <ServiceCard key={service.id} service={service} />
 
       ))}
     </div>
