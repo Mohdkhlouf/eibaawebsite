@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
 import MainMenu from '@/components/ui/MainMenu'
-import { LogOut } from './dashboard/LogOut'
+import { LogOut } from '../dashboard/LogOut'
 import { getUser } from '@/lib/auth'
 
 

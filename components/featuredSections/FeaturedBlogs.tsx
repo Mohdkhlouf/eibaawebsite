@@ -1,6 +1,6 @@
 // components/FeaturedBlogs.tsx
 import { prisma } from '@/lib/prisma'
-import BlogCard from '@/components/BlogCard'
+import BlogCard from '@/components/cards/BlogCard'
 
 export default async function FeaturedBlogs() {
   const blogs = await prisma.blog.findMany({

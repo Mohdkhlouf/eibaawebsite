@@ -1,9 +1,9 @@
-import FeaturedServices from "@/components/FeaturedServices"
-import { PodcastSection } from '@/components/PodcastSection'
-import { InstagramPosts } from '@/components/InstagramPosts'
-import { HeaderContent } from '@/components/HeaderContent'
-import FeaturedBlogs from '@/components/FeaturedBlogs'
 
+import { PodcastSection } from '@/components/featuredSections/PodcastSection'
+import { InstagramPosts } from '@/components/featuredSections/InstagramPosts'
+import { HeaderContent } from '@/components/ui/HeaderContent'
+import FeaturedBlogs from '@/components/featuredSections/FeaturedBlogs'
+import FeaturedServices from "@/components/featuredSections/FeaturedServices"
 export default function HomePage() {
   return (
     <>

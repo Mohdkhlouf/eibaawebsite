@@ -3,7 +3,7 @@ import Link from "next/link"
 export default async function ServiceCard({ service }: { service: { id: string;  title: string; content: string; thumbnail: string; shortDesc: string; slug: string } }) {
   return (
     <article className="bg-white border border-[#F2C4A0] rounded-2xl shadow-sm hover:shadow-md transition-shadow">      {service.thumbnail && (
-        <div className="relative w-[250px] h-[250px] mx-auto mt-4 rounded-lg overflow-hidden">
+        <div className="relative w-62.5 h-62.5 mx-auto mt-4 rounded-lg overflow-hidden">
           <Image
             src={service.thumbnail}
             alt={service.title}

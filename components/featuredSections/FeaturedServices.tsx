@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import ServiceCard from "@/components/ServiceCard"
+import ServiceCard from "@/components/cards/ServiceCard"
 
 export default async function FeaturedServices() {
   const featuredServices = await prisma.service.findMany({
