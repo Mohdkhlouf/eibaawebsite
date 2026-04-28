@@ -1,7 +1,5 @@
-'use client'
-
 import { DashboardSidebar } from '@/components/dashboard/DashboardSidebar'
-import { useSearchParams } from 'next/navigation'
+
 
 // Import list components
 import BlogsList from '@/components/dashboard/lists/BlogsList'
@@ -19,10 +17,12 @@ import CoursesForm from '@/components/dashboard/forms/CoursesForm'
 import UsersForm from '@/components/dashboard/forms/UsersForm'
 import SocialMediaLinksFrom from '@/components/dashboard/forms/SocialMediaLinksFrom'
 
-export default function DashboardPage() {
-  const searchParams = useSearchParams()
-  const section = searchParams.get('section')
-  const action = searchParams.get('action')
+
+export default async function DashboardPage({ searchParams }: {
+  searchParams: Promise<{ section?: string; action?: string; id?: string }>
+}) {
+  const { section, action, id } = await searchParams
+
 
   const renderContent = () => {
     switch (section) {

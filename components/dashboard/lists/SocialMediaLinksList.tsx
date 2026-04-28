@@ -1,4 +1,15 @@
-export default function SocialMediaLinksList() {
+
+import { prisma } from '@/lib/prisma'
+
+export default async function SocialMediaLinksList() {
+  const links = await prisma.socialMediaLink.findMany({ orderBy: { order: 'desc' } })
+
+  if (!links.length) {
+    return (
+      <div>no data found</div>
+    )
+  }
+
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold text-gray-900">Social Links</h2>
