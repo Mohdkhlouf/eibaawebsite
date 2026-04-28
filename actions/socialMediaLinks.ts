@@ -7,11 +7,9 @@ export async function deleteSocialMediaLink(id: number) {
   revalidatePath('/dashboard')
 }
 
-export async function deleteSocialMediaLinkAction(formData: FormData) {
+
+export async function deleteSocialMediaLinkAction(id: number) {
   'use server'
-  const id = formData.get('id')
-  if (!id) throw new Error('Invalid id')
-  const nid = typeof id === 'string' ? Number(id) : Number(id)
-  if (Number.isNaN(nid)) throw new Error('Invalid id')
-  return deleteSocialMediaLink(nid)
+  if (!id || Number.isNaN(id)) throw new Error('Invalid id')
+  return deleteSocialMediaLink(id)
 }
