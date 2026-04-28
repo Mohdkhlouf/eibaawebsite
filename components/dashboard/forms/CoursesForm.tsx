@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import CloudinaryUpload from '@/components/cloudinary/CloudinaryUpload'
 
 interface Course {
   id: string
@@ -153,16 +154,11 @@ export default function CoursesForm() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Thumbnail URL *</label>
-            <input
-              type="url"
-              name="thumbnail"
-              value={formData.thumbnail}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="https://example.com/image.jpg"
-            />
+            <label className="block text-sm font-medium text-gray-700 mb-2">Thumbnail *</label>
+            <CloudinaryUpload onUpload={(url: string) => setFormData(prev => ({ ...prev, thumbnail: url }))} />
+            {formData.thumbnail && (
+              <img src={formData.thumbnail} alt="Thumbnail preview" className="mt-2 h-20 rounded-lg object-cover" />
+            )}
           </div>
 
           <div>

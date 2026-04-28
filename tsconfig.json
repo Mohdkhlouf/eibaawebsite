@@ -30,6 +30,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "lib/cloudinary",
+    "components/dashboard/lists/SocialMediaLinksList",
   ],
   "exclude": ["node_modules"],
 }
