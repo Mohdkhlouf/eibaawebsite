@@ -1,6 +1,6 @@
 // app/blogs/page.tsx
 import { prisma } from '@/lib/prisma' // adjust path to wherever your file is
-import BlogCard from '@/components/BlogCard'
+import BlogCard from '@/components/cards/BlogCard'
 
 export default async function BlogsPage() {
   const blogs = await prisma.blog.findMany({ orderBy: { createdAt: 'desc' } })

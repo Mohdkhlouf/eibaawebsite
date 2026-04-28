@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
 :root {
-    --mainColor: #60768e;
-    --secondColor: #e7d0c3;
-    --bg: #404060;
-    --surface: #a0c0e0;
-    --accent: #8080a0;
-    --text: #e0e0e0;
+    --mainColor: #7c6b8a; /* purple - buttons, accents */
+    --bg: #faf7f5; /* warm off-white - page bg */
+    --surface: #ffffff; /* cards */
+    --text: #3d3350; /* all text */
+    --text-muted: #9a8fa8; /* secondary text */
 }
 
 * {

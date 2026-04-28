@@ -30,16 +30,24 @@ export default function DashboardPage() {
         return <BlogsList />
 
       case 'services':
-        return action === 'add' ? <ServicesForm /> : <ServicesList />
+        if (action === 'add') return <ServicesForm />
+        if (action === 'edit') return <ServicesForm />
+        return <ServicesList />
 
       case 'categories':
-        return action === 'add' ? <CategoriesForm /> : <CategoriesList />
+        if (action === 'add') return <CategoriesForm />
+        if (action === 'edit') return <CategoriesForm />
+        return <CategoriesList />
 
       case 'courses':
-        return action === 'add' ? <CoursesForm /> : <CoursesList />
+        if (action === 'add') return <CoursesForm />
+        if (action === 'edit') return <CoursesForm />
+        return <CoursesList />
 
       case 'users':
-        return action === 'add' ? <UsersForm /> : <UsersList />
+        if (action === 'add') return <UsersForm />
+        if (action === 'edit') return <UsersForm />
+        return <UsersList />
 
       default:
         return (
