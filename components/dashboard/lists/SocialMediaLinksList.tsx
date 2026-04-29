@@ -2,7 +2,7 @@
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import { DeleteButton } from '@/components/ui/DeleteButton'
-import { deleteSocialMediaLinkAction } from '@/actions/socialMediaLinks'
+import { deleteSocialMediaLink }  from '@/actions/socialMediaLinks'
 export default async function SocialMediaLinksList() {
   const links = await prisma.socialMediaLink.findMany({ orderBy: { order: 'desc' } })
   return (
@@ -32,8 +32,7 @@ export default async function SocialMediaLinksList() {
                 <td className="px-6 py-4 text-sm text-gray-600">{s.order}</td>
                 <td className="px-6 py-4 text-sm space-x-2">
                   <Link href={`/dashboard?section=services&action=edit&id=${s.id}`} className="text-blue-600 hover:text-blue-900">Edit</Link>
-                  <DeleteButton id={s.id} action={ deleteSocialMediaLinkAction} />
-                </td>
+                  <DeleteButton id={s.id} action={(id) => deleteSocialMediaLink(Number(id))} />                </td>
               </tr>
             ))}
           </tbody>
