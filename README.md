@@ -56,7 +56,7 @@ The dashboard layout is explicitly set to `lang="en" dir="ltr"` in `layout.tsx`,
 | Auth             | [Supabase Auth](https://supabase.com/auth)          |
 | Database         | PostgreSQL via [Prisma ORM](https://www.prisma.io/) |
 | Backend BaaS     | [Supabase](https://supabase.com)                    |
-| Package Manager  | pnpm                                                |
+| Package Manager  | npm                                                |
 
 ---
 
