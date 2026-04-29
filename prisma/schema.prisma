@@ -98,3 +98,11 @@ model Enrollement {
   @@unique([userId, courseId])
   @@map("enrollments")
 }
+
+model socialMediaLink {
+  id    Int    @id @default(autoincrement())
+  name  String
+  url   String
+  icon  String
+  order Int    @unique
+}

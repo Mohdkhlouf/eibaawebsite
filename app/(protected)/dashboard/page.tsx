@@ -1,7 +1,5 @@
-'use client'
-
 import { DashboardSidebar } from '@/components/dashboard/DashboardSidebar'
-import { useSearchParams } from 'next/navigation'
+
 
 // Import list components
 import BlogsList from '@/components/dashboard/lists/BlogsList'
@@ -9,6 +7,7 @@ import ServicesList from '@/components/dashboard/lists/ServicesList'
 import CategoriesList from '@/components/dashboard/lists/CategoriesList'
 import CoursesList from '@/components/dashboard/lists/CoursesList'
 import UsersList from '@/components/dashboard/lists/UsersList'
+import SocialMediaLinksList from '@/components/dashboard/lists/SocialMediaLinksList'
 
 // Import form components
 import BlogsForm from '@/components/dashboard/forms/BlogsForm'
@@ -16,11 +15,14 @@ import ServicesForm from '@/components/dashboard/forms/ServicesForm'
 import CategoriesForm from '@/components/dashboard/forms/CategoriesForm'
 import CoursesForm from '@/components/dashboard/forms/CoursesForm'
 import UsersForm from '@/components/dashboard/forms/UsersForm'
+import SocialMediaLinksFrom from '@/components/dashboard/forms/SocialMediaLinksFrom'
 
-export default function DashboardPage() {
-  const searchParams = useSearchParams()
-  const section = searchParams.get('section')
-  const action = searchParams.get('action')
+
+export default async function DashboardPage({ searchParams }: {
+  searchParams: Promise<{ section?: string; action?: string; id?: string }>
+}) {
+  const { section, action, id } = await searchParams
+
 
   const renderContent = () => {
     switch (section) {
@@ -48,6 +50,11 @@ export default function DashboardPage() {
         if (action === 'add') return <UsersForm />
         if (action === 'edit') return <UsersForm />
         return <UsersList />
+
+      case 'socialMediaLinks':
+        if (action === 'add') return <SocialMediaLinksFrom />
+        if (action === 'edit') return <SocialMediaLinksFrom />
+        return <SocialMediaLinksList />
 
       default:
         return (
