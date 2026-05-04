@@ -12,7 +12,13 @@ export function DeleteButton({ id, action, label = 'Delete' }: Props) {
 
   const handleClick = () => {
     if (!confirm('Are you sure you want to delete this item?')) return
-    startTransition(() => action(id))
+    startTransition(async () => {
+      try {
+        await action(id)
+      } catch (e: any) {
+        alert(e?.message || 'Failed to delete')
+      }
+    })
   }
 
   return (
