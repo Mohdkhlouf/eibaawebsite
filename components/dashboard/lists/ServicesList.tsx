@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getServices, deleteService } from '@/app/actions/services'
+import { getServices, deleteService } from '@/actions/services'
 
 interface Service {
   id: string

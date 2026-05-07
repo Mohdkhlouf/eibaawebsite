@@ -8,7 +8,7 @@ interface Course {
   title: string
   slug: string
   capacity: number
-  enrollments: { id: string }[]
+  enrollmentsCount: number
   createdAt: Date
   updatedAt: Date
 }
@@ -81,7 +81,7 @@ export default function CoursesList() {
                 <td className="px-6 py-4 text-sm text-gray-600">{course.capacity}</td>
                 <td className="px-6 py-4 text-sm">
                   <span className="px-2 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium">
-                    {course.enrollments?.length || 0} / {course.capacity}
+                    {course.enrollmentsCount} / {course.capacity}
                   </span>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-600">

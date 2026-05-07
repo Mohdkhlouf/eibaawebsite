@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react'
 import { enrollInCourse } from '@/actions/enroll'
 
@@ -7,10 +6,12 @@ export default function EnrollButton({
   courseId,
   isEnrolled,
   isLoggedIn,
+  isFull,
 }: {
   courseId: string
   isEnrolled: boolean
   isLoggedIn: boolean
+  isFull: boolean
 }) {
   const [enrolled, setEnrolled] = useState(isEnrolled)
   const [loading, setLoading] = useState(false)
@@ -30,6 +31,14 @@ export default function EnrollButton({
     return (
       <div className="mt-8 px-6 py-3 bg-green-100 text-green-700 rounded-lg inline-block">
         ✓ Already Enrolled
+      </div>
+    )
+  }
+
+  if (isFull) {
+    return (
+      <div className="mt-8 px-6 py-3 bg-red-100 text-red-700 rounded-lg inline-block">
+        ✗ Course is Full
       </div>
     )
   }
