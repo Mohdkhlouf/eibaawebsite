@@ -32,5 +32,8 @@ export async function GET() {
     return NextResponse.json({ error: 'User not found in app DB' }, { status: 404 })
   }
 
-  return NextResponse.json({ role: dbUser.role })
+  return NextResponse.json({
+    role: dbUser.role,
+    profileCompleted: dbUser.profileCompleted,
+  })
 }
