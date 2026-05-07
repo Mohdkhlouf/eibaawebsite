@@ -5,50 +5,24 @@ import { SocialMediaLink, SocialMediaLinkSchema } from "@/lib/types/socialMedia"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
-export async function deleteSocialMediaLink(id: number | string) {
-  const nid = typeof id === 'string' ? parseInt(id) : id
-  if (!nid || Number.isNaN(Number(nid))) throw new Error('Invalid id')
-  try {
-    await prisma.socialMediaLink.delete({ where: { id: Number(nid) } })
-    revalidatePath('/dashboard')
-  } catch (e: any) {
-    // handle missing table or record gracefully
-    if (e?.code === 'P2021') throw new Error('Database table for social links not found. Run Prisma migrations.')
-    if (e?.code === 'P2025') throw new Error('Social media link not found')
-    throw e
-  }
+export async function deleteSocialMediaLink(id: number) {
+  if (!id) throw new Error('Invalid id')
+  await prisma.socialMediaLink.delete({ where: { id } })
+  revalidatePath('/dashboard')
 }
 
 export async function getSocialMediaLinkById(id: string) {
-  try {
-    return await prisma.socialMediaLink.findUnique({ where: { id: parseInt(id) } })
-  } catch (e: any) {
-    if (e?.code === 'P2021') throw new Error('Database table for social links not found. Run Prisma migrations.')
-    throw e
-  }
+  return await prisma.socialMediaLink.findUnique({ where: { id: parseInt(id) } })
 }
 
 export async function createSocialMediaLink(data: SocialMediaLink) {
-  try {
-    await prisma.socialMediaLink.create({ data })
-    revalidatePath('/dashboard')
-  } catch (e: any) {
-    if (e?.code === 'P2021') throw new Error('Database table for social links not found. Run Prisma migrations.')
-    if (e?.code === 'P2002') throw new Error('Order must be unique')
-    throw e
-  }
+  await prisma.socialMediaLink.create({ data })
+  revalidatePath('/dashboard')
 }
 
 export async function updateSocialMediaLink(id: string, data: SocialMediaLink) {
-  try {
-    await prisma.socialMediaLink.update({ where: { id: parseInt(id) }, data })
-    revalidatePath('/dashboard')
-  } catch (e: any) {
-    if (e?.code === 'P2021') throw new Error('Database table for social links not found. Run Prisma migrations.')
-    if (e?.code === 'P2002') throw new Error('Order must be unique')
-    if (e?.code === 'P2025') throw new Error('Social media link not found')
-    throw e
-  }
+  await prisma.socialMediaLink.update({ where: { id: parseInt(id) }, data })
+  revalidatePath('/dashboard')
 }
 
 // Server action wrappers for forms

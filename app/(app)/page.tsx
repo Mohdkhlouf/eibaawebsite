@@ -4,12 +4,15 @@ import InstagramPosts  from '@/components/featuredSections/InstagramPosts'
 import { HeaderContent } from '@/components/ui/HeaderContent'
 import FeaturedBlogs from '@/components/featuredSections/FeaturedBlogs'
 import FeaturedServices from "@/components/featuredSections/FeaturedServices"
+import FeaturedCourses from "@/components/featuredSections/FeaturedCourses"
 export default function HomePage() {
   return (
     <>
       <HeaderContent />
 
       <FeaturedServices />
+
+      <FeaturedCourses />
 
       <FeaturedBlogs />
 
