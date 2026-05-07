@@ -1,10 +1,17 @@
 import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import Enroll from '@/components/ui/Enroll'
+import Register from '@/components/ui/Register'
+
+import { createClient } from '@/lib/supabase/server'
 
 export default async function CoursePage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
 
+
+  const { id } = await params
   const course = await prisma.course.findUnique({
     where: { id },
   })
@@ -31,6 +38,10 @@ export default async function CoursePage({ params }: { params: Promise<{ id: str
         className="prose prose-lg max-w-none"
         dangerouslySetInnerHTML={{ __html: course.content }}
       />
+      <div>
+        {user ? <Enroll />: <Register />}
+        <button>Enroll Now</button>
+      </div>
     </div>
   )
 }
