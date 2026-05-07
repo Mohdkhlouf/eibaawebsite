@@ -1,4 +1,3 @@
-// app/blogs/page.tsx
 import { prisma } from '@/lib/prisma' // adjust path to wherever your file is
 import BlogCard from '@/components/cards/BlogCard'
 

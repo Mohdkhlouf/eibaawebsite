@@ -32,7 +32,7 @@ export default async function SocialMediaLinksList() {
                 <td className="px-6 py-4 text-sm text-gray-600">{s.order}</td>
                 <td className="px-6 py-4 text-sm space-x-2">
                   <Link href={`/dashboard?section=services&action=edit&id=${s.id}`} className="text-blue-600 hover:text-blue-900">Edit</Link>
-                  <DeleteButton id={s.id} action={(id) => deleteSocialMediaLink(Number(id))} />                </td>
+                  <DeleteButton id={s.id} action={deleteSocialMediaLink} />                </td>
               </tr>
             ))}
           </tbody>
