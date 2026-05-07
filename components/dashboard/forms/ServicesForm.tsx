@@ -8,7 +8,7 @@ import { CldUploadWidget } from 'next-cloudinary'
 import { serviceSchema, ServiceFormData } from '@/lib/types/service'
 import CloudinaryUpload from '@/components/cloudinary/CloudinaryUpload'
 import { cloudinaryConfig } from '@/lib/cloudinary/cloudinary'
-import { createService, updateService, getServiceById } from '@/app/actions/services'
+import { createService, updateService, getServiceById } from '@/actions/services'
 
 export default function ServicesForm() {
   const searchParams = useSearchParams()
