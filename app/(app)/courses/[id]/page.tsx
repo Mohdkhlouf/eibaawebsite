@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Enroll from '@/components/ui/Enroll'
-import Register from '@/components/ui/Register'
+import LoginNow from '@/components/ui/LoginNow'
 
 import { createClient } from '@/lib/supabase/server'
 
@@ -39,8 +39,7 @@ export default async function CoursePage({ params }: { params: Promise<{ id: str
         dangerouslySetInnerHTML={{ __html: course.content }}
       />
       <div>
-        {user ? <Enroll />: <Register />}
-        <button>Enroll Now</button>
+        {user ? <Enroll />: <LoginNow />}
       </div>
     </div>
   )

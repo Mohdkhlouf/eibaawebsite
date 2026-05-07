@@ -18,17 +18,39 @@ enum Role {
 }
 
 model User {
-  id           String        @id @db.Uuid
-  email        String        @unique
-  name         String?
-  avatarUrl    String?
-  role         Role          @default(USER)
-  createdAt    DateTime      @default(now())
+  id               String   @id @db.Uuid
+  email            String   @unique
+  name             String?
+  avatarUrl        String?
+  role             Role     @default(USER)
+  createdAt        DateTime @default(now())
+  profileCompleted Boolean  @default(false)
+
+  // Personal info
+  gender        Gender?
+  country       String?
+  whatsapp      String?
+  phone         String?
+  dateOfBirth   DateTime?
+  maritalStatus MaritalStatus?
+
   courses      Course[]
   blogs        Blog[]
   enrollements Enrollement[]
 
   @@map("users")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum MaritalStatus {
+  SINGLE
+  MARRIED
+  DIVORCED
+  ENGAGED
 }
 
 model Category {
