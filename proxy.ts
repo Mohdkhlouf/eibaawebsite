@@ -4,6 +4,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const isDashboardRoute = pathname.startsWith('/dashboard')
+  const isOnboardingRoute = pathname === '/onboarding'
 
   let response = NextResponse.next({
     request: { headers: request.headers },
@@ -38,15 +39,24 @@ export async function proxy(request: NextRequest) {
     if (!user) {
       return NextResponse.redirect(new URL('/login', request.url))
     }
-
-    // Check role from DB via /api/me
     const meRes = await fetch(new URL('/api/me', request.url), {
       headers: { cookie: request.headers.get('cookie') ?? '' },
     })
     const me = await meRes.json()
-
     if (!meRes.ok || me.role !== 'SUPER_ADMIN') {
       return NextResponse.redirect(new URL('/', request.url))
+    }
+  }
+
+  // If logged in but profile not completed, redirect to onboarding
+  // Skip this check if already on /onboarding to avoid redirect loop
+  if (user && !isOnboardingRoute) {
+    const meRes = await fetch(new URL('/api/me', request.url), {
+      headers: { cookie: request.headers.get('cookie') ?? '' },
+    })
+    const me = await meRes.json()
+    if (meRes.ok && me.profileCompleted === false) {
+      return NextResponse.redirect(new URL('/onboarding', request.url))
     }
   }
 
@@ -54,5 +64,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: ['/dashboard/:path*', '/((?!_next|api|login|onboarding|.*\\..*).*)'],
 }

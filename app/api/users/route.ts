@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
-import { NextRequest, NextResponse } from 'next/server'
 import { randomUUID } from 'crypto'
+import { NextRequest, NextResponse } from 'next/server'
 
 // GET all users
 export async function GET(request: NextRequest) {
@@ -14,6 +14,13 @@ export async function GET(request: NextRequest) {
         avatarUrl: true,
         role: true,
         createdAt: true,
+        profileCompleted: true,
+        gender: true,
+        country: true,
+        phone: true,
+        whatsapp: true,
+        dateOfBirth: true,
+        maritalStatus: true,
       },
       orderBy: {
         createdAt: 'desc'
