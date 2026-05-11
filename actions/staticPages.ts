@@ -1,7 +1,7 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
-import { StaticPageSchema, StaticPage } from '@/lib/types/staticPage'
+import { StaticPage, StaticPageSchema } from '@/lib/types/staticPage'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -27,9 +27,10 @@ export async function updateStaticPage(id: string, data: StaticPage) {
   revalidatePath('/')
 }
 
-export async function deleteStaticPage(id: string) {
-  await prisma.staticPage.delete({ where: { id } })
-  revalidatePath('/')
+export async function deleteStaticPageAction(id: string | number) {
+  'use server'
+  await prisma.staticPage.delete({ where: { id: String(id) } })
+  revalidatePath('/dashboard')
 }
 
 // server action wrappers for forms
