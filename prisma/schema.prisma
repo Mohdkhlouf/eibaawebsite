@@ -126,5 +126,5 @@ model socialMediaLink {
   name  String
   url   String
   icon  String
-  order Int    @unique
+  order Int
 }
