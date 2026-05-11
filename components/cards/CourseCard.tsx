@@ -1,7 +1,21 @@
 import Image from "next/image"
 import Link from "next/link"
 
-export default async function CourseCard({ course }: { course: { id: string; title: string; content?: string; thumbnail?: string; capacity?: number; slug?: string } }) {
+export default function CourseCard({ course }: {
+  course: {
+    id: string
+    title: string
+    content?: string
+    thumbnail?: string
+    capacity?: number
+    slug?: string
+    enrollmentsCount?: number
+  }
+}) {
+  const isFull = typeof course.capacity === 'number' &&
+    typeof course.enrollmentsCount === 'number' &&
+    course.enrollmentsCount >= course.capacity
+
   return (
     <article className="bg-white border border-[#F2C4A0] rounded-2xl shadow-sm hover:shadow-md transition-shadow">
       {course.thumbnail && (
@@ -17,11 +31,25 @@ export default async function CourseCard({ course }: { course: { id: string; tit
       )}
       <div className="flex flex-col p-4 text-center flex-1">
         <h3 className="text-xl text-[#404060] font-bold mb-2">{course.title}</h3>
+
         {typeof course.capacity === 'number' && (
-          <p className="text-lg text-[#404060] mb-2">Capacity: {course.capacity}</p>
+          <div className="mb-3">
+            <span className={`text-sm font-medium px-3 py-1 rounded-full ${
+              isFull ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
+            }`}>
+              {isFull
+                ? 'Full'
+                : `${course.capacity} / ${course.enrollmentsCount ?? 0} enrolled`
+              }
+            </span>
+          </div>
         )}
-        <Link href={`/courses/${course.id}`} className="mt-auto bg-[#7C6B8A] hover:bg-[#5f5070] text-white font-semibold py-2 px-6 rounded-full transition-colors">
-          View course
+
+        <Link
+          href={`/courses/${course.id}`}
+          className="mt-auto bg-[#7C6B8A] hover:bg-[#5f5070] text-white font-semibold py-2 px-6 rounded-full transition-colors"
+        >
+          View Course
         </Link>
       </div>
     </article>
