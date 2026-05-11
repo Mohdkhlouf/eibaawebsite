@@ -3,35 +3,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  FaFacebook, FaInstagram, FaTelegram, FaWhatsapp, FaTiktok,
-  FaTwitter, FaYoutube, FaLinkedin, FaSnapchat, FaPinterest,
-  FaSoundcloud, FaSpotify, FaDiscord, FaGlobe
-} from 'react-icons/fa'
-import { FaThreads, FaXTwitter } from 'react-icons/fa6'
 import { SocialMediaLinkSchema, SocialMediaLink } from '@/lib/types/socialMedia'
 import { createSocialMediaLinkAction, updateSocialMediaLinkAction, getSocialMediaLinkById } from '@/actions/socialMediaLinks'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import { SOCIAL_ICONS } from '@/lib/socialIcons'
 
-const SOCIAL_ICONS = [
-  { value: 'facebook',   label: 'Facebook',   Icon: FaFacebook },
-  { value: 'instagram',  label: 'Instagram',  Icon: FaInstagram },
-  { value: 'telegram',   label: 'Telegram',   Icon: FaTelegram },
-  { value: 'whatsapp',   label: 'WhatsApp',   Icon: FaWhatsapp },
-  { value: 'tiktok',     label: 'TikTok',     Icon: FaTiktok },
-  { value: 'twitter',    label: 'Twitter',    Icon: FaTwitter },
-  { value: 'xtwitter',   label: 'X',          Icon: FaXTwitter },
-  { value: 'youtube',    label: 'YouTube',    Icon: FaYoutube },
-  { value: 'linkedin',   label: 'LinkedIn',   Icon: FaLinkedin },
-  { value: 'snapchat',   label: 'Snapchat',   Icon: FaSnapchat },
-  { value: 'pinterest',  label: 'Pinterest',  Icon: FaPinterest },
-  { value: 'threads',    label: 'Threads',    Icon: FaThreads },
-  { value: 'soundcloud', label: 'SoundCloud', Icon: FaSoundcloud },
-  { value: 'spotify',    label: 'Spotify',    Icon: FaSpotify },
-  { value: 'discord',    label: 'Discord',    Icon: FaDiscord },
-  { value: 'website',    label: 'Website',    Icon: FaGlobe },
-]
 
 export default function SocialMediaLinksFormClient() {
   const searchParams = useSearchParams()

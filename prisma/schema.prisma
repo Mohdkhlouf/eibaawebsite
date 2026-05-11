@@ -128,3 +128,14 @@ model socialMediaLink {
   icon  String
   order Int
 }
+
+model StaticPage {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("static_pages")
+}

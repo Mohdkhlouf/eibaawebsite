@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 interface Enrollment {
@@ -135,8 +135,8 @@ export default function CoursesList() {
           </thead>
           <tbody>
             {courses.map(course => (
-              <>
-                <tr key={course.id} className="hover:bg-gray-50 border-b">
+              <React.Fragment key={course.id}>
+                <tr className="hover:bg-gray-50 border-b">
                   <td className="px-6 py-4 text-sm font-medium text-gray-900">{course.title}</td>
                   <td className="px-6 py-4 text-sm text-gray-600">{course.slug}</td>
                   <td className="px-6 py-4 text-sm text-gray-600">{course.capacity}</td>
@@ -222,7 +222,7 @@ export default function CoursesList() {
                     </td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>

@@ -8,6 +8,7 @@ import CategoriesList from '@/components/dashboard/lists/CategoriesList'
 import CoursesList from '@/components/dashboard/lists/CoursesList'
 import UsersList from '@/components/dashboard/lists/UsersList'
 import SocialMediaLinksList from '@/components/dashboard/lists/SocialMediaLinksList'
+import StaticPagesList from '@/components/dashboard/lists/StaticPagesList'
 
 // Import form components
 import BlogsForm from '@/components/dashboard/forms/BlogsForm'
@@ -16,6 +17,7 @@ import CategoriesForm from '@/components/dashboard/forms/CategoriesForm'
 import CoursesForm from '@/components/dashboard/forms/CoursesForm'
 import UsersForm from '@/components/dashboard/forms/UsersForm'
 import SocialMediaLinksFrom from '@/components/dashboard/forms/SocialMediaLinksFrom'
+import StaticPageForm from '@/components/dashboard/forms/StaticPageForm'
 
 
 export default async function DashboardPage({ searchParams }: {
@@ -53,8 +55,13 @@ export default async function DashboardPage({ searchParams }: {
 
       case 'socialMediaLinks':
         if (action === 'add') return <SocialMediaLinksFrom />
-        if (action === 'edit') return <SocialMediaLinksFrom searchParams={{ id: id ?? '' }} />
+        if (action === 'edit') return <SocialMediaLinksFrom />
         return <SocialMediaLinksList />
+
+      case 'pages':
+        if (action === 'add') return <StaticPageForm />
+        if (action === 'edit') return <StaticPageForm />
+        return <StaticPagesList />
 
       default:
         return (
