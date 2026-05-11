@@ -3,6 +3,21 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
+interface Enrollment {
+  id: string
+  enrolledAt: string
+  user: {
+    id: string
+    name: string | null
+    email: string
+    phone: string | null
+    whatsapp: string | null
+    country: string | null
+    gender: string | null
+    maritalStatus: string | null
+  }
+}
+
 interface Course {
   id: string
   title: string
@@ -17,6 +32,9 @@ export default function CoursesList() {
   const [courses, setCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [expandedCourse, setExpandedCourse] = useState<string | null>(null)
+  const [enrollments, setEnrollments] = useState<Record<string, Enrollment[]>>({})
+  const [enrollmentsLoading, setEnrollmentsLoading] = useState<string | null>(null)
 
   useEffect(() => {
     fetchCourses()
@@ -32,6 +50,48 @@ export default function CoursesList() {
       setError(err instanceof Error ? err.message : 'An error occurred')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const toggleEnrollments = async (courseId: string) => {
+    // Collapse if already open
+    if (expandedCourse === courseId) {
+      setExpandedCourse(null)
+      return
+    }
+
+    setExpandedCourse(courseId)
+
+    // Already fetched
+    if (enrollments[courseId]) return
+
+    setEnrollmentsLoading(courseId)
+    try {
+      const res = await fetch(`/api/courses/${courseId}/enrollments`)
+      if (!res.ok) throw new Error('Failed to fetch enrollments')
+      const data = await res.json()
+      setEnrollments(prev => ({ ...prev, [courseId]: data }))
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setEnrollmentsLoading(null)
+    }
+  }
+
+  const removeEnrollment = async (courseId: string, enrollmentId: string) => {
+    if (!confirm('Remove this enrollment?')) return
+    try {
+      const res = await fetch(`/api/courses/${courseId}/enrollments/${enrollmentId}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('Failed to remove enrollment')
+      setEnrollments(prev => ({
+        ...prev,
+        [courseId]: prev[courseId].filter(e => e.id !== enrollmentId)
+      }))
+      setCourses(prev => prev.map(c =>
+        c.id === courseId ? { ...c, enrollmentsCount: c.enrollmentsCount - 1 } : c
+      ))
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Failed to remove enrollment')
     }
   }
 
@@ -73,35 +133,96 @@ export default function CoursesList() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y">
+          <tbody>
             {courses.map(course => (
-              <tr key={course.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 text-sm font-medium text-gray-900">{course.title}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{course.slug}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{course.capacity}</td>
-                <td className="px-6 py-4 text-sm">
-                  <span className="px-2 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium">
-                    {course.enrollmentsCount} / {course.capacity}
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-600">
-                  {new Date(course.createdAt).toLocaleDateString()}
-                </td>
-                <td className="px-6 py-4 text-sm space-x-2">
-                  <Link
-                    href={`/dashboard?section=courses&action=edit&id=${course.id}`}
-                    className="text-blue-600 hover:text-blue-900"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    onClick={() => deleteCourse(course.id)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
+              <>
+                <tr key={course.id} className="hover:bg-gray-50 border-b">
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">{course.title}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{course.slug}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{course.capacity}</td>
+                  <td className="px-6 py-4 text-sm">
+                    <button
+                      onClick={() => toggleEnrollments(course.id)}
+                      className="px-2 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium hover:bg-green-200 transition-colors"
+                    >
+                      {course.enrollmentsCount} / {course.capacity}
+                      {expandedCourse === course.id ? ' ▲' : ' ▼'}
+                    </button>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-600">
+                    {new Date(course.createdAt).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 text-sm space-x-2">
+                    <Link
+                      href={`/dashboard?section=courses&action=edit&id=${course.id}`}
+                      className="text-blue-600 hover:text-blue-900"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => deleteCourse(course.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+
+                {/* Enrollments panel */}
+                {expandedCourse === course.id && (
+                  <tr key={`${course.id}-enrollments`}>
+                    <td colSpan={6} className="bg-gray-50 px-6 py-4">
+                      <p className="text-sm font-semibold text-gray-700 mb-3">
+                        Enrolled Students — {course.title}
+                      </p>
+
+                      {enrollmentsLoading === course.id ? (
+                        <p className="text-sm text-gray-500">Loading...</p>
+                      ) : !enrollments[course.id]?.length ? (
+                        <p className="text-sm text-gray-500">No enrollments yet.</p>
+                      ) : (
+                        <table className="w-full text-sm border rounded-lg overflow-hidden">
+                          <thead className="bg-gray-100">
+                            <tr>
+                              <th className="px-4 py-2 text-left text-xs text-gray-600 uppercase">Name</th>
+                              <th className="px-4 py-2 text-left text-xs text-gray-600 uppercase">Email</th>
+                              <th className="px-4 py-2 text-left text-xs text-gray-600 uppercase">Phone</th>
+                              <th className="px-4 py-2 text-left text-xs text-gray-600 uppercase">WhatsApp</th>
+                              <th className="px-4 py-2 text-left text-xs text-gray-600 uppercase">Country</th>
+                              <th className="px-4 py-2 text-left text-xs text-gray-600 uppercase">Gender</th>
+                              <th className="px-4 py-2 text-left text-xs text-gray-600 uppercase">Enrolled At</th>
+                              <th className="px-4 py-2 text-left text-xs text-gray-600 uppercase">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y bg-white">
+                            {enrollments[course.id].map(e => (
+                              <tr key={e.id} className="hover:bg-gray-50">
+                                <td className="px-4 py-2">{e.user.name ?? '—'}</td>
+                                <td className="px-4 py-2">{e.user.email}</td>
+                                <td className="px-4 py-2">{e.user.phone ?? '—'}</td>
+                                <td className="px-4 py-2">{e.user.whatsapp ?? '—'}</td>
+                                <td className="px-4 py-2">{e.user.country ?? '—'}</td>
+                                <td className="px-4 py-2">{e.user.gender ?? '—'}</td>
+                                <td className="px-4 py-2">
+                                  {new Date(e.enrolledAt).toLocaleDateString()}
+                                </td>
+                                <td className="px-4 py-2">
+                                  <button
+                                    onClick={() => removeEnrollment(course.id, e.id)}
+                                    className="text-red-600 hover:text-red-900 text-xs"
+                                  >
+                                    Remove
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      )}
+                    </td>
+                  </tr>
+                )}
+              </>
             ))}
           </tbody>
         </table>

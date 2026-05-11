@@ -5,9 +5,9 @@ import { SocialMediaLink, SocialMediaLinkSchema } from "@/lib/types/socialMedia"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
-export async function deleteSocialMediaLink(id: number) {
+export async function deleteSocialMediaLink(id: string | number) {
   if (!id) throw new Error('Invalid id')
-  await prisma.socialMediaLink.delete({ where: { id } })
+  await prisma.socialMediaLink.delete({ where: { id: Number(id) } })
   revalidatePath('/dashboard')
 }
 
