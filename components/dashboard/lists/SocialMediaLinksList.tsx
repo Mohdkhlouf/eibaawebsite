@@ -9,7 +9,7 @@ export default async function SocialMediaLinksList() {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-900">Social Media Links</h2>
-        <Link href="/dashboard?section=socialMediaLinks&action=add" className="px-4 py-2 bg-blue-600 text-white rounded-lg">+ Add Service</Link>
+        <Link href="/dashboard?section=socialMediaLinks&action=add" className="px-4 py-2 bg-blue-600 text-white rounded-lg">+ Add Social Media Link</Link>
       </div>
 
       <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -31,7 +31,7 @@ export default async function SocialMediaLinksList() {
                 <td className="px-6 py-4 text-sm text-gray-600">{s.icon}</td>
                 <td className="px-6 py-4 text-sm text-gray-600">{s.order}</td>
                 <td className="px-6 py-4 text-sm space-x-2">
-                  <Link href={`/dashboard?section=services&action=edit&id=${s.id}`} className="text-blue-600 hover:text-blue-900">Edit</Link>
+                  <Link href={`/dashboard?section=socialMediaLinks&action=edit&id=${s.id}`} className="text-blue-600 hover:text-blue-900">Edit</Link>
                   <DeleteButton id={s.id} action={deleteSocialMediaLink} />                </td>
               </tr>
             ))}

@@ -8,6 +8,8 @@ import CategoriesList from '@/components/dashboard/lists/CategoriesList'
 import CoursesList from '@/components/dashboard/lists/CoursesList'
 import UsersList from '@/components/dashboard/lists/UsersList'
 import SocialMediaLinksList from '@/components/dashboard/lists/SocialMediaLinksList'
+import StaticPagesList from '@/components/dashboard/lists/StaticPagesList'
+import MenuList from '@/components/dashboard/lists/MenuList'
 
 // Import form components
 import BlogsForm from '@/components/dashboard/forms/BlogsForm'
@@ -16,6 +18,8 @@ import CategoriesForm from '@/components/dashboard/forms/CategoriesForm'
 import CoursesForm from '@/components/dashboard/forms/CoursesForm'
 import UsersForm from '@/components/dashboard/forms/UsersForm'
 import SocialMediaLinksFrom from '@/components/dashboard/forms/SocialMediaLinksFrom'
+import StaticPageForm from '@/components/dashboard/forms/StaticPageForm'
+import MenuForm from '@/components/dashboard/forms/MenuForm'
 
 
 export default async function DashboardPage({ searchParams }: {
@@ -55,6 +59,16 @@ export default async function DashboardPage({ searchParams }: {
         if (action === 'add') return <SocialMediaLinksFrom />
         if (action === 'edit') return <SocialMediaLinksFrom />
         return <SocialMediaLinksList />
+
+      case 'pages':
+        if (action === 'add') return <StaticPageForm />
+        if (action === 'edit') return <StaticPageForm />
+        return <StaticPagesList />
+
+      case 'menu':
+        if (action === 'add') return <MenuForm />
+        if (action === 'edit') return <MenuForm />
+        return <MenuList />
 
       default:
         return (

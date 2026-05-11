@@ -126,5 +126,28 @@ model socialMediaLink {
   name  String
   url   String
   icon  String
-  order Int    @unique
+  order Int
+}
+
+model StaticPage {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("static_pages")
+}
+
+model MenuItem {
+  id        String   @id @default(cuid())
+  label     String
+  url       String?
+  order     Int      @default(0)
+  pageId    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("menu_items")
 }

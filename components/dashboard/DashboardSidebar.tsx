@@ -9,6 +9,8 @@ const menuItems = [
   { label: 'Courses', section: 'courses' },
   { label: 'Users', section: 'users' },
   { label: 'Socialmedia Links', section: 'socialMediaLinks' },
+  { label: 'Pages', section: 'pages' },
+  { label: 'Menu', section: 'menu' },
 ]
 
 export function DashboardSidebar() {
