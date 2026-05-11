@@ -53,7 +53,7 @@ export default async function DashboardPage({ searchParams }: {
 
       case 'socialMediaLinks':
         if (action === 'add') return <SocialMediaLinksFrom />
-        if (action === 'edit') return <SocialMediaLinksFrom />
+        if (action === 'edit') return <SocialMediaLinksFrom searchParams={{ id: id ?? '' }} />
         return <SocialMediaLinksList />
 
       default:
