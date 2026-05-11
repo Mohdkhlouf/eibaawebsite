@@ -68,7 +68,7 @@ export default function StaticPageFormClient() {
         className="bg-white rounded-lg shadow p-6 w-full space-y-6"
       >
         {isEdit && <input type="hidden" name="id" value={String(id)} />}
-        <input type="hidden" name="content" {...register('content')} />
+        <input type="hidden" {...register('content')} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>

@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import { DeleteButton } from '@/components/ui/DeleteButton'
-import { deleteStaticPage } from '@/actions/staticPages'
 import { deleteStaticPageAction } from '@/actions/staticPages'
 
 export default async function StaticPagesList() {

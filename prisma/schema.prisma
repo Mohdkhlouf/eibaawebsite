@@ -139,3 +139,15 @@ model StaticPage {
 
   @@map("static_pages")
 }
+
+model MenuItem {
+  id        String   @id @default(cuid())
+  label     String
+  url       String?
+  order     Int      @default(0)
+  pageId    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("menu_items")
+}
