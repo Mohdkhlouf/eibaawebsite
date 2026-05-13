@@ -1,37 +1,50 @@
-'use client'
-import { createClient } from '@/lib/supabase/client'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import { redirect } from 'next/navigation'
+import Header from '@/components/ui/Header'
+import { Footer } from '@/components/ui/Footer'
+import { Tajawal } from 'next/font/google'
+import Link from 'next/link'
+import type { Metadata } from 'next'
+import RegisterForm from '@/components/auth/RegisterForm'
 
-export default function RegisterPage() {
-  const supabase = createClient()
-  const router = useRouter()
-  const [error, setError] = useState<string | null>(null)
+const tajawal = Tajawal({ weight: ['400', '700'], subsets: ['arabic'] })
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const form = new FormData(e.currentTarget)
+export const metadata: Metadata = {
+  title: 'إنشاء حساب - Eibaa',
+  description: 'إنشاء حساب جديد في إباء',
+}
 
-    const { error } = await supabase.auth.signUp({
-      email: form.get('email') as string,
-      password: form.get('password') as string,
-      options: {
-        data: { name: form.get('name') as string }, // stored in auth.users.raw_user_meta_data
-        emailRedirectTo: `${location.origin}/auth/callback`
-      }
-    })
-
-    if (error) return setError(error.message)
-    router.push('/register/confirm') // "check your email" page
-  }
+export default async function RegisterPage() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user) redirect('/')
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="name" placeholder="Full name" required />
-      <input name="email" type="email" placeholder="Email" required />
-      <input name="password" type="password" placeholder="Password" required />
-      {error && <p>{error}</p>}
-      <button type="submit">Register</button>
-    </form>
+    <div lang="ar" dir="rtl" className={`flex flex-col min-h-screen ${tajawal.className}`}>
+      <Header />
+      <main className="flex-1 w-full py-12 md:py-20 px-4 md:px-8 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-md mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">إنشاء حساب جديد</h1>
+            <p className="text-lg text-gray-600">انضم إلينا وابدأ مسيرتك مع إباء</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+            <RegisterForm />
+            <div className="mt-6 text-center pt-6 border-t border-gray-200">
+              <p className="text-sm text-gray-600">
+                لديك حساب بالفعل؟{' '}
+                <Link href="/login" className="font-semibold text-[#3D3350] hover:text-[#5A4A6B] transition-colors">
+                  تسجيل الدخول
+                </Link>
+              </p>
+            </div>
+          </div>
+          <div className="mt-8 text-center text-gray-600 text-sm">
+            <p>بإنشاء حساب، أنت توافق على شروط الخدمة الخاصة بنا</p>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
   )
 }
