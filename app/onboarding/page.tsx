@@ -2,6 +2,21 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
 import { countries } from '@/lib/countries'
+import Header from '@/components/ui/Header'
+import { Footer } from '@/components/ui/Footer'
+import '../globals.css'
+import { Tajawal } from 'next/font/google'
+import type { Metadata } from 'next'
+
+const tajawal = Tajawal({
+  weight: ['400', '700'],
+  subsets: ['arabic']
+})
+
+export const metadata: Metadata = {
+  title: 'إكمال الملف الشخصي - Eibaa',
+  description: 'أكمل ملفك الشخصي',
+}
 
 async function completeOnboarding(formData: FormData) {
   'use server'
@@ -37,138 +52,155 @@ export default async function OnboardingPage() {
   if (profile?.profileCompleted) redirect('/')
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-2 text-center">Welcome to Eibaa!</h2>
-        <p className="text-gray-500 mb-6 text-center text-sm">
-          Please complete your profile to continue.
-        </p>
-
-        <form action={completeOnboarding} className="space-y-4">
-          {/* Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-            <input
-              type="text"
-              name="name"
-              defaultValue={user.user_metadata?.full_name ?? ''}
-              required
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
-            />
+    <div lang="ar" dir="rtl" className={`flex flex-col min-h-screen ${tajawal.className}`}>
+      <Header />
+      <main className="flex-1 w-full py-12 md:py-20 px-4 md:px-8 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-2xl mx-auto">
+          {/* Header Section */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">أكمل ملفك الشخصي</h1>
+            <p className="text-lg text-gray-600">
+              نرحب بك في إباء! يرجى إكمال معلومات ملفك الشخصي لمتابعة الاستفادة من خدماتنا.
+            </p>
           </div>
 
-          {/* Gender */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-            <select
-              name="gender"
-              required
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
-            >
-              <option value="">Select gender</option>
-              <option value="MALE">Male</option>
-              <option value="FEMALE">Female</option>
-            </select>
-          </div>
+          {/* Form Section */}
+          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+            <form action={completeOnboarding} className="space-y-6">
+              {/* Name */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">الاسم الكامل *</label>
+                <input
+                  type="text"
+                  name="name"
+                  defaultValue={user.user_metadata?.full_name ?? ''}
+                  required
+                  placeholder="أدخل اسمك الكامل"
+                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors"
+                />
+              </div>
 
+              {/* Gender */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">النوع *</label>
+                <select
+                  name="gender"
+                  required
+                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors bg-white"
+                >
+                  <option value="">اختر النوع</option>
+                  <option value="MALE">ذكر</option>
+                  <option value="FEMALE">أنثى</option>
+                </select>
+              </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
-            <select
-              name="country"
-              required
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
-            >
-              <option value="">Select country</option>
-              {countries.map(c => (
-                <option key={c.name} value={c.name}>
-                  {c.flag} {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
+              {/* Country */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">الدولة *</label>
+                <select
+                  name="country"
+                  required
+                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors bg-white"
+                >
+                  <option value="">اختر الدولة</option>
+                  {countries.map(c => (
+                    <option key={c.name} value={c.name}>
+                      {c.flag} {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
+              {/* Phone Number */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">رقم الهاتف *</label>
+                <div className="flex gap-2 flex-row-reverse">
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="7XXXXXXXX"
+                    className="flex-1 border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors"
+                  />
+                  <select
+                    name="phoneCode"
+                    className="w-32 border-2 border-gray-200 rounded-lg px-3 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors bg-white"
+                  >
+                    {countries.map(c => (
+                      <option key={c.name} value={c.code}>
+                        {c.flag} {c.code}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-            <div className="flex gap-2">
-              <select
-                name="phoneCode"
-                className="w-32 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
+              {/* WhatsApp Number */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">رقم واتس آب *</label>
+                <div className="flex gap-2 flex-row-reverse">
+                  <input
+                    type="tel"
+                    name="whatsapp"
+                    placeholder="7XXXXXXXX"
+                    className="flex-1 border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors"
+                  />
+                  <select
+                    name="whatsappCode"
+                    className="w-32 border-2 border-gray-200 rounded-lg px-3 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors bg-white"
+                  >
+                    {countries.map(c => (
+                      <option key={c.name} value={c.code}>
+                        {c.flag} {c.code}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Date of Birth */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">تاريخ الميلاد *</label>
+                <input
+                  type="date"
+                  name="dateOfBirth"
+                  required
+                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors"
+                />
+              </div>
+
+              {/* Marital Status */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-800 mb-2">الحالة الاجتماعية *</label>
+                <select
+                  name="maritalStatus"
+                  required
+                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-[#3D3350] focus:ring-1 focus:ring-[#3D3350] transition-colors bg-white"
+                >
+                  <option value="">اختر الحالة</option>
+                  <option value="SINGLE">أعزب</option>
+                  <option value="MARRIED">متزوج</option>
+                  <option value="DIVORCED">مطلق</option>
+                  <option value="ENGAGED">مخطوبة</option>
+                </select>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-[#3D3350] to-[#5A4A6B] text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg hover:from-[#2d254a] hover:to-[#4a3a5b] transition-all duration-200 mt-8"
               >
-                {countries.map(c => (
-                  <option key={c.name} value={c.code}>
-                    {c.flag} {c.code}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="7XXXXXXXX"
-                className="flex-1 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
-              />
-            </div>
+                إكمال الملف الشخصي
+              </button>
+            </form>
           </div>
 
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">WhatsApp Number</label>
-            <div className="flex gap-2">
-              <select
-                name="whatsappCode"
-                className="w-32 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
-              >
-                {countries.map(c => (
-                  <option key={c.name} value={c.code}>
-                    {c.flag} {c.code}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="tel"
-                name="whatsapp"
-                placeholder="7XXXXXXXX"
-                className="flex-1 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
-              />
-            </div>
+          {/* Info Message */}
+          <div className="mt-8 text-center text-gray-600 text-sm">
+            <p>جميع المعلومات التي تدخلها محمية وآمنة تماماً ولن تُشارك مع أطراف ثالثة</p>
           </div>
-
-          {/* Date of Birth */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
-            <input
-              type="date"
-              name="dateOfBirth"
-              required
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
-            />
-          </div>
-
-          {/* Marital Status */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
-            <select
-              name="maritalStatus"
-              required
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#3D3350]"
-            >
-              <option value="">Select status</option>
-              <option value="SINGLE">Single</option>
-              <option value="MARRIED">Married</option>
-              <option value="DIVORCED">Divorced</option>
-              <option value="ENGAGED">Engaged</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-[#3D3350] text-white py-2 px-4 rounded-md hover:bg-[#7C6B8A] transition-colors mt-2"
-          >
-            Complete Profile
-          </button>
-        </form>
-      </div>
+        </div>
+      </main>
+      <Footer />
     </div>
   )
 }
