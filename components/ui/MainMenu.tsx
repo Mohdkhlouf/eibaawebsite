@@ -1,14 +1,24 @@
 import Link from "next/link";
+import { prisma } from "@/lib/prisma"
 
+export default async function MainMenu() {
+  const dynamic_menu = await prisma.menuItem.findMany({
+    orderBy: { order: 'asc' }
+  })
 
-export default function MainMenu() {
+  if(!dynamic_menu) {
+    return null;
+  }
+
   return (
-  <nav className="hidden md:flex space-x-6 items-center text-[#60768e] font-semibold" aria-label="Main navigation">
-    <Link href="/" >الصفحة الرئيسية</Link>
-    <Link href="/services" >الخدمات</Link>
-      <Link href="/blogs" >المقالات</Link>
-      <Link href="/courses" >الدورات</Link>
-      <Link href="/#footer" className=" font-semibold">تواصل معنا</Link>
+    <nav className="hidden md:flex space-x-6 items-center text-[#60768e] font-semibold" aria-label="Main navigation">
+      {dynamic_menu.map(item => {
+        const href = item.url || (item.pageId ? `/pages/${item.pageId}` : '#')
+        return (
+          <Link key={item.id} href={href}>{item.label}</Link>
+        )
+      }
+      )}
   </nav>
   )
 }
