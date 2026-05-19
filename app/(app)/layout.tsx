@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
+import { prisma } from '@/lib/prisma'
 import { Footer } from '@/components/ui/Footer'
 import '../globals.css'
 import Header from '@/components/ui/Header'
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
-import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
 import { Tajawal } from 'next/font/google'
 const tajawal = Tajawal({
@@ -25,13 +25,15 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       redirect('/onboarding')
     }
   }
+  const socialLinks = await prisma.socialMediaLink.findMany({ orderBy: { order: 'asc' } })
+
   return (
-    <div lang="ar" dir="rtl" className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-1 mx-auto w-full tajawal.className">
-        {children}
-      </main>
-      <Footer />
-    </div>
-  )
+      <div lang="ar" dir="rtl" className={`flex flex-col min-h-screen ${tajawal.className}`}>
+        <Header />
+        <main className="flex-1 mx-auto w-full">
+          {children}
+        </main>
+        <Footer socialLinks={socialLinks} />
+      </div>
+    )
 }

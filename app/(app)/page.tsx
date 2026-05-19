@@ -4,10 +4,15 @@ import { HeaderContent } from '@/components/ui/HeaderContent'
 import FeaturedBlogs from '@/components/featuredSections/FeaturedBlogs'
 import FeaturedServices from "@/components/featuredSections/FeaturedServices"
 import FeaturedCourses from "@/components/featuredSections/FeaturedCourses"
-export default function HomePage() {
+import { prisma } from '@/lib/prisma'
+
+export default async function HomePage() {
+
+  const socialLinks = await prisma.socialMediaLink.findMany({ orderBy: { order: 'asc' } })
+
   return (
     <>
-      <HeaderContent />
+      <HeaderContent socialLinks={socialLinks}/>
       <FeaturedServices />
       <FeaturedCourses />
       <FeaturedBlogs />

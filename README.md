@@ -19,22 +19,21 @@ The **public website is in Arabic** (RTL layout), tailored for Arabic-speaking a
 - **Instagram Feed** — Latest Instagram posts
 - **Podcast / SoundCloud** — Embedded podcast episodes
 - **Mobile Responsive** — Hamburger menu for small screens
-- **Dark Mode Ready** — Tailwind CSS support
 
 ### 🛠️ Admin Dashboard (English)
 
 Only accessible after login. Complete content management system:
 
-| Section        | What you can do                                    |
-| -------------- | -------------------------------------------------- |
-| Blogs          | Add, edit, delete blog posts with rich text        |
-| Categories     | Organize blogs into categories                     |
-| Services       | Add, edit, delete services with thumbnails         |
-| Courses        | Manage courses and view enrollments                |
-| Static Pages   | Create custom pages with title, slug, and content  |
-| Menu           | Manage site navigation (custom URLs or page links) |
-| Social Media   | Update social profile links                        |
-| Users          | View and manage user profiles                      |
+| Section      | What you can do                                    |
+| ------------ | -------------------------------------------------- |
+| Blogs        | Add, edit, delete blog posts with rich text        |
+| Categories   | Organize blogs into categories                     |
+| Services     | Add, edit, delete services with thumbnails         |
+| Courses      | Manage courses and view enrollments                |
+| Static Pages | Create custom pages with title, slug, and content  |
+| Menu         | Manage site navigation (custom URLs or page links) |
+| Social Media | Update social profile links                        |
+| Users        | View and manage user profiles                      |
 
 ---
 
@@ -51,21 +50,20 @@ The dashboard layout is explicitly set to `lang="en" dir="ltr"` in `layout.tsx`,
 
 ## 🛠️ Tech Stack
 
-| Layer               | Technology                                                  |
-| ------------------- | ----------------------------------------------------------- |
-| Framework           | [Next.js 16](https://nextjs.org/) (App Router)              |
-| Language            | TypeScript                                                  |
-| Styling             | Tailwind CSS                                                |
-| Rich Text Editor    | Tiptap (ProseMirror) — supports Arabic, RTL, and images     |
-| Form Management     | React Hook Form                                             |
-| Validation          | Zod (schema-based, fully type-safe)                         |
-| Image Uploads       | Cloudinary                                                  |
-| Icons               | Lucide React                                                |
-| Authentication      | [Supabase Auth](https://supabase.com/auth)                  |
-| Database            | [PostgreSQL](https://www.postgresql.org/) via [Supabase](https://supabase.com) |
-| Backend / BaaS      | [Supabase](https://supabase.com)                            |
-| Package Manager     | npm                                                         |
-| Deployment          | Vercel (recommended for Next.js)                            |
+| Layer            | Technology                                                                     |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Framework        | [Next.js 16](https://nextjs.org/) (App Router)                                 |
+| Language         | TypeScript                                                                     |
+| Styling          | Tailwind CSS                                                                   |
+| Rich Text Editor | Tiptap (ProseMirror) — supports Arabic, RTL, and images                        |
+| Form Management  | React Hook Form                                                                |
+| Validation       | Zod (schema-based, fully type-safe)                                            |
+| Image Uploads    | Cloudinary                                                                     |
+| Icons            | Lucide React                                                                   |
+| Authentication   | [Supabase Auth](https://supabase.com/auth)                                     |
+| Database         | [PostgreSQL](https://www.postgresql.org/) via [Supabase](https://supabase.com) |
+| Package Manager  | npm                                                                            |
+| Deployment       | Vercel (recommended for Next.js)                                               |
 
 ---
 
@@ -98,6 +96,7 @@ NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 ```
 
 Get these values from:
+
 - **Supabase Dashboard**: [https://app.supabase.com](https://app.supabase.com)
   - Project Settings > API > Project URL (NEXT_PUBLIC_SUPABASE_URL)
   - Project Settings > API > anon public key (NEXT_PUBLIC_SUPABASE_ANON_KEY)
@@ -236,18 +235,20 @@ npm run start
 The dashboard uses URL query parameters to control what's displayed — no separate pages needed:
 
 ```
-/dashboard                              → Welcome screen
-/dashboard?section=blogs                → Blog posts list
-/dashboard?section=blogs&action=add     → Add new blog post
-/dashboard?section=blogs&action=edit&id=X  → Edit blog post
-/dashboard?section=categories           → Categories list
-/dashboard?section=services             → Services list
-/dashboard?section=courses              → Courses list
-/dashboard?section=pages                → Static pages list
-/dashboard?section=menu                 → Menu management
-/dashboard?section=socialMediaLinks     → Social media links
-/dashboard?section=users                → Users list
-```
+
+/dashboard → Welcome screen
+/dashboard?section=blogs → Blog posts list
+/dashboard?section=blogs&action=add → Add new blog post
+/dashboard?section=blogs&action=edit&id=X → Edit blog post
+/dashboard?section=categories → Categories list
+/dashboard?section=services → Services list
+/dashboard?section=courses → Courses list
+/dashboard?section=pages → Static pages list
+/dashboard?section=menu → Menu management
+/dashboard?section=socialMediaLinks → Social media links
+/dashboard?section=users → Users list
+
+````
 
 ---
 
@@ -338,17 +339,19 @@ This pattern ensures **type safety**, **validation at both client and server**, 
 1. **Create the database model** in `prisma/schema.prisma`
    ```bash
    npx prisma migrate dev --name add_new_model
-   ```
+````
 
 2. **Create the Zod schema** in `lib/types/newmodule.ts`
+
    ```typescript
    export const newModuleSchema = z.object({
      // validation rules
-   })
-   export type NewModule = z.infer<typeof newModuleSchema>
+   });
+   export type NewModule = z.infer<typeof newModuleSchema>;
    ```
 
 3. **Create server actions** in `actions/newmodule.ts`
+
    ```typescript
    export async function getNe wModules() { }
    export async function createNewModule(formData: FormData) { }
@@ -356,9 +359,10 @@ This pattern ensures **type safety**, **validation at both client and server**, 
    ```
 
 4. **Create the form** in `components/dashboard/forms/NewModuleForm.tsx`
+
    ```typescript
    export default function NewModuleForm() {
-     const form = useForm({ resolver: zodResolver(newModuleSchema) })
+     const form = useForm({ resolver: zodResolver(newModuleSchema) });
      // form JSX
    }
    ```
