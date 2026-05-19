@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useRef, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -9,12 +8,10 @@ import { blogSchema, BlogFormData } from '@/lib/types/blog'
 import CloudinaryUpload from '@/components/cloudinary/CloudinaryUpload'
 import RichTextEditor from '@/components/editor/EditorWrapper'
 import { cloudinaryConfig } from '@/lib/cloudinary/cloudinary'
-// ─── Types ────────────────────────────────────────────────
 interface Category {
   id: string
   name: string
 }
-
 interface Blog {
   id: string
   title: string
@@ -28,27 +25,20 @@ interface Blog {
   author: { id: string; name: string | null }
   authorId: string
 }
-
-// ─── Component ────────────────────────────────────────────
 export default function BlogsForm() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const blogId = searchParams.get('id')
   const isEdit = !!blogId
-
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(isEdit)
   const [serverError, setServerError] = useState<string | null>(null)
-
-  // ─── Refs for editor image upload ─────────────────────
   const imageCallbackRef = useRef<((url: string) => void) | null>(null)
   const openEditorUploadRef = useRef<(() => void) | null>(null)
-
   const handleEditorImageUpload = (callback: (url: string) => void) => {
     imageCallbackRef.current = callback
     openEditorUploadRef.current?.()
   }
-
   const {
     register,
     handleSubmit,
@@ -68,13 +58,10 @@ export default function BlogsForm() {
       published: false,
     },
   })
-
-  // ─── Fetch categories & blog ───────────────────────────
   useEffect(() => {
     fetchCategories()
     if (isEdit) fetchBlog()
   }, [isEdit, blogId])
-
   const fetchCategories = async () => {
     try {
       const res = await fetch('/api/categories')
@@ -84,7 +71,6 @@ export default function BlogsForm() {
       setServerError(err instanceof Error ? err.message : 'Failed to fetch categories')
     }
   }
-
   const fetchBlog = async () => {
     try {
       const res = await fetch(`/api/blogs/${blogId}`)
@@ -105,21 +91,16 @@ export default function BlogsForm() {
       setLoading(false)
     }
   }
-
-  // ─── Slug generator ───────────────────────────────────
   const generateSlug = (title: string) =>
     title.toLowerCase().trim()
       .replace(/[^\w\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
-
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value
     setValue('title', title)
     setValue('slug', generateSlug(title))
   }
-
-  // ─── Submit ───────────────────────────────────────────
   const onSubmit = async (data: BlogFormData) => {
     setServerError(null)
     try {
@@ -137,14 +118,12 @@ export default function BlogsForm() {
       setServerError(err instanceof Error ? err.message : 'An error occurred')
     }
   }
-
   if (loading) return <div className="text-center py-12">Loading blog...</div>
-
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold text-gray-900">{isEdit ? 'Edit Blog' : 'Add New Blog'}</h2>
-
-      {/* Hidden Cloudinary widget for editor image uploads */}
+      {
+}
       <CldUploadWidget
         uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!}
         options={cloudinaryConfig.options}
@@ -159,16 +138,14 @@ export default function BlogsForm() {
           return <span className="hidden" />
         }}
       </CldUploadWidget>
-
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-lg shadow p-6 max-w-3xl space-y-6">
-
         {serverError && (
           <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
             {serverError}
           </div>
         )}
-
-        {/* Title */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Title *</label>
           <input
@@ -180,8 +157,8 @@ export default function BlogsForm() {
           />
           {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
         </div>
-
-        {/* Short Title */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Short Title *</label>
           <input
@@ -192,8 +169,8 @@ export default function BlogsForm() {
           />
           {errors.shortTitle && <p className="text-red-500 text-sm mt-1">{errors.shortTitle.message}</p>}
         </div>
-
-        {/* Slug */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Slug *</label>
           <input
@@ -205,9 +182,9 @@ export default function BlogsForm() {
           <p className="text-xs text-gray-500 mt-1">Auto-generated from title. Edit if needed.</p>
           {errors.slug && <p className="text-red-500 text-sm mt-1">{errors.slug.message}</p>}
         </div>
-
         <div className="grid grid-cols-2 gap-4">
-          {/* Category */}
+          {
+}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Category *</label>
             <select
@@ -221,8 +198,8 @@ export default function BlogsForm() {
             </select>
             {errors.categoryId && <p className="text-red-500 text-sm mt-1">{errors.categoryId.message}</p>}
           </div>
-
-          {/* Thumbnail */}
+          {
+}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Thumbnail *</label>
             <CloudinaryUpload
@@ -234,8 +211,8 @@ export default function BlogsForm() {
             {errors.thumbnail && <p className="text-red-500 text-sm mt-1">{errors.thumbnail.message}</p>}
           </div>
         </div>
-
-        {/* Content */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Content *</label>
           <RichTextEditor
@@ -246,8 +223,8 @@ export default function BlogsForm() {
           />
           {errors.content && <p className="text-red-500 text-sm mt-1">{errors.content.message}</p>}
         </div>
-
-        {/* Published */}
+        {
+}
         <div className="flex items-center">
           <input
             type="checkbox"
@@ -256,8 +233,8 @@ export default function BlogsForm() {
           />
           <label className="ml-2 text-sm font-medium text-gray-700">Publish immediately</label>
         </div>
-
-        {/* Actions */}
+        {
+}
         <div className="flex gap-4">
           <button
             type="submit"
@@ -274,7 +251,6 @@ export default function BlogsForm() {
             Cancel
           </button>
         </div>
-
       </form>
     </div>
   )

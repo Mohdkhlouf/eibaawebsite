@@ -19,7 +19,6 @@ export default async function ServiceCard({ service }: { service: { id: string; 
         <Link href={`/services/${service.id}`} className="mt-auto bg-[#7C6B8A] hover:bg-[#5f5070] text-white font-semibold py-2 px-6 rounded-full transition-colors">
           Read more
         </Link>
-
       </div>
     </article>
   )

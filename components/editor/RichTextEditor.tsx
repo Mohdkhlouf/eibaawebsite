@@ -1,5 +1,4 @@
 'use client'
-
 import { useEditor, EditorContent } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 import StarterKit from '@tiptap/starter-kit'
@@ -13,8 +12,6 @@ import {
 } from 'lucide-react'
 import TextAlign from '@tiptap/extension-text-align'
 import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from 'lucide-react'
-
-
 const CustomImage = Image.extend({
   addAttributes() {
     return {
@@ -35,10 +32,8 @@ const CustomImage = Image.extend({
       img.src = node.attrs.src
       img.alt = node.attrs.alt || ''
       if (node.attrs.style) img.style.cssText = node.attrs.style
-
       img.style.cursor = 'pointer'
       img.style.maxWidth = '100%'
-
       img.addEventListener('click', () => {
         const pos = typeof getPos === 'function' ? getPos() : null
         if (pos == null || typeof pos !== 'number') return
@@ -48,7 +43,6 @@ const CustomImage = Image.extend({
           )
         )
       })
-
       return {
         dom: img,
         update: (updatedNode) => {
@@ -61,7 +55,6 @@ const CustomImage = Image.extend({
     }
   },
 })
-
 const ToolbarButton = ({
   onClick, active, children,
 }: {
@@ -77,21 +70,17 @@ const ToolbarButton = ({
     {children}
   </button>
 )
-
 interface RichTextEditorProps {
   value: string
   onChange: (value: string) => void
   placeholder?: string
   onImageUpload?: (callback: (url: string) => void) => void
 }
-
 export default function RichTextEditor({ value, onChange, placeholder, onImageUpload }: RichTextEditorProps) {  const [mounted, setMounted] = useState(false)
   const [isImageSelected, setIsImageSelected] = useState(false)
-
   useEffect(() => {
     setMounted(true)
   }, [])
-
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
@@ -114,25 +103,19 @@ export default function RichTextEditor({ value, onChange, placeholder, onImageUp
       setIsImageSelected(editor.isActive('image'))
     },
   })
-
-  // Sync value when editing existing blog
   useEffect(() => {
     if (editor && value && editor.getHTML() !== value) {
       editor.commands.setContent(value)
     }
   }, [value, editor])
-
   if (!mounted) return (
     <div className="border border-gray-300 rounded-lg min-h-[300px] animate-pulse bg-gray-50" />
   )
-
   if (!editor) return null
-
   const addLink = () => {
     const url = prompt('Enter URL')
     if (url) editor.chain().focus().setLink({ href: url }).run()
   }
-
   const addImage = () => {
      if (onImageUpload) {
        onImageUpload((url: string) => {
@@ -143,7 +126,6 @@ export default function RichTextEditor({ value, onChange, placeholder, onImageUp
        if (url) editor.chain().focus().setImage({ src: url }).run()
      }
    }
-
   return (
     <div className="border border-gray-300 rounded-lg overflow-hidden">
       <div className="flex flex-wrap gap-1 p-2 bg-gray-50 border-b border-gray-300">
@@ -159,9 +141,7 @@ export default function RichTextEditor({ value, onChange, placeholder, onImageUp
         <ToolbarButton onClick={() => editor.chain().focus().toggleCode().run()} active={editor.isActive('code')}>
           <Code size={16} />
         </ToolbarButton>
-
         <div className="w-px bg-gray-300 mx-1" />
-
         <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} active={editor.isActive('heading', { level: 1 })}>
           <Heading1 size={16} />
         </ToolbarButton>
@@ -171,9 +151,7 @@ export default function RichTextEditor({ value, onChange, placeholder, onImageUp
         <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} active={editor.isActive('heading', { level: 3 })}>
           <Heading3 size={16} />
         </ToolbarButton>
-
         <div className="w-px bg-gray-300 mx-1" />
-
         <ToolbarButton onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive('bulletList')}>
           <List size={16} />
         </ToolbarButton>
@@ -186,9 +164,7 @@ export default function RichTextEditor({ value, onChange, placeholder, onImageUp
         <ToolbarButton onClick={() => editor.chain().focus().setHorizontalRule().run()}>
           <Minus size={16} />
         </ToolbarButton>
-
         <div className="w-px bg-gray-300 mx-1" />
-
         <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('left').run()} active={editor.isActive({ textAlign: 'left' })}>
           <AlignLeft size={16} />
         </ToolbarButton>
@@ -201,16 +177,13 @@ export default function RichTextEditor({ value, onChange, placeholder, onImageUp
         <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('justify').run()} active={editor.isActive({ textAlign: 'justify' })}>
           <AlignJustify size={16} />
         </ToolbarButton>
-
         <div className="w-px bg-gray-300 mx-1" />
-
         <ToolbarButton onClick={addLink} active={editor.isActive('link')}>
           <LinkIcon size={16} />
         </ToolbarButton>
         <ToolbarButton onClick={addImage}>
           <ImageIcon size={16} />
         </ToolbarButton>
-
         {isImageSelected && (
           <>
             <div className="w-px bg-gray-300 mx-1" />
@@ -225,9 +198,7 @@ export default function RichTextEditor({ value, onChange, placeholder, onImageUp
             </ToolbarButton>
           </>
         )}
-
         <div className="w-px bg-gray-300 mx-1" />
-
         <ToolbarButton onClick={() => editor.chain().focus().undo().run()}>
           <Undo size={16} />
         </ToolbarButton>
@@ -235,9 +206,6 @@ export default function RichTextEditor({ value, onChange, placeholder, onImageUp
           <Redo size={16} />
         </ToolbarButton>
       </div>
-
-
-
       <EditorContent editor={editor} />
     </div>
   )

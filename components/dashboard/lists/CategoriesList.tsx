@@ -1,24 +1,19 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-
 interface Category {
   id: string
   name: string
   blogs: { id: string }[]
   createdAt?: Date
 }
-
 export default function CategoriesList() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
   useEffect(() => {
     fetchCategories()
   }, [])
-
   const fetchCategories = async () => {
     try {
       const response = await fetch('/api/categories')
@@ -31,7 +26,6 @@ export default function CategoriesList() {
       setLoading(false)
     }
   }
-
   const deleteCategory = async (id: string) => {
     if (!confirm('Are you sure you want to delete this category?')) return
     try {
@@ -42,10 +36,8 @@ export default function CategoriesList() {
       alert(err instanceof Error ? err.message : 'Failed to delete category')
     }
   }
-
   if (loading) return <div className="text-center py-12">Loading categories...</div>
   if (error) return <div className="text-center py-12 text-red-600">{error}</div>
-
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -57,7 +49,6 @@ export default function CategoriesList() {
           + Add Category
         </Link>
       </div>
-
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <table className="w-full">
           <thead className="bg-gray-50 border-b">
@@ -95,7 +86,6 @@ export default function CategoriesList() {
           </tbody>
         </table>
       </div>
-
       {categories.length === 0 && (
         <div className="text-center py-12 bg-white rounded-lg">
           <p className="text-gray-600">No categories found. Create your first category!</p>

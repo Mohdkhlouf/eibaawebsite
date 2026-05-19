@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-
 const menuItems = [
   { label: 'Blogs', section: 'blogs' },
   { label: 'Services', section: 'services' },
@@ -12,11 +11,9 @@ const menuItems = [
   { label: 'Pages', section: 'pages' },
   { label: 'Menu', section: 'menu' },
 ]
-
 export function DashboardSidebar() {
   const searchParams = useSearchParams()
   const currentSection = searchParams.get('section')
-
   return (
     <aside className="w-64 shrink-0 bg-white border-r border-gray-200 overflow-y-auto">
       <nav className="px-4 py-6 space-y-1">

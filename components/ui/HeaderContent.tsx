@@ -1,10 +1,8 @@
 'use client'
 import React, { useRef } from 'react'
 import { SocialMediaLinks } from './SocialMediaLinks'
-
 export const HeaderContent = () => {
   const scrollRef = useRef(null);
-
   return (
     <section className=" bg-[linear-gradient(to_right,rgba(61,51,80,0.85),rgba(124,107,138,0.5)),url(/background.png)] bg-cover bg-center bg-no-repeat min-h-125">
       <div className="max-w-250 min-h-125 mx-auto " >

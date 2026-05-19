@@ -1,4 +1,3 @@
-
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import { DeleteButton } from '@/components/ui/DeleteButton'
@@ -11,7 +10,6 @@ export default async function SocialMediaLinksList() {
         <h2 className="text-2xl font-bold text-gray-900">Social Media Links</h2>
         <Link href="/dashboard?section=socialMediaLinks&action=add" className="px-4 py-2 bg-blue-600 text-white rounded-lg">+ Add Social Media Link</Link>
       </div>
-
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <table className="w-full">
           <thead className="bg-gray-50 border-b">
@@ -38,7 +36,6 @@ export default async function SocialMediaLinksList() {
           </tbody>
         </table>
       </div>
-
       {links.length === 0 && (
         <div className="text-center py-12 bg-white rounded-lg">
           <p className="text-gray-600">No services found. Create your first service!</p>

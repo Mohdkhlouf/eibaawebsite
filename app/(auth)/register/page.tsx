@@ -6,19 +6,15 @@ import { Tajawal } from 'next/font/google'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import RegisterForm from '@/components/auth/RegisterForm'
-
 const tajawal = Tajawal({ weight: ['400', '700'], subsets: ['arabic'] })
-
 export const metadata: Metadata = {
   title: 'إنشاء حساب - Eibaa',
   description: 'إنشاء حساب جديد في إباء',
 }
-
 export default async function RegisterPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (user) redirect('/')
-
   return (
     <div lang="ar" dir="rtl" className={`flex flex-col min-h-screen ${tajawal.className}`}>
       <Header />

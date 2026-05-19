@@ -1,16 +1,12 @@
 import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-
 export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-
   const blog = await prisma.blog.findUnique({
     where: { id },
   })
-
   if (!blog) return notFound()
-
   return (
     <div className="container mx-auto py-8 max-w-3xl">
       {blog.thumbnail && (

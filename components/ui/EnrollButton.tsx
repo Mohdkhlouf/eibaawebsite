@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { enrollInCourse } from '@/actions/enroll'
-
 export default function EnrollButton({
   courseId,
   isEnrolled,
@@ -15,7 +14,6 @@ export default function EnrollButton({
 }) {
   const [enrolled, setEnrolled] = useState(isEnrolled)
   const [loading, setLoading] = useState(false)
-
   if (!isLoggedIn) {
     return (
       <a
@@ -26,7 +24,6 @@ export default function EnrollButton({
       </a>
     )
   }
-
   if (enrolled) {
     return (
       <div className="mt-8 px-6 py-3 bg-green-100 text-green-700 rounded-lg inline-block">
@@ -34,7 +31,6 @@ export default function EnrollButton({
       </div>
     )
   }
-
   if (isFull) {
     return (
       <div className="mt-8 px-6 py-3 bg-red-100 text-red-700 rounded-lg inline-block">
@@ -42,14 +38,12 @@ export default function EnrollButton({
       </div>
     )
   }
-
   async function handleEnroll() {
     setLoading(true)
     const result = await enrollInCourse(courseId)
     if (result?.success) setEnrolled(true)
     setLoading(false)
   }
-
   return (
     <div className="mt-8">
       <button

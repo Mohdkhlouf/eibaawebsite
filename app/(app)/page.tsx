@@ -1,4 +1,3 @@
-
 import { PodcastSection } from '@/components/featuredSections/PodcastSection'
 import InstagramPosts  from '@/components/featuredSections/InstagramPosts'
 import { HeaderContent } from '@/components/ui/HeaderContent'
@@ -9,15 +8,10 @@ export default function HomePage() {
   return (
     <>
       <HeaderContent />
-
       <FeaturedServices />
-
       <FeaturedCourses />
-
       <FeaturedBlogs />
-
       <PodcastSection />
-
       <InstagramPosts />
     </>
   )

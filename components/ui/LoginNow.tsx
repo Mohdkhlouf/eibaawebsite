@@ -1,5 +1,4 @@
 import Link from 'next/link'
-
 export default function LoginNow() {
   return (
     <div className="mt-8">

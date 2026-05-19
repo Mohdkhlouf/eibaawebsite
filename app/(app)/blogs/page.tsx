@@ -1,16 +1,13 @@
 import { prisma } from '@/lib/prisma' // adjust path to wherever your file is
 import BlogCard from '@/components/cards/BlogCard'
-
 export default async function BlogsPage() {
   const blogs = await prisma.blog.findMany({ orderBy: { createdAt: 'desc' } })
-
   if (!blogs.length) return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6">Blogs</h1>
       <p className="text-gray-600">no blogs</p>
     </div>
   )
-
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6">Blogs</h1>

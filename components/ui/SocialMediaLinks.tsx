@@ -1,5 +1,4 @@
 import { iconMap } from '@/lib/socialIcons'
-
 export const SocialMediaLinks = ({ links = [] }: { links?: { id: number; url: string; icon: string; name: string }[] }) => {  return (
     <div className="flex items-center justify-center gap-2">
       {links.map(({ id, url, icon, name }) => {

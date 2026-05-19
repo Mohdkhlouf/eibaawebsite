@@ -1,24 +1,20 @@
 import Link from 'next/link'
-
 export type Column<T> = {
   key: keyof T | string
   label: string
   render?: (row: T) => React.ReactNode
 }
-
 type Action<T> = {
   label: string
   href?: (row: T) => string
   formAction?: string | ((formData: FormData) => Promise<any>)
   variant?: 'default' | 'danger'
 }
-
 type Props<T extends { id: string | number }> = {
   data: T[]
   columns: Column<T>[]
   actions?: Action<T>[]
 }
-
 export function DataGrid<T extends { id: string | number }>({ data, columns, actions }: Props<T>) {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -51,7 +47,6 @@ export function DataGrid<T extends { id: string | number }>({ data, columns, act
                         </Link>
                       )
                     }
-
                     if (typeof action.formAction === 'string') {
                       return (
                         <form key={action.label} method="post" action={action.formAction} className="inline">
@@ -62,7 +57,6 @@ export function DataGrid<T extends { id: string | number }>({ data, columns, act
                         </form>
                       )
                     }
-
                     if (typeof action.formAction === 'function') {
                       const fn = action.formAction as unknown as (formData: FormData) => Promise<any>
                       return (
@@ -74,7 +68,6 @@ export function DataGrid<T extends { id: string | number }>({ data, columns, act
                         </form>
                       )
                     }
-
                     return null
                   })}
                 </td>

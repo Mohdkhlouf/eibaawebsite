@@ -1,15 +1,12 @@
 'use client'
 import { useTransition } from 'react'
-
 type Props = {
   id: number | string
   action: (id: number | string) => Promise<void>
   label?: string
 }
-
 export function DeleteButton({ id, action, label = 'Delete' }: Props) {
   const [isPending, startTransition] = useTransition()
-
   const handleClick = () => {
     if (!confirm('Are you sure you want to delete this item?')) return
     startTransition(async () => {
@@ -20,7 +17,6 @@ export function DeleteButton({ id, action, label = 'Delete' }: Props) {
       }
     })
   }
-
   return (
     <button
       onClick={handleClick}

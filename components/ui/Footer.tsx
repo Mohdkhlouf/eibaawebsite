@@ -2,10 +2,8 @@ import React from 'react'
 import { SocialMediaLinks } from './SocialMediaLinks'
 import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
-
 export const Footer: React.FC = async () => {
   const links = await prisma.socialMediaLink.findMany({ orderBy: { order: 'asc' } })
-
   return (
     <footer className="bg-[#3D3350] text-[#FAF7F5] py-12">
       <div className="max-w-[1000px] mx-auto w-full">

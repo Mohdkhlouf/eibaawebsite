@@ -1,9 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-
 export default function BlogCard({ blog }: { blog: any }) {
   return (
-
     <article className="bg-white border border-[#E8D5F0] rounded-2xl shadow-sm hover:shadow-md transition-shadow">        <div className='relative w-full h-48 shrink-0'>
           {blog.thumbnail && (
             <Image
@@ -23,6 +21,5 @@ export default function BlogCard({ blog }: { blog: any }) {
         </Link>
       </div>
       </article>
-
   )
 }

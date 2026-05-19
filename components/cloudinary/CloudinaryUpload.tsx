@@ -3,25 +3,20 @@ import { useState } from 'react'
 import { CldUploadWidget } from 'next-cloudinary'
 import Image from 'next/image'
 import { cloudinaryConfig } from '@/lib/cloudinary/cloudinary'
-
 interface CloudinaryUploadProps {
   onUpload: (url: string) => void
 }
-
 export default function CloudinaryUpload({ onUpload }: CloudinaryUploadProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-
   const handleUpload = (result: any) => {
     const url = result.info.secure_url
     setPreviewUrl(url)
     onUpload(url)
   }
-
   const handleCancel = () => {
     setPreviewUrl(null)
     onUpload('')
   }
-
   return (
     <div className="space-y-2">
       {!previewUrl ? (

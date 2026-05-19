@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma"
 import CourseCard from "@/components/cards/CourseCard"
-
 export default async function CoursesPage() {
   const courses = await prisma.course.findMany({
     orderBy: { createdAt: 'desc' },
@@ -8,19 +7,16 @@ export default async function CoursesPage() {
       enrollements: { select: { id: true } }
     }
   })
-
   const coursesWithCount = courses.map(course => ({
     ...course,
     enrollmentsCount: course.enrollements.length,
   }))
-
   if (!coursesWithCount.length) return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6">Courses</h1>
       <p className="text-gray-600">No courses yet</p>
     </div>
   )
-
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6">Courses</h1>
