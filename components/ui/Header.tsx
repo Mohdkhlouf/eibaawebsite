@@ -20,10 +20,10 @@ export default async function Header() {
 
             <MainMenu />
 
-          <div className="flex items-center space-x-4">
-            <button className="hidden md:block bg-[#60768e] text-amber-50 rounded-full px-4 py-2 font-semibold">
+          <div className=" hidden md:flex space-x-6 items-center text-[#60768e] font-semibold">
+            {/*<button className="hidden md:block bg-[#60768e] text-amber-50 rounded-full px-4 py-2 font-semibold">
               <Link href="/Consultation">احجز استشارتك</Link>
-            </button>
+            </button>*/}
             {loggedIn? <LogOut /> : <Link href='/login'>Login</Link>}
           </div>
         </div>
