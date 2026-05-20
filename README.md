@@ -391,7 +391,66 @@ npm run dev          # Start dev server (http://localhost:3000)
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
-npm run type-check   # TypeScript check
+npm run test         # Run all Playwright tests
+npm run test:ui      # Run tests in UI mode (interactive)
+npm run test:headed  # Run tests in headed mode (browser visible)
+npm run test:debug   # Run tests in debug mode
+npm run test:report  # View HTML test report
+```
+
+---
+
+## 🧪 Testing
+
+The project uses **Playwright** for end-to-end testing. Tests cover:
+
+- **Navigation** — Menu, links, routing
+- **Public Pages** — Blogs, services, courses, pages
+- **Authentication** — Login, register, auth flows
+- **Dashboard** — All admin sections and features
+- **Responsive Design** — Mobile, tablet, desktop layouts
+- **Accessibility** — Keyboard navigation, labels, alt text
+- **Performance & SEO** — Load times, meta tags, OpenGraph
+
+### Running Tests
+
+```bash
+npm run test                # Run all tests (headless)
+npm run test:headed         # Run with browser visible
+npm run test:ui             # Interactive test runner
+npm run test:debug          # Debug mode with inspector
+npm run test:report         # View HTML report of last run
+```
+
+### Test Organization
+
+```
+tests/
+├── home.spec.ts            # Homepage tests
+├── navigation.spec.ts      # Navigation & menu tests
+├── public-pages.spec.ts    # Blog, service, course pages
+├── authentication.spec.ts  # Login, register, auth pages
+├── dashboard.spec.ts       # Admin dashboard sections
+├── responsive.spec.ts      # Mobile, tablet, desktop layouts
+├── accessibility.spec.ts   # a11y, keyboard navigation
+└── performance-seo.spec.ts # Performance, load times, SEO
+```
+
+### Writing New Tests
+
+Example test:
+
+```typescript
+import { expect, test } from '@playwright/test'
+
+test.describe('Feature Name', () => {
+  test('specific behavior', async ({ page }) => {
+    await page.goto('http://localhost:3000')
+    
+    const element = page.locator('selector')
+    await expect(element).toBeVisible()
+  })
+})
 ```
 
 ---

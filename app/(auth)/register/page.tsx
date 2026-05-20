@@ -6,6 +6,8 @@ import { Tajawal } from 'next/font/google'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import RegisterForm from '@/components/auth/RegisterForm'
+import { prisma } from '@/lib/prisma'
+
 const tajawal = Tajawal({ weight: ['400', '700'], subsets: ['arabic'] })
 export const metadata: Metadata = {
   title: 'إنشاء حساب - Eibaa',
@@ -15,6 +17,9 @@ export default async function RegisterPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (user) redirect('/')
+
+  const socialLinks = await prisma.socialMediaLink.findMany({ orderBy: { order: 'asc' } })
+
   return (
     <div lang="ar" dir="rtl" className={`flex flex-col min-h-screen ${tajawal.className}`}>
       <Header />
@@ -28,19 +33,20 @@ export default async function RegisterPage() {
             <RegisterForm />
             <div className="mt-6 text-center pt-6 border-t border-gray-200">
               <p className="text-sm text-gray-600">
-                لديك حساب بالفعل؟{' '}
+                هل لديك حساب بالفعل؟{' '}
                 <Link href="/login" className="font-semibold text-[#3D3350] hover:text-[#5A4A6B] transition-colors">
-                  تسجيل الدخول
+                  دخول
                 </Link>
               </p>
             </div>
           </div>
+
           <div className="mt-8 text-center text-gray-600 text-sm">
-            <p>بإنشاء حساب، أنت توافق على شروط الخدمة الخاصة بنا</p>
+            <p>بيانات حسابك محمية وآمنة تماماً</p>
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer socialLinks={socialLinks} />
     </div>
   )
 }
