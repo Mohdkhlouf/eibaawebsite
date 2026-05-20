@@ -11,12 +11,14 @@ export const HeaderContent = ({ socialLinks }: { socialLinks: SocialLink[] }) =>
       <div className="flex flex-col flex-1 align-middle max-w-250 min-h-125 mx-auto">
         <div className="flex flex-col  justify-center flex-1  md:items-end items-center text-white py-8" ref={scrollRef}>
           <div className="w-3/5 flex flex-col items-center justify-center">
-            <h2 className="text-2xl font-bold leading-12 drop-shadow-lg text-center">
+            <h2 className="text-xl font-bold leading-12 drop-shadow-lg text-center">
               هناك أوقات نتعثر فيها ونحتاج أن نجلب الشمس للعلاقة
             </h2>
-            <h3 className="text-2xl font-semibold leading-12 drop-shadow-lg">إذا كنت مستعداً فأنت في المكان الصحيح!</h3>
+            <h2 className="text-xl font-semibold leading-12 drop-shadow-lg">إذا كنت مستعداً فأنت في المكان الصحيح!</h2>
+
+            <h1 className="text-3xl font-bold drop-shadow-lg">أ.إباء أبوطه مرشدة زواجية وأسرية</h1>
             <p className="mt-5 text-xl text-justify drop-shadow-lg">
-              أ.إباء أبوطه مرشدة زواجية وأسرية، أساعد الأزواج على استكشاف ذواتهم بحب وقبول، وتحقيق الأهداف الزوجية بعلاقة صحية وسعيدة وفقاً لرغبتهم؛ عبر فلسفتي الخاصة (النموّ المتأنّي).
+              أساعد الأزواج على استكشاف ذواتهم بحب وقبول، وتحقيق الأهداف الزوجية بعلاقة صحية وسعيدة وفقاً لرغبتهم؛ عبر فلسفتي الخاصة (النموّ المتأنّي).
             </p>
             <p className="mt-5 text-xl text-justify drop-shadow-lg">
               من خلال تطوير مهارات التواصل مع الذات والآخر بشكل أفضل، ومهارات حل المشكلات، وفهم ديناميكية العلاقة، وأنماط السلوك المؤثرة فيها، وسيكلوجية الآخر.

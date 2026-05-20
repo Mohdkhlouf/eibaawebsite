@@ -1,0 +1,25 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="10.536393000000157">
+<testsuite name="home.spec.ts" timestamp="2026-05-20T14:09:46.204Z" hostname="chromium" tests="3" failures="0" skipped="0" time="20.623" errors="0">
+<testcase name="homepage loads" classname="home.spec.ts" time="6.564">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/home-homepage-loads-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="social links visible in footer" classname="home.spec.ts" time="6.968">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/home-social-links-visible-in-footer-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="social links visible in header" classname="home.spec.ts" time="7.091">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/home-social-links-visible-in-header-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

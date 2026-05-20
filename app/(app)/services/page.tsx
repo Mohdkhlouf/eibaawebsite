@@ -1,5 +1,12 @@
 import { prisma } from "@/lib/prisma"
 import ServiceCard from "@/components/cards/ServiceCard"
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'موقع الاخصائية الأسرية إباء أبو طه - الخدمات',
+  description: 'أخصائية زواج وأسرة.. لأسرة سعيدة نابضة بالحب والحياة - صفحة الخدمات',
+}
+
 export default async function servicesPage() {
   const services = await prisma.service.findMany({
     orderBy: { createdAt: 'desc' }
