@@ -14,8 +14,8 @@ const tajawal = Tajawal({
   subsets: ['arabic']
 })
 export const metadata: Metadata = {
-  title: 'تسجيل الدخول - Eibaa',
-  description: 'تسجيل الدخول إلى حسابك في إباء',
+  title: 'Login Page',
+  description: 'تسجيل الدخول إلى حسابك ',
 }
 export default async function LoginPage() {
   const supabase = await createClient()

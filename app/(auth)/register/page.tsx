@@ -9,10 +9,12 @@ import RegisterForm from '@/components/auth/RegisterForm'
 import { prisma } from '@/lib/prisma'
 
 const tajawal = Tajawal({ weight: ['400', '700'], subsets: ['arabic'] })
+
 export const metadata: Metadata = {
-  title: 'إنشاء حساب - Eibaa',
-  description: 'إنشاء حساب جديد في إباء',
+  title: 'Register',
+  description: 'إنشاء حساب جديد ',
 }
+
 export default async function RegisterPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -27,7 +29,7 @@ export default async function RegisterPage() {
         <div className="max-w-md mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">إنشاء حساب جديد</h1>
-            <p className="text-lg text-gray-600">انضم إلينا وابدأ مسيرتك مع إباء</p>
+            <p className="text-lg text-gray-600">انضم إلينا</p>
           </div>
           <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
             <RegisterForm />

@@ -1,0 +1,498 @@
+<testsuites id="" name="" tests="80" failures="6" skipped="0" errors="1" time="101.423999">
+<testsuite name="auth.setup.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="setup" tests="1" failures="0" skipped="0" time="4.976" errors="0">
+<testcase name="authenticate" classname="auth.setup.ts" time="4.976">
+</testcase>
+</testsuite>
+<testsuite name="dashboard.spec.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="dashboard" tests="15" failures="0" skipped="0" time="68.499" errors="1">
+<testcase name="Dashboard › dashboard redirect to login when not authenticated" classname="dashboard.spec.ts" time="32.168">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/dashboard-Dashboard-dashbo-b9d1f-ogin-when-not-authenticated-dashboard/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/dashboard-Dashboard-dashbo-b9d1f-ogin-when-not-authenticated-dashboard/video.webm]]
+
+[[ATTACHMENT|test-results/dashboard-Dashboard-dashbo-b9d1f-ogin-when-not-authenticated-dashboard/error-context.md]]
+]]>
+</system-out>
+<error message="Test timeout of 30000ms exceeded." type="Error">
+<![CDATA[  [dashboard] › dashboard.spec.ts:4:3 › Dashboard › dashboard redirect to login when not authenticated 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.waitForURL: Test timeout of 30000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+      navigated to "http://localhost:3000/dashboard"
+    ============================================================
+
+       5 |     await page.goto('http://localhost:3000/dashboard')
+       6 |     
+    >  7 |     await page.waitForURL(/\/(login|auth)/)
+         |                ^
+       8 |     expect(page.url()).toContain('login')
+       9 |   })
+      10 |
+        at /home/mohammad/projects/eibaawebsite/tests/dashboard.spec.ts:7:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/dashboard-Dashboard-dashbo-b9d1f-ogin-when-not-authenticated-dashboard/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/dashboard-Dashboard-dashbo-b9d1f-ogin-when-not-authenticated-dashboard/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/dashboard-Dashboard-dashbo-b9d1f-ogin-when-not-authenticated-dashboard/error-context.md
+]]>
+</error>
+</testcase>
+<testcase name="Dashboard › dashboard has sidebar navigation" classname="dashboard.spec.ts" time="3.554">
+</testcase>
+<testcase name="Dashboard › dashboard sidebar has menu items" classname="dashboard.spec.ts" time="3.574">
+</testcase>
+<testcase name="Dashboard › blogs section loads in dashboard" classname="dashboard.spec.ts" time="3.556">
+</testcase>
+<testcase name="Dashboard › services section loads in dashboard" classname="dashboard.spec.ts" time="2.275">
+</testcase>
+<testcase name="Dashboard › categories section loads in dashboard" classname="dashboard.spec.ts" time="2.323">
+</testcase>
+<testcase name="Dashboard › courses section loads in dashboard" classname="dashboard.spec.ts" time="2.41">
+</testcase>
+<testcase name="Dashboard › pages section loads in dashboard" classname="dashboard.spec.ts" time="2.69">
+</testcase>
+<testcase name="Dashboard › menu section loads in dashboard" classname="dashboard.spec.ts" time="2.475">
+</testcase>
+<testcase name="Dashboard › social media section loads in dashboard" classname="dashboard.spec.ts" time="2.485">
+</testcase>
+<testcase name="Dashboard › users section loads in dashboard" classname="dashboard.spec.ts" time="2.328">
+</testcase>
+<testcase name="Dashboard › dashboard header present" classname="dashboard.spec.ts" time="2.334">
+</testcase>
+<testcase name="Dashboard › dashboard LTR direction set" classname="dashboard.spec.ts" time="2.364">
+</testcase>
+<testcase name="Dashboard › add button appears in forms sections" classname="dashboard.spec.ts" time="1.993">
+</testcase>
+<testcase name="Dashboard › edit parameter works in URL" classname="dashboard.spec.ts" time="1.97">
+</testcase>
+</testsuite>
+<testsuite name="accessibility.spec.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="chromium" tests="10" failures="0" skipped="0" time="34.49" errors="0">
+<testcase name="Accessibility › page has proper heading hierarchy" classname="accessibility.spec.ts" time="4.246">
+</testcase>
+<testcase name="Accessibility › links have descriptive text" classname="accessibility.spec.ts" time="4.54">
+</testcase>
+<testcase name="Accessibility › buttons have accessible text" classname="accessibility.spec.ts" time="1.998">
+</testcase>
+<testcase name="Accessibility › form inputs have associated labels" classname="accessibility.spec.ts" time="2.161">
+</testcase>
+<testcase name="Accessibility › images have alt text" classname="accessibility.spec.ts" time="4.16">
+</testcase>
+<testcase name="Accessibility › page is keyboard navigable" classname="accessibility.spec.ts" time="3.897">
+</testcase>
+<testcase name="Accessibility › footer links are keyboard accessible" classname="accessibility.spec.ts" time="3.755">
+</testcase>
+<testcase name="Accessibility › navigation menu is keyboard accessible" classname="accessibility.spec.ts" time="3.884">
+</testcase>
+<testcase name="Accessibility › form validation messages appear" classname="accessibility.spec.ts" time="2.324">
+</testcase>
+<testcase name="Accessibility › color contrast is maintained" classname="accessibility.spec.ts" time="3.525">
+</testcase>
+</testsuite>
+<testsuite name="authentication.spec.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="chromium" tests="10" failures="0" skipped="0" time="21.319" errors="0">
+<testcase name="Authentication › login page loads" classname="authentication.spec.ts" time="2.125">
+</testcase>
+<testcase name="Authentication › register page loads" classname="authentication.spec.ts" time="1.795">
+</testcase>
+<testcase name="Authentication › login form has required fields" classname="authentication.spec.ts" time="1.695">
+</testcase>
+<testcase name="Authentication › register form has required fields" classname="authentication.spec.ts" time="1.921">
+</testcase>
+<testcase name="Authentication › login with invalid email shows error" classname="authentication.spec.ts" time="2.567">
+</testcase>
+<testcase name="Authentication › onboarding page accessible after signup" classname="authentication.spec.ts" time="2.24">
+</testcase>
+<testcase name="Authentication › auth page with LTR direction" classname="authentication.spec.ts" time="2.038">
+<system-out>
+<![CDATA[dir elements: [
+  {
+    tag: [32m'DIV'[39m,
+    dir: [32m'rtl'[39m,
+    class: [32m'flex flex-col min-h-screen tajawal_6a219fa7-module__wut1hW__className'[39m
+  },
+  {
+    tag: [32m'INPUT'[39m,
+    dir: [32m'ltr'[39m,
+    class: [32m'w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#3D3350] text-gray-900'[39m
+  },
+  {
+    tag: [32m'INPUT'[39m,
+    dir: [32m'ltr'[39m,
+    class: [32m'w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#3D3350] text-gray-900'[39m
+  }
+]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › forgot password link visible" classname="authentication.spec.ts" time="2.104">
+</testcase>
+<testcase name="Authentication › register link visible on login page" classname="authentication.spec.ts" time="2.484">
+</testcase>
+<testcase name="Authentication › login link visible on register page" classname="authentication.spec.ts" time="2.35">
+</testcase>
+</testsuite>
+<testsuite name="home.spec.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="chromium" tests="3" failures="0" skipped="0" time="15.365" errors="0">
+<testcase name="homepage loads" classname="home.spec.ts" time="5.335">
+</testcase>
+<testcase name="social links visible in footer" classname="home.spec.ts" time="5.562">
+</testcase>
+<testcase name="social links visible in header" classname="home.spec.ts" time="4.468">
+</testcase>
+</testsuite>
+<testsuite name="navigation.spec.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="chromium" tests="5" failures="0" skipped="0" time="21.553" errors="0">
+<testcase name="Navigation › desktop menu items visible on large screens" classname="navigation.spec.ts" time="4.442">
+</testcase>
+<testcase name="Navigation › mobile hamburger menu visible on small screens" classname="navigation.spec.ts" time="4.186">
+</testcase>
+<testcase name="Navigation › mobile menu opens and closes" classname="navigation.spec.ts" time="4.215">
+</testcase>
+<testcase name="Navigation › header logo navigates to home" classname="navigation.spec.ts" time="4.755">
+</testcase>
+<testcase name="Navigation › navigation links exist and are clickable" classname="navigation.spec.ts" time="3.955">
+</testcase>
+</testsuite>
+<testsuite name="performance-seo.spec.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="chromium" tests="10" failures="2" skipped="0" time="47.238" errors="0">
+<testcase name="Performance &amp; SEO › page loads in reasonable time" classname="performance-seo.spec.ts" time="5.812">
+</testcase>
+<testcase name="Performance &amp; SEO › images are optimized (lazy loaded)" classname="performance-seo.spec.ts" time="4.565">
+</testcase>
+<testcase name="Performance &amp; SEO › page has meta description" classname="performance-seo.spec.ts" time="9.472">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/performance-seo-Performance-SEO-page-has-meta-description-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/performance-seo-Performance-SEO-page-has-meta-description-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/performance-seo-Performance-SEO-page-has-meta-description-chromium/error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toBeVisible() failed" type="expect.toBeVisible">
+<![CDATA[  [chromium] › performance-seo.spec.ts:26:3 › Performance & SEO › page has meta description ────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('meta[name="description"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('meta[name="description"]')
+        12 × locator resolved to <meta name="description" content="إباء أبو طه"/>
+           - unexpected value "hidden"
+
+
+      28 |
+      29 |     const metaDescription = page.locator('meta[name="description"]')
+    > 30 |     await expect(metaDescription).toBeVisible()
+         |                                   ^
+      31 |   })
+      32 |
+      33 |   test('page has viewport meta tag', async ({ page }) => {
+        at /home/mohammad/projects/eibaawebsite/tests/performance-seo.spec.ts:30:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/performance-seo-Performance-SEO-page-has-meta-description-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/performance-seo-Performance-SEO-page-has-meta-description-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/performance-seo-Performance-SEO-page-has-meta-description-chromium/error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Performance &amp; SEO › page has viewport meta tag" classname="performance-seo.spec.ts" time="9.038">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/performance-seo-Performance-SEO-page-has-viewport-meta-tag-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/performance-seo-Performance-SEO-page-has-viewport-meta-tag-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/performance-seo-Performance-SEO-page-has-viewport-meta-tag-chromium/error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toBeVisible() failed" type="expect.toBeVisible">
+<![CDATA[  [chromium] › performance-seo.spec.ts:33:3 › Performance & SEO › page has viewport meta tag ───────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('meta[name="viewport"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('meta[name="viewport"]')
+        12 × locator resolved to <meta name="viewport" content="width=device-width, initial-scale=1"/>
+           - unexpected value "hidden"
+
+
+      35 |
+      36 |     const viewportMeta = page.locator('meta[name="viewport"]')
+    > 37 |     await expect(viewportMeta).toBeVisible()
+         |                                ^
+      38 |   })
+      39 |
+      40 |   test('page title is set', async ({ page }) => {
+        at /home/mohammad/projects/eibaawebsite/tests/performance-seo.spec.ts:37:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/performance-seo-Performance-SEO-page-has-viewport-meta-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/performance-seo-Performance-SEO-page-has-viewport-meta-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/performance-seo-Performance-SEO-page-has-viewport-meta-tag-chromium/error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Performance &amp; SEO › page title is set" classname="performance-seo.spec.ts" time="2.641">
+</testcase>
+<testcase name="Performance &amp; SEO › links have no broken references" classname="performance-seo.spec.ts" time="2.612">
+</testcase>
+<testcase name="Performance &amp; SEO › CSS is loaded" classname="performance-seo.spec.ts" time="2.762">
+</testcase>
+<testcase name="Performance &amp; SEO › page renders without console errors" classname="performance-seo.spec.ts" time="3.52">
+</testcase>
+<testcase name="Performance &amp; SEO › canonical URL is set on public pages" classname="performance-seo.spec.ts" time="3.548">
+</testcase>
+<testcase name="Performance &amp; SEO › OpenGraph tags present" classname="performance-seo.spec.ts" time="3.268">
+</testcase>
+</testsuite>
+<testsuite name="public-pages.spec.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="chromium" tests="10" failures="4" skipped="0" time="40.093" errors="0">
+<testcase name="Public Pages › blogs page loads and displays content" classname="public-pages.spec.ts" time="7.917">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/public-pages-Public-Pages--efb3e--loads-and-displays-content-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/public-pages-Public-Pages--efb3e--loads-and-displays-content-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/public-pages-Public-Pages--efb3e--loads-and-displays-content-chromium/error-context.md]]
+]]>
+</system-out>
+<failure message="expect(page).toHaveTitle(expected) failed" type="expect.toHaveTitle">
+<![CDATA[  [chromium] › public-pages.spec.ts:4:3 › Public Pages › blogs page loads and displays content ─────
+
+    Error: expect(page).toHaveTitle(expected) failed
+
+    Expected pattern: /Blogs/
+    Received string:  "Eibaa Abutaha Website"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveTitle" with timeout 5000ms
+        13 × unexpected value "Eibaa Abutaha Website"
+
+
+       5 |     await page.goto('http://localhost:3000/blogs')
+       6 |     
+    >  7 |     await expect(page).toHaveTitle(/Blogs/)
+         |                        ^
+       8 |     const blogCards = page.locator('article, [role="article"], .blog-card')
+       9 |     await expect(blogCards).toBeDefined()
+      10 |   })
+        at /home/mohammad/projects/eibaawebsite/tests/public-pages.spec.ts:7:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/public-pages-Public-Pages--efb3e--loads-and-displays-content-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/public-pages-Public-Pages--efb3e--loads-and-displays-content-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/public-pages-Public-Pages--efb3e--loads-and-displays-content-chromium/error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Public Pages › services page loads" classname="public-pages.spec.ts" time="7.453">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/public-pages-Public-Pages-services-page-loads-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/public-pages-Public-Pages-services-page-loads-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/public-pages-Public-Pages-services-page-loads-chromium/error-context.md]]
+]]>
+</system-out>
+<failure message="expect(page).toHaveTitle(expected) failed" type="expect.toHaveTitle">
+<![CDATA[  [chromium] › public-pages.spec.ts:12:3 › Public Pages › services page loads ──────────────────────
+
+    Error: expect(page).toHaveTitle(expected) failed
+
+    Expected pattern: /Services/
+    Received string:  "Eibaa Abutaha Website"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveTitle" with timeout 5000ms
+        13 × unexpected value "Eibaa Abutaha Website"
+
+
+      13 |     await page.goto('http://localhost:3000/services')
+      14 |     
+    > 15 |     await expect(page).toHaveTitle(/Services/)
+         |                        ^
+      16 |   })
+      17 |
+      18 |   test('courses page loads', async ({ page }) => {
+        at /home/mohammad/projects/eibaawebsite/tests/public-pages.spec.ts:15:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/public-pages-Public-Pages-services-page-loads-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/public-pages-Public-Pages-services-page-loads-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/public-pages-Public-Pages-services-page-loads-chromium/error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Public Pages › courses page loads" classname="public-pages.spec.ts" time="7.745">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/public-pages-Public-Pages-courses-page-loads-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/public-pages-Public-Pages-courses-page-loads-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/public-pages-Public-Pages-courses-page-loads-chromium/error-context.md]]
+]]>
+</system-out>
+<failure message="expect(page).toHaveTitle(expected) failed" type="expect.toHaveTitle">
+<![CDATA[  [chromium] › public-pages.spec.ts:18:3 › Public Pages › courses page loads ───────────────────────
+
+    Error: expect(page).toHaveTitle(expected) failed
+
+    Expected pattern: /Courses/
+    Received string:  "Eibaa Abutaha Website"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveTitle" with timeout 5000ms
+        13 × unexpected value "Eibaa Abutaha Website"
+
+
+      19 |     await page.goto('http://localhost:3000/courses')
+      20 |     
+    > 21 |     await expect(page).toHaveTitle(/Courses/)
+         |                        ^
+      22 |   })
+      23 |
+      24 |   test('blog detail page loads when blog exists', async ({ page }) => {
+        at /home/mohammad/projects/eibaawebsite/tests/public-pages.spec.ts:21:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/public-pages-Public-Pages-courses-page-loads-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/public-pages-Public-Pages-courses-page-loads-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/public-pages-Public-Pages-courses-page-loads-chromium/error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Public Pages › blog detail page loads when blog exists" classname="public-pages.spec.ts" time="1.497">
+</testcase>
+<testcase name="Public Pages › service detail page loads when service exists" classname="public-pages.spec.ts" time="1.491">
+</testcase>
+<testcase name="Public Pages › course detail page loads when course exists" classname="public-pages.spec.ts" time="2.65">
+</testcase>
+<testcase name="Public Pages › footer is visible on all pages" classname="public-pages.spec.ts" time="2.153">
+</testcase>
+<testcase name="Public Pages › header is visible on all pages" classname="public-pages.spec.ts" time="2.93">
+</testcase>
+<testcase name="Public Pages › 404 page displays for invalid route" classname="public-pages.spec.ts" time="2.219">
+</testcase>
+<testcase name="Public Pages › RTL attributes set correctly on public site" classname="public-pages.spec.ts" time="4.038">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/public-pages-Public-Pages--9abb5-et-correctly-on-public-site-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|test-results/public-pages-Public-Pages--9abb5-et-correctly-on-public-site-chromium/video.webm]]
+
+[[ATTACHMENT|test-results/public-pages-Public-Pages--9abb5-et-correctly-on-public-site-chromium/error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBe(expected) // Object.is equality" type="expect.toBe">
+<![CDATA[  [chromium] › public-pages.spec.ts:74:3 › Public Pages › RTL attributes set correctly on public site 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "ar"
+    Received: null
+
+      78 |     const lang = await htmlElement.getAttribute('lang')
+      79 |     
+    > 80 |     expect(lang).toBe('ar')
+         |                  ^
+      81 |   })
+      82 | })
+      83 |
+        at /home/mohammad/projects/eibaawebsite/tests/public-pages.spec.ts:80:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/public-pages-Public-Pages--9abb5-et-correctly-on-public-site-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/public-pages-Public-Pages--9abb5-et-correctly-on-public-site-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/public-pages-Public-Pages--9abb5-et-correctly-on-public-site-chromium/error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="responsive.spec.ts" timestamp="2026-05-20T12:34:30.097Z" hostname="chromium" tests="16" failures="0" skipped="0" time="56.725" errors="0">
+<testcase name="Responsive Design › homepage responsive on Mobile (iPhone 12)" classname="responsive.spec.ts" time="4.975">
+</testcase>
+<testcase name="Responsive Design › blogs page responsive on Mobile (iPhone 12)" classname="responsive.spec.ts" time="2.568">
+</testcase>
+<testcase name="Responsive Design › services page responsive on Mobile (iPhone 12)" classname="responsive.spec.ts" time="2.184">
+</testcase>
+<testcase name="Responsive Design › homepage responsive on Tablet (iPad)" classname="responsive.spec.ts" time="5.608">
+</testcase>
+<testcase name="Responsive Design › blogs page responsive on Tablet (iPad)" classname="responsive.spec.ts" time="3.042">
+</testcase>
+<testcase name="Responsive Design › services page responsive on Tablet (iPad)" classname="responsive.spec.ts" time="2.504">
+</testcase>
+<testcase name="Responsive Design › homepage responsive on Desktop" classname="responsive.spec.ts" time="5.685">
+</testcase>
+<testcase name="Responsive Design › blogs page responsive on Desktop" classname="responsive.spec.ts" time="2.686">
+</testcase>
+<testcase name="Responsive Design › services page responsive on Desktop" classname="responsive.spec.ts" time="2.285">
+</testcase>
+<testcase name="Responsive Design › homepage responsive on Large Desktop" classname="responsive.spec.ts" time="6.024">
+</testcase>
+<testcase name="Responsive Design › blogs page responsive on Large Desktop" classname="responsive.spec.ts" time="4.065">
+</testcase>
+<testcase name="Responsive Design › services page responsive on Large Desktop" classname="responsive.spec.ts" time="3.019">
+</testcase>
+<testcase name="Responsive Design › mobile menu toggle works" classname="responsive.spec.ts" time="5.023">
+</testcase>
+<testcase name="Responsive Design › desktop menu visible on large screens" classname="responsive.spec.ts" time="3.717">
+</testcase>
+<testcase name="Responsive Design › mobile login form responsive" classname="responsive.spec.ts" time="1.772">
+</testcase>
+<testcase name="Responsive Design › tablet dashboard sidebar responsive" classname="responsive.spec.ts" time="1.568">
+</testcase>
+</testsuite>
+</testsuites>
