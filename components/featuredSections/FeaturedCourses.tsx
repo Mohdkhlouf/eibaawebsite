@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma"
 import CourseCard from "@/components/cards/CourseCard"
-
 export default async function FeaturedCourses() {
   const featured = await prisma.course.findMany({
     orderBy: { createdAt: 'desc' },
@@ -9,14 +8,11 @@ export default async function FeaturedCourses() {
       enrollements: { select: { id: true } }
     }
   })
-
   if (!featured.length) return null
-
   const featuredWithCount = featured.map(course => ({
     ...course,
     enrollmentsCount: course.enrollements.length,
   }))
-
   return (
     <section className="container mx-auto py-12 px-6">
       <h2 className="text-[#3D3350] text-3xl font-bold mb-8 text-center">Featured Courses</h2>

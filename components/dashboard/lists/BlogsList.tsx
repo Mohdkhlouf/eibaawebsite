@@ -1,8 +1,6 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-
 interface Blog {
   id: string
   title: string
@@ -12,16 +10,13 @@ interface Blog {
   createdAt: Date
   published: boolean
 }
-
 export default function BlogsList() {
   const [blogs, setBlogs] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
   useEffect(() => {
     fetchBlogs()
   }, [])
-
   const fetchBlogs = async () => {
     try {
       const response = await fetch('/api/blogs')
@@ -34,7 +29,6 @@ export default function BlogsList() {
       setLoading(false)
     }
   }
-
   const deleteBlog = async (id: string) => {
     if (!confirm('Are you sure you want to delete this blog?')) return
     try {
@@ -45,10 +39,8 @@ export default function BlogsList() {
       alert(err instanceof Error ? err.message : 'Failed to delete blog')
     }
   }
-
   if (loading) return <div className="text-center py-12">Loading blogs...</div>
   if (error) return <div className="text-center py-12 text-red-600">{error}</div>
-
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -60,7 +52,6 @@ export default function BlogsList() {
           + Add Blog
         </Link>
       </div>
-
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <table className="w-full">
           <thead className="bg-gray-50 border-b">
@@ -106,7 +97,6 @@ export default function BlogsList() {
           </tbody>
         </table>
       </div>
-
       {blogs.length === 0 && (
         <div className="text-center py-12 bg-white rounded-lg">
           <p className="text-gray-600">No blogs found. Create your first blog!</p>

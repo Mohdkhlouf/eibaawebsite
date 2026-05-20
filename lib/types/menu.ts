@@ -1,5 +1,4 @@
 import { z } from 'zod'
-
 export const menuItemSchema = z.object({
   id: z.string().optional(),
   label: z.string().min(1, 'Label is required').max(100, 'Label must be 100 characters or less'),
@@ -19,5 +18,4 @@ export const menuItemSchema = z.object({
   message: 'Please provide either a custom URL or select a page',
   path: ['url'],
 })
-
 export type MenuItem = z.infer<typeof menuItemSchema>

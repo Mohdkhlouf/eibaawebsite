@@ -2,10 +2,8 @@ import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import { DeleteButton } from '@/components/ui/DeleteButton'
 import { deleteStaticPageAction } from '@/actions/staticPages'
-
 export default async function StaticPagesList() {
   const pages = await prisma.staticPage.findMany({ orderBy: { createdAt: 'desc' } })
-
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -14,7 +12,6 @@ export default async function StaticPagesList() {
           + Add Page
         </Link>
       </div>
-
       {pages.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg">
           <p className="text-gray-600">No pages found. Create your first page!</p>

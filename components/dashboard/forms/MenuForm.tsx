@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,23 +7,18 @@ import { createMenuItemAction, updateMenuItemAction, getMenuItemById } from '@/a
 import { getStaticPages } from '@/actions/staticPages'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-
 interface MenuItemFormData extends MenuItem {
   url?: string
   pageId?: string
 }
-
 export default function MenuForm() {
   const searchParams = useSearchParams()
   const id = searchParams.get('id')
   const isEdit = !!id
-
   const [loading, setLoading] = useState(isEdit)
   const [pages, setPages] = useState<Array<{ id: string; title: string; slug: string }>>([])
   const [serverError, setServerError] = useState<string | null>(null)
-
   const formRef = useRef<HTMLFormElement | null>(null)
-
   const {
     register,
     handleSubmit,
@@ -36,24 +30,20 @@ export default function MenuForm() {
     resolver: zodResolver(menuItemSchema) as any,
     defaultValues: { label: '', linkType: 'custom', url: '', pageId: '', order: 0 },
   })
-
   const linkType = watch('linkType')
   const url = watch('url')
   const pageId = watch('pageId')
-
   useEffect(() => {
     const loadData = async () => {
       try {
         const staticPages = await getStaticPages()
         setPages(staticPages)
-
         if (isEdit) {
           const item = await getMenuItemById(String(id))
           if (!item) {
             setServerError('Menu item not found')
             return
           }
-
           const detectedLinkType = item.pageId ? 'page' : 'custom'
           reset({
             label: item.label,
@@ -69,35 +59,29 @@ export default function MenuForm() {
         setLoading(false)
       }
     }
-
     loadData()
   }, [id, isEdit, reset])
-
   const onValid = () => {
     setServerError(null)
     formRef.current?.requestSubmit()
   }
-
   if (loading) return <div className="text-center py-12">Loading...</div>
-
   return (
     <div className="space-y-4 w-full">
       <h2 className="text-2xl font-bold text-gray-900">
         {isEdit ? 'Edit Menu Item' : 'Add Menu Item'}
       </h2>
-
       {serverError && (
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">{serverError}</div>
       )}
-
       <form
         ref={formRef}
         action={isEdit ? updateMenuItemAction : createMenuItemAction}
         className="bg-white rounded-lg shadow p-6 w-full space-y-6"
       >
         {isEdit && <input type="hidden" name="id" value={String(id)} />}
-
-        {/* Label */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Label *</label>
           <input
@@ -109,8 +93,8 @@ export default function MenuForm() {
           />
           {errors.label && <p className="text-red-500 text-sm mt-1">{errors.label.message}</p>}
         </div>
-
-        {/* Link Type */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Link Type *</label>
           <div className="flex gap-4">
@@ -135,8 +119,8 @@ export default function MenuForm() {
           </div>
           {errors.linkType && <p className="text-red-500 text-sm mt-1">{errors.linkType.message}</p>}
         </div>
-
-        {/* Custom URL */}
+        {
+}
         {linkType === 'custom' && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">URL *</label>
@@ -150,8 +134,8 @@ export default function MenuForm() {
             {errors.url && <p className="text-red-500 text-sm mt-1">{errors.url.message}</p>}
           </div>
         )}
-
-        {/* Page Selection */}
+        {
+}
         {linkType === 'page' && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Select Page *</label>
@@ -170,8 +154,8 @@ export default function MenuForm() {
             {errors.pageId && <p className="text-red-500 text-sm mt-1">{errors.pageId.message}</p>}
           </div>
         )}
-
-        {/* Order */}
+        {
+}
         <div className="max-w-xs">
           <label className="block text-sm font-medium text-gray-700 mb-2">Order</label>
           <input
@@ -183,8 +167,8 @@ export default function MenuForm() {
           />
           {errors.order && <p className="text-red-500 text-sm mt-1">{errors.order.message}</p>}
         </div>
-
-        {/* Actions */}
+        {
+}
         <div className="flex gap-4 pt-2">
           <button
             onClick={handleSubmit(onValid, () => {})}

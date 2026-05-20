@@ -15,7 +15,6 @@ import {
     FaYoutube
 } from 'react-icons/fa'
 import { FaThreads, FaXTwitter } from 'react-icons/fa6'
-
 export const iconMap: Record<string, IconType> = {
   facebook:   FaFacebook,
   instagram:  FaInstagram,
@@ -34,7 +33,6 @@ export const iconMap: Record<string, IconType> = {
   discord:    FaDiscord,
   website:    FaGlobe,
 }
-
 export const SOCIAL_ICONS = Object.entries(iconMap).map(([value, Icon]) => ({
   value,
   Icon,

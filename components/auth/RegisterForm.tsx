@@ -1,30 +1,24 @@
 'use client'
-
 import { createClient } from '@/lib/supabase/client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-
 export default function RegisterForm() {
   const supabase = createClient()
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
     setError(null)
-
     const form = new FormData(e.currentTarget)
     const password = form.get('password') as string
     const confirmPassword = form.get('confirmPassword') as string
-
     if (password !== confirmPassword) {
       setError('كلمات المرور غير متطابقة')
       setLoading(false)
       return
     }
-
     const { error } = await supabase.auth.signUp({
       email: form.get('email') as string,
       password,
@@ -33,16 +27,13 @@ export default function RegisterForm() {
         emailRedirectTo: `${location.origin}/auth/callback`
       }
     })
-
     if (error) {
       setError(error.message)
       setLoading(false)
       return
     }
-
     router.push('/register/confirm')
   }
-
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>

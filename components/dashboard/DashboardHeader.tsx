@@ -1,8 +1,6 @@
 import {userType} from '@/lib/types/general'
 import { LogOut } from '@/components/dashboard/LogOut'
-
 import Image from 'next/image'
-
 export function DashboardHeader({dashboardUser}: {dashboardUser: userType}) {
   return (
     <header>

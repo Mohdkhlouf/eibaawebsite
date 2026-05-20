@@ -1,8 +1,6 @@
 'use client'
-
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-
 interface Enrollment {
   id: string
   enrolledAt: string
@@ -17,7 +15,6 @@ interface Enrollment {
     maritalStatus: string | null
   }
 }
-
 interface Course {
   id: string
   title: string
@@ -27,7 +24,6 @@ interface Course {
   createdAt: Date
   updatedAt: Date
 }
-
 export default function CoursesList() {
   const [courses, setCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true)
@@ -35,11 +31,9 @@ export default function CoursesList() {
   const [expandedCourse, setExpandedCourse] = useState<string | null>(null)
   const [enrollments, setEnrollments] = useState<Record<string, Enrollment[]>>({})
   const [enrollmentsLoading, setEnrollmentsLoading] = useState<string | null>(null)
-
   useEffect(() => {
     fetchCourses()
   }, [])
-
   const fetchCourses = async () => {
     try {
       const response = await fetch('/api/courses')
@@ -52,19 +46,13 @@ export default function CoursesList() {
       setLoading(false)
     }
   }
-
   const toggleEnrollments = async (courseId: string) => {
-    // Collapse if already open
     if (expandedCourse === courseId) {
       setExpandedCourse(null)
       return
     }
-
     setExpandedCourse(courseId)
-
-    // Already fetched
     if (enrollments[courseId]) return
-
     setEnrollmentsLoading(courseId)
     try {
       const res = await fetch(`/api/courses/${courseId}/enrollments`)
@@ -77,7 +65,6 @@ export default function CoursesList() {
       setEnrollmentsLoading(null)
     }
   }
-
   const removeEnrollment = async (courseId: string, enrollmentId: string) => {
     if (!confirm('Remove this enrollment?')) return
     try {
@@ -94,7 +81,6 @@ export default function CoursesList() {
       alert(err instanceof Error ? err.message : 'Failed to remove enrollment')
     }
   }
-
   const deleteCourse = async (id: string) => {
     if (!confirm('Are you sure you want to delete this course?')) return
     try {
@@ -105,10 +91,8 @@ export default function CoursesList() {
       alert(err instanceof Error ? err.message : 'Failed to delete course')
     }
   }
-
   if (loading) return <div className="text-center py-12">Loading courses...</div>
   if (error) return <div className="text-center py-12 text-red-600">{error}</div>
-
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -120,7 +104,6 @@ export default function CoursesList() {
           + Add Course
         </Link>
       </div>
-
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <table className="w-full">
           <thead className="bg-gray-50 border-b">
@@ -167,15 +150,14 @@ export default function CoursesList() {
                     </button>
                   </td>
                 </tr>
-
-                {/* Enrollments panel */}
+                {
+}
                 {expandedCourse === course.id && (
                   <tr key={`${course.id}-enrollments`}>
                     <td colSpan={6} className="bg-gray-50 px-6 py-4">
                       <p className="text-sm font-semibold text-gray-700 mb-3">
                         Enrolled Students — {course.title}
                       </p>
-
                       {enrollmentsLoading === course.id ? (
                         <p className="text-sm text-gray-500">Loading...</p>
                       ) : !enrollments[course.id]?.length ? (
@@ -227,7 +209,6 @@ export default function CoursesList() {
           </tbody>
         </table>
       </div>
-
       {courses.length === 0 && (
         <div className="text-center py-12 bg-white rounded-lg">
           <p className="text-gray-600">No courses found. Create your first course!</p>

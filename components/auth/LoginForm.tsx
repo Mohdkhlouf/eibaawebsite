@@ -1,34 +1,27 @@
 'use client'
-
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-
 export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
-
     const supabase = createClient()
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-
     if (error) {
       setError('البريد الإلكتروني أو كلمة المرور غير صحيحة')
       setLoading(false)
       return
     }
-
     router.push('/dashboard')
     router.refresh()
   }
-
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>

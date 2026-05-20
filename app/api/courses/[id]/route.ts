@@ -1,15 +1,12 @@
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
-
-// GET single course
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
-
     const course = await prisma.course.findUnique({
       where: { id },
       include: {
@@ -18,14 +15,12 @@ export async function GET(
         }
       }
     })
-
     if (!course) {
       return NextResponse.json(
         { message: 'Course not found' },
         { status: 404 }
       )
     }
-
     return NextResponse.json({
       ...course,
       enrollmentsCount: course.enrollements.length,
@@ -39,75 +34,57 @@ export async function GET(
     )
   }
 }
-
-// PUT update course
 export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
-
-    // Check authentication
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
-
     if (!user) {
       return NextResponse.json(
         { message: 'Unauthorized' },
         { status: 401 }
       )
     }
-
-    // Check if user is admin
     const adminUser = await prisma.user.findUnique({
       where: { id: user.id }
     })
-
     if (adminUser?.role !== 'SUPER_ADMIN') {
       return NextResponse.json(
         { message: 'Forbidden: Only admins can update courses' },
         { status: 403 }
       )
     }
-
-    // Check if course exists
     const existingCourse = await prisma.course.findUnique({
       where: { id }
     })
-
     if (!existingCourse) {
       return NextResponse.json(
         { message: 'Course not found' },
         { status: 404 }
       )
     }
-
     const body = await request.json()
     const { title, slug, content, thumbnail, capacity } = body
-
-    // Validate required fields
     if (!title || !slug || !content || !thumbnail || capacity === undefined || capacity === null) {
       return NextResponse.json(
         { message: 'Missing required fields: title, slug, content, thumbnail, capacity' },
         { status: 400 }
       )
     }
-
-    // Validate capacity is a positive number
     if (typeof capacity !== 'number' || capacity <= 0) {
       return NextResponse.json(
         { message: 'Capacity must be a positive number' },
         { status: 400 }
       )
     }
-
     // Check if new title already exists (but allow if it's the same course)
     if (title !== existingCourse.title) {
       const duplicateTitle = await prisma.course.findUnique({
         where: { title }
       })
-
       if (duplicateTitle) {
         return NextResponse.json(
           { message: 'Course with this title already exists' },
@@ -115,13 +92,11 @@ export async function PUT(
         )
       }
     }
-
     // Check if new slug already exists (but allow if it's the same course)
     if (slug !== existingCourse.slug) {
       const duplicateSlug = await prisma.course.findUnique({
         where: { slug }
       })
-
       if (duplicateSlug) {
         return NextResponse.json(
           { message: 'Course with this slug already exists' },
@@ -129,7 +104,6 @@ export async function PUT(
         )
       }
     }
-
     const updatedCourse = await prisma.course.update({
       where: { id },
       data: {
@@ -146,7 +120,6 @@ export async function PUT(
         }
       }
     })
-
     return NextResponse.json({
       ...updatedCourse,
       enrollmentsCount: updatedCourse.enrollements.length,
@@ -160,54 +133,41 @@ export async function PUT(
     )
   }
 }
-
-// DELETE course
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
-
-    // Check authentication
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
-
     if (!user) {
       return NextResponse.json(
         { message: 'Unauthorized' },
         { status: 401 }
       )
     }
-
-    // Check if user is admin
     const adminUser = await prisma.user.findUnique({
       where: { id: user.id }
     })
-
     if (adminUser?.role !== 'SUPER_ADMIN') {
       return NextResponse.json(
         { message: 'Forbidden: Only admins can delete courses' },
         { status: 403 }
       )
     }
-
-    // Check if course exists
     const course = await prisma.course.findUnique({
       where: { id }
     })
-
     if (!course) {
       return NextResponse.json(
         { message: 'Course not found' },
         { status: 404 }
       )
     }
-
     await prisma.course.delete({
       where: { id }
     })
-
     return NextResponse.json({ message: 'Course deleted successfully' })
   } catch (error) {
     console.error('[COURSE_DELETE]', error)

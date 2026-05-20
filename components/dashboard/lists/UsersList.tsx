@@ -1,8 +1,6 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-
 interface User {
   id: string
   email: string
@@ -10,16 +8,13 @@ interface User {
   role: 'USER' | 'SUPER_ADMIN'
   createdAt: Date
 }
-
 export default function UsersList() {
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
   useEffect(() => {
     fetchUsers()
   }, [])
-
   const fetchUsers = async () => {
     try {
       const response = await fetch('/api/users')
@@ -32,7 +27,6 @@ export default function UsersList() {
       setLoading(false)
     }
   }
-
   const deleteUser = async (id: string) => {
     if (!confirm('Are you sure you want to delete this user?')) return
     try {
@@ -43,10 +37,8 @@ export default function UsersList() {
       alert(err instanceof Error ? err.message : 'Failed to delete user')
     }
   }
-
   if (loading) return <div className="text-center py-12">Loading users...</div>
   if (error) return <div className="text-center py-12 text-red-600">{error}</div>
-
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -58,7 +50,6 @@ export default function UsersList() {
           + Add User
         </Link>
       </div>
-
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <table className="w-full">
           <thead className="bg-gray-50 border-b">
@@ -102,7 +93,6 @@ export default function UsersList() {
           </tbody>
         </table>
       </div>
-
       {users.length === 0 && (
         <div className="text-center py-12 bg-white rounded-lg">
           <p className="text-gray-600">No users found.</p>

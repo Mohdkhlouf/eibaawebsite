@@ -1,5 +1,4 @@
 import React from 'react'
-
 export const PodcastSection = () => {
   return (
     <section className="container mx-auto py-12  px-6">

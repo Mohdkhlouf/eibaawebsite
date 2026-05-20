@@ -2,8 +2,6 @@ import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { blogSchema } from '@/lib/types/blog'
 import { NextRequest, NextResponse } from 'next/server'
-
-// GET all blogs
 export async function GET(request: NextRequest) {
   try {
     const blogs = await prisma.blog.findMany({
@@ -19,25 +17,17 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ message: 'Failed to fetch blogs' }, { status: 500 })
   }
 }
-
-// POST create new blog
 export async function POST(request: NextRequest) {
   try {
-    // Check authentication
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
-
     if (!user) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
     }
-
-    // Check if user is admin
     const adminUser = await prisma.user.findUnique({ where: { id: user.id } })
     if (adminUser?.role !== 'SUPER_ADMIN') {
       return NextResponse.json({ message: 'Forbidden: Only admins can create blogs' }, { status: 403 })
     }
-
-    // Validate body with Zod
     const body = await request.json()
     const parsed = blogSchema.safeParse(body)
     if (!parsed.success) {
@@ -46,21 +36,15 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-
     const { title, shortTitle, slug, content, categoryId, thumbnail, published } = parsed.data
-
-    // Check if category exists
     const category = await prisma.category.findUnique({ where: { id: categoryId } })
     if (!category) {
       return NextResponse.json({ message: 'Category not found' }, { status: 404 })
     }
-
-    // Check if slug already exists
     const existingBlog = await prisma.blog.findUnique({ where: { slug } })
     if (existingBlog) {
       return NextResponse.json({ message: 'Blog with this slug already exists' }, { status: 409 })
     }
-
     const blog = await prisma.blog.create({
       data: {
         title,
@@ -77,7 +61,6 @@ export async function POST(request: NextRequest) {
         category: { select: { id: true, name: true } },
       },
     })
-
     return NextResponse.json(blog, { status: 201 })
   } catch (error) {
     console.error('[BLOGS_POST]', error)

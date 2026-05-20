@@ -1,14 +1,12 @@
-import React from 'react'
-import { SocialMediaLinks } from './SocialMediaLinks'
+import SocialMediaLinks from './SocialMediaLinks'
 import Image from 'next/image'
-import { prisma } from '@/lib/prisma'
 
-export const Footer: React.FC = async () => {
-  const links = await prisma.socialMediaLink.findMany({ orderBy: { order: 'asc' } })
+type SocialLink = { id: number; url: string; icon: string; name: string }
 
+export function Footer({ socialLinks }: { socialLinks: SocialLink[] }) {
   return (
     <footer className="bg-[#3D3350] text-[#FAF7F5] py-12">
-      <div className="max-w-[1000px] mx-auto w-full">
+      <div className="max-w-250 mx-auto w-full">
         <div className="pt-5">
           <div className="flex justify-center">
             <div className="flex flex-col items-center">
@@ -21,7 +19,7 @@ export const Footer: React.FC = async () => {
                 height={200}
               />
               <h6 className='mt-3'>للتواصل معي من خلال</h6>
-              <SocialMediaLinks links={links} />
+              <SocialMediaLinks links={socialLinks} />
               <h6 className='mt-2'>راسلني عبر</h6>
               <a href="mailto:eiba.abutaha@gmail.com">eiba.abutaha@gmail.com</a>
             </div>

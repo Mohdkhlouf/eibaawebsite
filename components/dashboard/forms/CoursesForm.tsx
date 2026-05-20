@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,17 +7,13 @@ import { createCourseAction, updateCourseAction, getCourseById } from '@/actions
 import CloudinaryUpload from '@/components/cloudinary/CloudinaryUpload'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-
 export default function CoursesForm() {
   const searchParams = useSearchParams()
   const id = searchParams.get('id')
   const isEdit = !!id
-
   const [loading, setLoading] = useState(isEdit)
   const [serverError, setServerError] = useState<string | null>(null)
-
   const formRef = useRef<HTMLFormElement | null>(null)
-
   const {
     register,
     handleSubmit,
@@ -30,20 +25,16 @@ export default function CoursesForm() {
     resolver: zodResolver(courseSchema) as any,
     defaultValues: { title: '', slug: '', content: '', thumbnail: '', capacity: 30 },
   })
-
   const generateSlug = (title: string) =>
     title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-')
-
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value
     setValue('title', title)
     setValue('slug', generateSlug(title))
   }
-
   useEffect(() => {
     if (isEdit) fetchCourse()
   }, [isEdit, id])
-
   const fetchCourse = async () => {
     try {
       const course = await getCourseById(String(id))
@@ -61,34 +52,28 @@ export default function CoursesForm() {
       setLoading(false)
     }
   }
-
   const onValid = () => {
     setServerError(null)
     formRef.current?.requestSubmit()
   }
-
   const thumbnail = watch('thumbnail')
-
   if (loading) return <div className="text-center py-12">Loading course...</div>
-
   return (
     <div className="space-y-4 w-full">
       <h2 className="text-2xl font-bold text-gray-900">
         {isEdit ? 'Edit Course' : 'Add New Course'}
       </h2>
-
       {serverError && (
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">{serverError}</div>
       )}
-
       <form
         ref={formRef}
         action={isEdit ? updateCourseAction : createCourseAction}
         className="bg-white rounded-lg shadow p-6 w-full space-y-6"
       >
         {isEdit && <input type="hidden" name="id" value={String(id)} />}
-
-        {/* Title */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Title *</label>
           <input
@@ -102,8 +87,8 @@ export default function CoursesForm() {
           {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
           <p className="text-xs text-gray-500 mt-1">Must be unique</p>
         </div>
-
-        {/* Slug */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Slug *</label>
           <input
@@ -116,8 +101,8 @@ export default function CoursesForm() {
           {errors.slug && <p className="text-red-500 text-sm mt-1">{errors.slug.message}</p>}
           <p className="text-xs text-gray-500 mt-1">Auto-generated from title. Edit if needed.</p>
         </div>
-
-        {/* Thumbnail and Capacity */}
+        {
+}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Thumbnail *</label>
@@ -127,7 +112,6 @@ export default function CoursesForm() {
             )}
             {errors.thumbnail && <p className="text-red-500 text-sm mt-1">{errors.thumbnail.message}</p>}
           </div>
-
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Capacity *</label>
             <input
@@ -142,8 +126,8 @@ export default function CoursesForm() {
             <p className="text-xs text-gray-500 mt-1">Maximum number of enrollments allowed</p>
           </div>
         </div>
-
-        {/* Content */}
+        {
+}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Content *</label>
           <textarea
@@ -155,11 +139,11 @@ export default function CoursesForm() {
           />
           {errors.content && <p className="text-red-500 text-sm mt-1">{errors.content.message}</p>}
         </div>
-
-        {/* Hidden input for thumbnail */}
+        {
+}
         <input type="hidden" {...register('thumbnail')} />
-
-        {/* Actions */}
+        {
+}
         <div className="flex gap-4 pt-2">
           <button
             onClick={handleSubmit(onValid, () => {})}

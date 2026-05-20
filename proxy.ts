@@ -1,15 +1,12 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const isDashboardRoute = pathname.startsWith('/dashboard')
   const isOnboardingRoute = pathname === '/onboarding'
-
   let response = NextResponse.next({
     request: { headers: request.headers },
   })
-
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -32,9 +29,7 @@ export async function proxy(request: NextRequest) {
       },
     }
   )
-
   const { data: { user } } = await supabase.auth.getUser()
-
   if (isDashboardRoute) {
     if (!user) {
       return NextResponse.redirect(new URL('/login', request.url))
@@ -47,9 +42,6 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(new URL('/', request.url))
     }
   }
-
-  // If logged in but profile not completed, redirect to onboarding
-  // Skip this check if already on /onboarding to avoid redirect loop
   if (user && !isOnboardingRoute) {
     const meRes = await fetch(new URL('/api/me', request.url), {
       headers: { cookie: request.headers.get('cookie') ?? '' },
@@ -59,10 +51,8 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(new URL('/onboarding', request.url))
     }
   }
-
   return response
 }
-
 export const config = {
   matcher: ['/dashboard/:path*', '/((?!_next|api|login|onboarding|.*\\..*).*)'],
 }

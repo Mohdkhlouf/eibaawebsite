@@ -1,7 +1,4 @@
 import { DashboardSidebar } from '@/components/dashboard/DashboardSidebar'
-
-
-// Import list components
 import BlogsList from '@/components/dashboard/lists/BlogsList'
 import ServicesList from '@/components/dashboard/lists/ServicesList'
 import CategoriesList from '@/components/dashboard/lists/CategoriesList'
@@ -10,8 +7,6 @@ import UsersList from '@/components/dashboard/lists/UsersList'
 import SocialMediaLinksList from '@/components/dashboard/lists/SocialMediaLinksList'
 import StaticPagesList from '@/components/dashboard/lists/StaticPagesList'
 import MenuList from '@/components/dashboard/lists/MenuList'
-
-// Import form components
 import BlogsForm from '@/components/dashboard/forms/BlogsForm'
 import ServicesForm from '@/components/dashboard/forms/ServicesForm'
 import CategoriesForm from '@/components/dashboard/forms/CategoriesForm'
@@ -20,56 +15,44 @@ import UsersForm from '@/components/dashboard/forms/UsersForm'
 import SocialMediaLinksFrom from '@/components/dashboard/forms/SocialMediaLinksFrom'
 import StaticPageForm from '@/components/dashboard/forms/StaticPageForm'
 import MenuForm from '@/components/dashboard/forms/MenuForm'
-
-
 export default async function DashboardPage({ searchParams }: {
   searchParams: Promise<{ section?: string; action?: string; id?: string }>
 }) {
   const { section, action, id } = await searchParams
-
-
   const renderContent = () => {
     switch (section) {
       case 'blogs':
         if (action === 'add') return <BlogsForm />
         if (action === 'edit') return <BlogsForm />
         return <BlogsList />
-
       case 'services':
         if (action === 'add') return <ServicesForm />
         if (action === 'edit') return <ServicesForm />
         return <ServicesList />
-
       case 'categories':
         if (action === 'add') return <CategoriesForm />
         if (action === 'edit') return <CategoriesForm />
         return <CategoriesList />
-
       case 'courses':
         if (action === 'add') return <CoursesForm />
         if (action === 'edit') return <CoursesForm />
         return <CoursesList />
-
       case 'users':
         if (action === 'add') return <UsersForm />
         if (action === 'edit') return <UsersForm />
         return <UsersList />
-
       case 'socialMediaLinks':
         if (action === 'add') return <SocialMediaLinksFrom />
         if (action === 'edit') return <SocialMediaLinksFrom />
         return <SocialMediaLinksList />
-
       case 'pages':
         if (action === 'add') return <StaticPageForm />
         if (action === 'edit') return <StaticPageForm />
         return <StaticPagesList />
-
       case 'menu':
         if (action === 'add') return <MenuForm />
         if (action === 'edit') return <MenuForm />
         return <MenuList />
-
       default:
         return (
           <div className="space-y-4">
@@ -81,7 +64,6 @@ export default async function DashboardPage({ searchParams }: {
         )
     }
   }
-
   return (
     <div className="flex h-full w-full">
       <DashboardSidebar />
