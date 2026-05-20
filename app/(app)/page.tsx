@@ -5,6 +5,12 @@ import FeaturedBlogs from '@/components/featuredSections/FeaturedBlogs'
 import FeaturedServices from "@/components/featuredSections/FeaturedServices"
 import FeaturedCourses from "@/components/featuredSections/FeaturedCourses"
 import { prisma } from '@/lib/prisma'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'موقع الاخصائية الأسرية إباء أبو طه',
+  description: 'أخصائية زواج وأسرة.. لأسرة سعيدة نابضة بالحب والحياة'
+}
 
 export default async function HomePage() {
 

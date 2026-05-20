@@ -1,5 +1,14 @@
 import { prisma } from "@/lib/prisma"
 import CourseCard from "@/components/cards/CourseCard"
+
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'موقع الاخصائية الأسرية إباء أبو طه - الدورات',
+  description: 'أخصائية زواج وأسرة.. لأسرة سعيدة نابضة بالحب والحياة - صفحة الدورات',
+}
+
+
 export default async function CoursesPage() {
   const courses = await prisma.course.findMany({
     orderBy: { createdAt: 'desc' },

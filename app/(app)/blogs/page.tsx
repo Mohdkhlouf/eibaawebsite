@@ -1,5 +1,15 @@
 import { prisma } from '@/lib/prisma' // adjust path to wherever your file is
 import BlogCard from '@/components/cards/BlogCard'
+
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'مقالات الاخصائية الأسرية إباء أبو طه',
+  description: 'مقالات بمجال الأسرة والزواج والمرأة'
+}
+
+
+
 export default async function BlogsPage() {
   const blogs = await prisma.blog.findMany({ orderBy: { createdAt: 'desc' } })
   if (!blogs.length) return (
